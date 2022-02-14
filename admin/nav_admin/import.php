@@ -18,6 +18,7 @@ if ($_FILES["import_excel"]["name"] != '') {
         $file_type = \PhpOffice\PhpSpreadsheet\IOFactory::identify($file_name);
         $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader($file_type);
 
+        $reader->setLoadSheetsOnly(["Sheet 2", "all"]);
         $spreadsheet = $reader->load($file_name);
 
         unlink($file_name);
@@ -25,21 +26,30 @@ if ($_FILES["import_excel"]["name"] != '') {
         $data = $spreadsheet->getActiveSheet()->toArray();
 
         foreach ($data as $row) {
-            $insert_data = array(
-                ':user_id'  => $row[0],
-                ':username'  => $row[1],
-                ':fullname'  => $row[2],
-                ':password'  => $row[3]
-            );
+            if ($row[3] == 2564 && $row[5] == '124/236') {
 
-            $query = "
-   INSERT INTO user 
-   (user_id, username, fullname, password) 
-   VALUES (:user_id, :username, :fullname, :password)
-   ";
+                $insert_data = array(
+                    ':seq'  => $row[1],
+                    ':book_name'  => $row[2],
+                    ':year'  => $row[3],
+                    ':month'  => $row[4],
+                    ':house_id'  => $row[5],
+                    ':book_number'  => $row[6],
+                    ':number'  => $row[7],
+                    ':date_paid'  => $row[8],
+                    ':amount'  => $row[9],
+                    ':other'  => $row[10]
+                );
 
-            $statement = $connect->prepare($query);
-            $statement->execute($insert_data);
+                $query = "
+       INSERT INTO payment 
+       (seq, book_name, year, month, house_id, book_number, number, date_paid, amount, other) 
+       VALUES (:seq, :book_name, :year, :month, :house_id, :book_number, :number, :date_paid, :amount, :other)
+       ";
+
+                $statement = $connect->prepare($query);
+                $statement->execute($insert_data);
+            }
         }
         $message = '<div class="alert alert-success">Data Imported Successfully</div>';
     } else {

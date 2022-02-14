@@ -3,7 +3,7 @@ class user extends db
 {
     public function getLength()
     {
-        $lengthquery = "SELECT * FROM director";
+        $lengthquery = "SELECT * FROM payment";
         $stmtlength = $this->connect()->prepare($lengthquery);
         $stmtlength->execute();
         $length = 0;
@@ -64,7 +64,7 @@ if (!isset($_SESSION['username'])) {
                 <span class="tooltip">กรรมการ</span>
             </li>
             <li>
-                <a href="#">
+                <a href="../nav_admin/admin.php">
                     <i class='bx bx-code-block'></i>
                     <span class="links_name">แอดมิน</span>
                 </a>
@@ -243,7 +243,7 @@ if (!isset($_SESSION['username'])) {
                     // echo $_SESSION['page'];
                     ?>
 
-                    <h2 class='text-center'>ข้อมูลแอดมิน</h2><br>
+                    <h2 class='text-center'>ข้อมูลการชำระเงิน</h2><br>
 
                     <div class="row align-items-center">
                         <input type="text" id="q" name='q' placeholder="ค้นหา..." class='form-control col-sm-5 mx-auto' autocomplete='off'>
@@ -311,12 +311,12 @@ if (!isset($_SESSION['username'])) {
     if (isset($_GET['next'])) {
         if ($_SESSION['page'] + 20 < $length) {
             $_SESSION['page'] += 20;
-            echo "<script> window.location.href = './director.php' </script>";
+            echo "<script> window.location.href = './payment.php' </script>";
         }
     } else if (isset($_GET['back'])) {
         if ($_SESSION['page'] > 0) {
             $_SESSION['page'] -= 20;
-            echo "<script> window.location.href = './director.php' </script>";
+            echo "<script> window.location.href = './payment.php' </script>";
         }
     } else if (isset($_GET['page'])) {
         $goPage = $_GET['page'];
@@ -324,7 +324,7 @@ if (!isset($_SESSION['username'])) {
         echo "<script> console.log(' get page = '+ $goPage);</script>";
     } else if (isset($_GET['clear_page'])) {
         $_SESSION['page'] = 0;
-        echo "<script> window.location.href = './director.php' </script>";
+        echo "<script> window.location.href = './payment.php' </script>";
     }
 
     ?>

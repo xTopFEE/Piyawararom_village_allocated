@@ -20,7 +20,7 @@ class user extends db
 	}
 	public function load($page)
 	{
-		$query = "SELECT * FROM payment LIMIT 20 OFFSET $page";
+		$query = "SELECT * FROM adminn LIMIT 20 OFFSET $page";
 		$stmt = $this->connect()->prepare($query);
 		$stmt->execute();
 		$out = "";
@@ -28,13 +28,13 @@ class user extends db
 		$count = 1;
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 			$resultcount = $page + $count;
-			$admin_id = $row['payment_id'];
+			$admin_id = $row['admin_id'];
 			$username = $row['username'];
 			$password = $row['password'];
 			$fullname = $row['fullname'];
 			$out .= "<tr><td>$resultcount</td><td>$username</td><td><p style='display:none' id='hide_pass_$resultcount'>$password</p><i onclick='hidepass($resultcount)' class='bx bx-hide'></i></td><td>$fullname</td>";
-			//$out .= "<td><a href='edit.php?admin_id=$admin_id' class='edit btn btn-sm btn-success' title='edit'><i class='fa fa-fw fa-pencil'></i></a></td>";
-			//$out .= "<td><span admin_id='$admin_id' class='del btn btn-sm btn-danger' onclick='myFunction()' title='delete'><i class='fa fa-fw fa-trash'></i></span></td>";
+			$out .= "<td><a href='edit.php?admin_id=$admin_id' class='edit btn btn-sm btn-success' title='edit'><i class='fa fa-fw fa-pencil'></i></a></td>";
+			$out .= "<td><span admin_id='$admin_id' class='del btn btn-sm btn-danger' onclick='myFunction()' title='delete'><i class='fa fa-fw fa-trash'></i></span></td>";
 			$count++;
 		}
 		$out .= "</table>";
@@ -43,7 +43,6 @@ class user extends db
 			$out = "";
 			$out .= "<p class='alert alert-info text-center col-sm-5 mx-auto'>ไม่มีข้อมูล!</p>";
 		}
-		return $out;
 		return $out;
 	}
 	// update data

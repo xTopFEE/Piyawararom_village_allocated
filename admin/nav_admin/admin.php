@@ -92,7 +92,7 @@ if (!isset($_SESSION['username'])) {
                 <span class="tooltip">การร้องเรียนทั่วไป</span>
             </li>
             <li>
-                <a href="#">
+                <a href="../nav_payment/payment.php">
                     <i class='bx bx-spreadsheet'></i>
                     <span class="links_name">การชำระเงิน</span>
                 </a>

@@ -27,12 +27,12 @@ echo $user->load($page);
 			if (result.isConfirmed) {
 				Swal.fire('ลบข้อมูลแล้ว!', '', 'success')
 				//
-				var admin_id = $(this).attr('admin_id');
+				var payment_id = $(this).attr('payment_id');
 				$.ajax({
 					url: 'includes/delete.php',
 					type: 'POST',
 					data: {
-						admin_id: admin_id
+						payment_id: payment_id
 					},
 					success: function(data) {
 						$("#table").load("includes/load.php");

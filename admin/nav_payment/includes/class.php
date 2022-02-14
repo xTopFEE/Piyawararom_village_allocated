@@ -1,26 +1,26 @@
 <?php require_once "db.php";
 class user extends db
 {
-	public function insert($username, $fullname, $password)
+	/*public function insert($username, $fullname, $password)
 	{
 		$query = "INSERT INTO admin (username,fullname,password) VALUES(?,?,?) ";
 		$stmt = $this->connect()->prepare($query);
 		if ($stmt->execute([$username, $fullname, $password])) {
 			echo "เพิ่มข้อมูลเรียบร้อย!";
 		}
-	}
-	public function get_row($admin_id)
+	}*/
+	public function get_row($payment_id)
 	{
-		$query = "SELECT * FROM adminn WHERE admin_id = ? ";
+		$query = "SELECT * FROM payment WHERE payment_id = ? ";
 		$stmt = $this->connect()->prepare($query);
-		$stmt->execute([$admin_id]);
+		$stmt->execute([$payment_id]);
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 			return $row;
 		}
 	}
 	public function load($page)
 	{
-		$query = "SELECT * FROM adminn LIMIT 20 OFFSET $page";
+		$query = "SELECT * FROM payment LIMIT 20 OFFSET $page";
 		$stmt = $this->connect()->prepare($query);
 		$stmt->execute();
 		$out = "";
@@ -28,13 +28,20 @@ class user extends db
 		$count = 1;
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 			$resultcount = $page + $count;
-			$admin_id = $row['admin_id'];
-			$username = $row['username'];
-			$password = $row['password'];
-			$fullname = $row['fullname'];
-			$out .= "<tr><td>$resultcount</td><td>$username</td><td><p style='display:none' id='hide_pass_$resultcount'>$password</p><i onclick='hidepass($resultcount)' class='bx bx-hide'></i></td><td>$fullname</td>";
-			$out .= "<td><a href='edit.php?admin_id=$admin_id' class='edit btn btn-sm btn-success' title='edit'><i class='fa fa-fw fa-pencil'></i></a></td>";
-			$out .= "<td><span admin_id='$admin_id' class='del btn btn-sm btn-danger' onclick='myFunction()' title='delete'><i class='fa fa-fw fa-trash'></i></span></td>";
+			$payment_id = $row['payment_id'];
+			$seq = $row['seq'];
+			$book_name = $row['book_name'];
+			$year = $row['year'];
+			$month = $row['month'];
+			$house_id = $row['house_id'];
+			$book_number= $row['book_number'];
+			$number = $row['number'];
+			$date_paid = $row['date_paid'];
+			$amount = $row['amount'];
+			$other = $row['other'];
+			$out .= "<tr><td>$seq</td><td>$book_name</td><td>$year</td><td>$month</td><td>$house_id</td><td>$book_number</td><td>$number</td><td>$date_paid</td><td>$amount</td><td>$other</td>";
+			//$out .= "<td><a href='edit.php?payment_id=$payment_id' class='edit btn btn-sm btn-success' title='edit'><i class='fa fa-fw fa-pencil'></i></a></td>";
+			//$out .= "<td><span payment_id='$payment_id' class='del btn btn-sm btn-danger' onclick='myFunction()' title='delete'><i class='fa fa-fw fa-trash'></i></span></td>";
 			$count++;
 		}
 		$out .= "</table>";
@@ -44,14 +51,13 @@ class user extends db
 			$out .= "<p class='alert alert-info text-center col-sm-5 mx-auto'>ไม่มีข้อมูล!</p>";
 		}
 		return $out;
-		return $out;
 	}
 	// update data
-	public function update($username, $fullname, $password, $admin_id)
+	public function update($username, $fullname, $password, $payment_id)
 	{
-		$query = "UPDATE admin SET username = ?,fullname = ?,password = ? where admin_id = ? ";
+		$query = "UPDATE admin SET username = ?,fullname = ?,password = ? where payment_id = ? ";
 		$stmt = $this->connect()->prepare($query);
-		if ($stmt->execute([$username, $fullname, $password, $admin_id])) {
+		if ($stmt->execute([$username, $fullname, $password, $payment_id])) {
 			echo "ข้อมูลถูกแก้ไขแล้ว! <a href='admin.php'>ดูข้อมูล</a>";
 		}
 	}
@@ -59,20 +65,27 @@ class user extends db
 	public function search($text)
 	{
 		$text = strtolower($text);
-		$query = "SELECT * FROM adminn WHERE username LIKE ? OR password LIKE ? OR fullname LIKE ? ";
+		$query = "SELECT * FROM payment WHERE username LIKE ? OR password LIKE ? OR fullname LIKE ? ";
 		$stmt = $this->connect()->prepare($query);
 		$stmt->execute([$text, $text, $text, $text]);
 		$out = "";
 		$out .= "<table style='font-size:14px;' class='table table-responsive table-hover'><tr class='bg-light'><th>ลำดับ</th><th>username</th><th>password</th><th>ชื่อ-นามสกุล</th><th colspan='2'>การดำเนินการ</th></tr>";
 		$count = 1;
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-			$admin_id = $row['admin_id'];
-			$username = $row['username'];
-			$fullname = $row['fullname'];
-			$password = $row['password'];
-			$out .= "<tr><td>$count</td><td>$username</td><td><p style='display:none' id='hide_pass_$count'>$password</p><i onclick='hidepass($count)' class='bx bx-hide'></i></td><td>$fullname</td>";
-			$out .= "<td><a href='edit.php?admin_id=$admin_id' class='edit btn btn-sm btn-success' title='edit'><i class='fa fa-fw fa-pencil'></i></a></td>";
-			$out .= "<td><span admin_id='$admin_id' class='del btn btn-sm btn-danger' onclick='myFunction()' title='delete'><i class='fa fa-fw fa-trash'></i></span></td>";
+			$payment_id = $row['payment_id'];
+			$seq = $row['seq'];
+			$book_name = $row['book_name'];
+			$year = $row['year'];
+			$month = $row['month'];
+			$house_id = $row['house_id'];
+			$book_number= $row['book_number'];
+			$number = $row['number'];
+			$date_paid = $row['date_paid'];
+			$amount = $row['amount'];
+			$other = $row['other'];
+			$out .= "<tr><td>$seq</td><td>$book_name</td><td>$year</td><td>$month</td><td>$house_id</td><td>$book_number</td><td>$number</td><td>$date_paid</td><td>$amount</td><td>$other</td>";
+			//$out .= "<td><a href='edit.php?payment_id=$payment_id' class='edit btn btn-sm btn-success' title='edit'><i class='fa fa-fw fa-pencil'></i></a></td>";
+			//$out .= "<td><span payment_id='$payment_id' class='del btn btn-sm btn-danger' onclick='myFunction()' title='delete'><i class='fa fa-fw fa-trash'></i></span></td>";
 			$count++;
 		}
 		$out .= "</table>";
@@ -83,11 +96,11 @@ class user extends db
 		return $out;
 	}
 
-	public function delete($admin_id)
+	public function delete($payment_id)
 	{
-		$query = "DELETE FROM adminn WHERE admin_id = ?";
+		$query = "DELETE FROM payment WHERE payment_id = ?";
 		$stmt = $this->connect()->prepare($query);
-		if ($stmt->execute([$admin_id])) {
+		if ($stmt->execute([$payment_id])) {
 			echo "ลบเรียบร้อยแล้ว";
 		}
 	}

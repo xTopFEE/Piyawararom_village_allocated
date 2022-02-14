@@ -3,7 +3,7 @@ class user extends db
 {
     public function getLength()
     {
-        $lengthquery = "SELECT * FROM user";
+        $lengthquery = "SELECT * FROM director";
         $stmtlength = $this->connect()->prepare($lengthquery);
         $stmtlength->execute();
         $length = 0;
@@ -17,7 +17,7 @@ session_start();
 
 if (!isset($_SESSION['username'])) {
     $_SESSION['msg'] = "กรุณาล็อกอินก่อน";
-    header('location: ../login.php');
+    header('location: ../../login.php');
 }
 ?>
 
@@ -50,7 +50,7 @@ if (!isset($_SESSION['username'])) {
                 <span class="tooltip">Dashboard</span>
             </li>
             <li>
-                <a href="user.php">
+                <a href="../nav_user/user.php?clear_page=true">
                     <i class='bx bx-user'></i>
                     <span class="links_name">สมาชิกในหมู่บ้าน</span>
                 </a>
@@ -64,7 +64,7 @@ if (!isset($_SESSION['username'])) {
                 <span class="tooltip">กรรมการ</span>
             </li>
             <li>
-                <a href="../nav_admin/admin.php"> <!-- ?clear_page=true -->
+                <a href="#">
                     <i class='bx bx-code-block'></i>
                     <span class="links_name">แอดมิน</span>
                 </a>
@@ -92,7 +92,7 @@ if (!isset($_SESSION['username'])) {
                 <span class="tooltip">การร้องเรียนทั่วไป</span>
             </li>
             <li>
-                <a href="../nav_payment/payment.php">
+                <a href="#">
                     <i class='bx bx-spreadsheet'></i>
                     <span class="links_name">การชำระเงิน</span>
                 </a>
@@ -114,7 +114,7 @@ if (!isset($_SESSION['username'])) {
                             <div class="profile-details">
                                 <img src="./user.png" alt="profileImg">
                                 <div class="name_job">
-                                    <div class="name"><?php echo $_SESSION['username']; ?></div>
+                                    <div class="name"><?php echo $_SESSION['username'] ?></div>
                                     <!-- RODJANAPHADIT -->
                                     <div class="job">Admin</div>
                                 </div>
@@ -131,21 +131,23 @@ if (!isset($_SESSION['username'])) {
         </ul>
     </div>
     <section class="home-section">
-        <div class="text">สมาชิกในหมู่บ้าน</div>
+        <div class="text">การชำระเงิน</div>
 
         <head>
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
         </head>
 
+        
         <body>
-
-            <div class="container shadow-lg bg-light py-3" style="border-radius: 12px;">
-                <h2 align="center">upload ไฟล์ข้อมูลสมาชิกในหมู่บ้านเพื่อใช้สำหรับการเข้าสู่ระบบ</h2>
-                <br>
-
+             <div class="container">
+                <br />
+                <div class="container bg-light py-3">
+                    <h2 align="center">Upload ไฟล์ข้อมูลการชำระเงิน</h2>
+                    <br />
+                </div>
                 <div class="panel panel-default">
-                    <div class="panel-heading"><h4>นำเข้าข้อมูลจากไฟล์ Excel หรือ CSV</h4></div>
+                    <div class="panel-heading">นำเข้าข้อมูลจากไฟล์ Excel หรือ CSV</div>
                     <div class="panel-body">
                         <div class="table-responsive">
                             <span id="message"></span>
@@ -157,6 +159,8 @@ if (!isset($_SESSION['username'])) {
                                     </tr>
                                 </table>
                             </form>
+                            <br />
+
                         </div>
                     </div>
                 </div>
@@ -164,43 +168,82 @@ if (!isset($_SESSION['username'])) {
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
         </body>
         
+
         <head>
             <meta charset="utf-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1">
-            <title>สมาชิกในหมู่บ้าน</title>
+            <title>การชำระเงิน</title>
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
             <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+            <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
         </head>
 
-        <body style="font-family:roboto,sans-serif;">
-            <!--
-            <div class="container">
-                <div class="container bg-light py-3" id='regBox'>
-                    <h2 class='text-center'>เพิ่มสมาชิกในหมู่บ้าน</h2><br>
+        <body>
+
+            <!--<div class="container">
+                <div class="container shadow-lg bg-light py-3" style="border-radius: 12px;" id='regBox'>
+                    <h2 class='text-center'>เพิ่มข้อมูลการชำระเงิน</h2><br>
                     <div id='msgReg'></div>
-                    <form action="" id='regForm' method="post">
-                        <div class="form-group">
-                            <input type="text" id="username" name="username" placeholder="username" class='form-control' required>
+                    <form action="" id='regForm' method="post"><br>
+                        <div class="row">
+                            <div class="col">
+                                <label>
+                                    <h4>username</h4>
+                                </label>
+                                <div class="form-group">
+                                    <input type="text" id="username" name="username" placeholder="username" class='form-control col-sm-5 mx-auto' required>
+                                </div><br><br>
+                            </div>
+                            <div class="col">
+                                <label>
+                                    <h4>รหัสผ่าน</h4>
+                                </label>
+                                <div class="form-group">
+                                    <input type="text" id="password" name="password" placeholder="รหัสผ่าน" class='form-control col-sm-5 mx-auto' required>
+                                </div><br><br>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <input type="text" id="password" name="password" placeholder="password" class='form-control' required>
+                        <div class="row">
+                            <div class="col">
+                                <label>
+                                    <h4>ชื่อ-นามสกุล</h4>
+                                </label>
+                                <div class="form-group">
+                                    <input type="text" id="fullname" name="fullname" placeholder="ชื่อ-นามสกุล" class='form-control col-sm-5 mx-auto' required>
+                                </div><br><br>
+                            </div>
+                            <div class="col">
+                                <label>
+                                    <h4>ยืนยันรหัสผ่าน</h4>
+                                </label>
+                                <div class="form-group">
+                                    <input type="text" id="password_2" name="password_2" placeholder="ยืนยันรหัสผ่าน" class='form-control col-sm-5 mx-auto' required>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <input type="text" id="fullname" name="fullname" placeholder="ชื่อ-นามสกุล" class='form-control' required>
+                        <div class="row">
+                            <div class="col">
+                                <br>
+                                <input type="submit" id="btnPost" value="เพิ่มข้อมูลกรรมการ" class='btn btn-info'>
+                            </div>
                         </div>
-                        <input type="submit" id="btnPost" value="เพิ่มสมาชิกในหมู่บ้าน" class='btn btn-info'>
                     </form>
                     <br>
+
                 </div>
             </div>
-            <br>
-            -->
+            </div>-->
+
             <div class="container">
                 <br>
                 <div class="container shadow-lg bg-light py-3" style="border-radius: 12px;">
+                    <?php
+                    // echo $_SESSION['page'];
+                    ?>
 
-                    <h2 class='text-center'>ข้อมูลสมาชิกในหมู่บ้าน</h2><br>
+                    <h2 class='text-center'>ข้อมูลแอดมิน</h2><br>
 
                     <div class="row align-items-center">
                         <input type="text" id="q" name='q' placeholder="ค้นหา..." class='form-control col-sm-5 mx-auto' autocomplete='off'>
@@ -210,13 +253,13 @@ if (!isset($_SESSION['username'])) {
                         <div id="msg" class='mx-auto'></div>
                     </div>
 
-                    <div id="table" class='text-center mx-auto'></div>
+                    <div id="table" class='text-center mx-auto '></div>
 
                     <br>
+
                     <a href='?back=true'>
                         <input type='submit' id='backpage' value='ย้อนกลับ' class='btn btn-info'>
                     </a>
-
                     <?php
                     $user = new user;
                     $page = 0;
@@ -236,13 +279,16 @@ if (!isset($_SESSION['username'])) {
                     echo "<script> console.log('page = '+$testvar + ' length = '+ $length);</script>";
 
                     ?>
-
                     <a href='?next=true'>
                         <input type='submit' id='nextpage' name="nextpage" value='ถัดไป' class='btn btn-info'>
                     </a>
 
                 </div>
+            </div>
 
+            <br> <br>
+            <!-- <form action='./user.php' id='' method='GET'><input type='submit' id='page' value='20' class='btn btn-info' name='page'></form> <br> -->
+            <!-- <a href='./user.php?page=20'><input type='submit' id='' value='ถัดไป' class='btn btn-info'></a> <br> -->
             </div>
             <br>
             <br>
@@ -265,12 +311,12 @@ if (!isset($_SESSION['username'])) {
     if (isset($_GET['next'])) {
         if ($_SESSION['page'] + 20 < $length) {
             $_SESSION['page'] += 20;
-            echo "<script> window.location.href = './user.php' </script>";
+            echo "<script> window.location.href = './director.php' </script>";
         }
     } else if (isset($_GET['back'])) {
         if ($_SESSION['page'] > 0) {
             $_SESSION['page'] -= 20;
-            echo "<script> window.location.href = './user.php' </script>";
+            echo "<script> window.location.href = './director.php' </script>";
         }
     } else if (isset($_GET['page'])) {
         $goPage = $_GET['page'];
@@ -278,7 +324,7 @@ if (!isset($_SESSION['username'])) {
         echo "<script> console.log(' get page = '+ $goPage);</script>";
     } else if (isset($_GET['clear_page'])) {
         $_SESSION['page'] = 0;
-        echo "<script> window.location.href = './user.php' </script>";
+        echo "<script> window.location.href = './director.php' </script>";
     }
 
     ?>
@@ -336,7 +382,6 @@ if (!isset($_SESSION['username'])) {
             });
         });
     </script>
-
 
     <script>
         let sidebar = document.querySelector(".sidebar");
