@@ -16,6 +16,7 @@ current usage is very good. And the problem encountered is importing data from t
 file and being unable to upload it as desired. Therefore, must study the use of the system 
 for importing data into the database system.
 
-Read this before download
+!!Read this before download!!
 
-1. Emport SQL database (File name: Piyawararom village allocated DB.dql)
+1. Emport SQL database (File name: sql/Piyawararom village allocated DB.dql)
+2. Run with XAMPP
