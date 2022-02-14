@@ -17,5 +17,5 @@ for importing data into the database system.
 
 # Read this before download
 
-1. Emport SQL database [Piyawararom village allocated DB.dql](./sql/Piyawararom village allocated DB.dql)
+1. Emport SQL database [https://github.com/xTopFEE/Piyawararom_village_allocated/tree/main/sql](Piyawararom village allocated DB.sql)
 2. Run with XAMPP
