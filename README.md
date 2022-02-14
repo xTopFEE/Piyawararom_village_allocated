@@ -15,7 +15,15 @@ current usage is very good. And the problem encountered is importing data from t
 file and being unable to upload it as desired. Therefore, must study the use of the system 
 for importing data into the database system.
 
-# Read this before download
-
-1. Emport SQL database (File name: sql/Piyawararom village allocated DB.dql)
+###Testing
+Instructions for testing:
+1. Clone the repo
+2. config database in 
+      - [setting_db.php](https://github.com/xTopFEE/Piyawararom_village_allocated/blob/main/admin/setting_db.php)
+      - [admin/setting_db.php](https://github.com/xTopFEE/Piyawararom_village_allocated/blob/main/admin/setting_db.php)
+      - [admin/nav_admin/includes/db.php](https://github.com/xTopFEE/Piyawararom_village_allocated/blob/main/admin/nav_admin/includes/db.php)
+      - [admin/nav_director/includes/db.php](https://github.com/xTopFEE/Piyawararom_village_allocated/blob/main/admin/nav_director/includes/db.php)
+      - **[admin/nav_admin/includes/db.php](https://github.com/xTopFEE/Piyawararom_village_allocated/blob/main/admin/nav_admin/includes/db.php)
+      - **[admin/nav_admin/includes/db.php](https://github.com/xTopFEE/Piyawararom_village_allocated/blob/main/admin/nav_admin/includes/db.php)
+3. Import Database from ([Piyawararom village allocated DB.sql](https://github.com/xTopFEE/Piyawararom_village_allocated/tree/main/sql))
 2. Run with XAMPP
