@@ -17,7 +17,6 @@ for importing data into the database system.
 
 ###Testing
 Instructions for testing:
-```
 1. Clone the repo
 2. config database in 
       - [setting_db.php](https://github.com/xTopFEE/Piyawararom_village_allocated/blob/main/admin/setting_db.php)
@@ -28,4 +27,3 @@ Instructions for testing:
       - **[admin/nav_admin/includes/db.php](https://github.com/xTopFEE/Piyawararom_village_allocated/blob/main/admin/nav_admin/includes/db.php)
 3. Import Database from ([Piyawararom village allocated DB.sql](https://github.com/xTopFEE/Piyawararom_village_allocated/tree/main/sql))
 2. Run with XAMPP
-```
