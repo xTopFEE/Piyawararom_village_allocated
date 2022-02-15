@@ -26,7 +26,7 @@ if ($_FILES["import_excel"]["name"] != '') {
         $data = $spreadsheet->getActiveSheet()->toArray();
 
         foreach ($data as $row) {
-            if ($row[3] == 2564 && $row[5] == '124/236') {
+            if ($row[1] != 0) {
 
                 $insert_data = array(
                     ':seq'  => $row[1],

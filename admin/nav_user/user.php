@@ -139,11 +139,9 @@ if (!isset($_SESSION['username'])) {
         </head>
 
         <body>
-
             <div class="container shadow-lg bg-light py-3" style="border-radius: 12px;">
                 <h2 align="center">upload ไฟล์ข้อมูลสมาชิกในหมู่บ้านเพื่อใช้สำหรับการเข้าสู่ระบบ</h2>
                 <br>
-
                 <div class="panel panel-default">
                     <div class="panel-heading"><h4>นำเข้าข้อมูลจากไฟล์ Excel หรือ CSV</h4></div>
                     <div class="panel-body">

@@ -20,11 +20,12 @@ class user extends db
 	}
 	public function load($page)
 	{
-		$query = "SELECT * FROM payment LIMIT 20 OFFSET $page";
+		//$query = "SELECT * FROM payment WHERE year=2564; ORDER BY seq DESC LIMIT 20 OFFSET $page";
+		$query = "SELECT * FROM payment ORDER BY seq DESC LIMIT 20 OFFSET $page";
 		$stmt = $this->connect()->prepare($query);
 		$stmt->execute();
 		$out = "";
-		$out .= "<table style='font-size:14px;' class='table table-responsive table-hover'><tr class='bg-light'><th>ลำดับ</th><th>username</th><th>password</th><th>ชื่อ-นามสกุล</th><th colspan='2'>การดำเนินการ</th></tr>";
+		$out .= "<table style='font-size:14px;' class='table table-responsive table-hover'><tr class='bg-light'><th>ลำดับ</th><th colspan='3'>ชื่อเล่ม</th><th>ปี</th><th>ค่าส่วนกลางประจำเดือน</th><th>บ้านเลขที่</th><th>เล่มที่</th><th>เลขที่</th><th>วันที่จ่าย</th><th>จำนวน</th><th colspan='2'>หมายเหตุ</th></tr>";
 		$count = 1;
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 			$resultcount = $page + $count;
@@ -39,7 +40,7 @@ class user extends db
 			$date_paid = $row['date_paid'];
 			$amount = $row['amount'];
 			$other = $row['other'];
-			$out .= "<tr><td>$seq</td><td>$book_name</td><td>$year</td><td>$month</td><td>$house_id</td><td>$book_number</td><td>$number</td><td>$date_paid</td><td>$amount</td><td>$other</td>";
+			$out .= "<tr><td colspan='2'>$seq</td><td colspan='2'>$book_name</td><td>$year</td><td>$month</td><td>$house_id</td><td>$book_number</td><td>$number</td><td>$date_paid</td><td>$amount</td><td>$other</td>";
 			//$out .= "<td><a href='edit.php?payment_id=$payment_id' class='edit btn btn-sm btn-success' title='edit'><i class='fa fa-fw fa-pencil'></i></a></td>";
 			//$out .= "<td><span payment_id='$payment_id' class='del btn btn-sm btn-danger' onclick='myFunction()' title='delete'><i class='fa fa-fw fa-trash'></i></span></td>";
 			$count++;

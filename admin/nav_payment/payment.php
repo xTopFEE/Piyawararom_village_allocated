@@ -140,14 +140,11 @@ if (!isset($_SESSION['username'])) {
 
         
         <body>
-             <div class="container">
-                <br />
-                <div class="container bg-light py-3">
-                    <h2 align="center">Upload ไฟล์ข้อมูลการชำระเงิน</h2>
-                    <br />
-                </div>
+            <div class="container shadow-lg bg-light py-3" style="border-radius: 12px;">
+                <h2 align="center">upload ไฟล์ข้อมูลการชำระเงินของหมู่บ้าน</h2>
+                <br>
                 <div class="panel panel-default">
-                    <div class="panel-heading">นำเข้าข้อมูลจากไฟล์ Excel หรือ CSV</div>
+                    <div class="panel-heading"><h4>นำเข้าข้อมูลจากไฟล์ Excel หรือ CSV</h4></div>
                     <div class="panel-body">
                         <div class="table-responsive">
                             <span id="message"></span>
@@ -159,8 +156,6 @@ if (!isset($_SESSION['username'])) {
                                     </tr>
                                 </table>
                             </form>
-                            <br />
-
                         </div>
                     </div>
                 </div>
@@ -243,7 +238,7 @@ if (!isset($_SESSION['username'])) {
                     // echo $_SESSION['page'];
                     ?>
 
-                    <h2 class='text-center'>ข้อมูลการชำระเงิน</h2><br>
+                    <h2 class='text-center'>ข้อมูลการชำระเงินค่าส่วนกลาง</h2><br>
 
                     <div class="row align-items-center">
                         <input type="text" id="q" name='q' placeholder="ค้นหา..." class='form-control col-sm-5 mx-auto' autocomplete='off'>
