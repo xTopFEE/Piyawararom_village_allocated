@@ -18,10 +18,16 @@ class user extends db
 			return $row;
 		}
 	}
-	public function load($page)
+	public function load($page, $enter_year)
 	{
-		//$query = "SELECT * FROM payment WHERE year=2564; ORDER BY seq DESC LIMIT 20 OFFSET $page";
-		$query = "SELECT * FROM payment ORDER BY seq DESC LIMIT 20 OFFSET $page";
+		if(!empty($enter_year))
+		echo "<script> console.log('enter year in load :' + $enter_year) </script>";
+		if (!empty($enter_year)) {
+			$query = "SELECT * FROM payment WHERE year='$enter_year' ORDER BY seq DESC LIMIT 20 OFFSET $page";
+		} else {
+			$query = "SELECT * FROM payment ORDER BY seq DESC LIMIT 20 OFFSET $page";
+		}
+
 		$stmt = $this->connect()->prepare($query);
 		$stmt->execute();
 		$out = "";
@@ -35,7 +41,7 @@ class user extends db
 			$year = $row['year'];
 			$month = $row['month'];
 			$house_id = $row['house_id'];
-			$book_number= $row['book_number'];
+			$book_number = $row['book_number'];
 			$number = $row['number'];
 			$date_paid = $row['date_paid'];
 			$amount = $row['amount'];
@@ -51,6 +57,7 @@ class user extends db
 			$out = "";
 			$out .= "<p class='alert alert-info text-center col-sm-5 mx-auto'>ไม่มีข้อมูล!</p>";
 		}
+		$_SESSION['Total_house'] = $count;
 		return $out;
 	}
 	// update data
@@ -79,7 +86,7 @@ class user extends db
 			$year = $row['year'];
 			$month = $row['month'];
 			$house_id = $row['house_id'];
-			$book_number= $row['book_number'];
+			$book_number = $row['book_number'];
 			$number = $row['number'];
 			$date_paid = $row['date_paid'];
 			$amount = $row['amount'];

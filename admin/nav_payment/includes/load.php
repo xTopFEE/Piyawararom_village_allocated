@@ -4,14 +4,18 @@ session_start();
 $user = new user;
 
 $page = 0;
-
+$enter_year = 2564;
 if (!empty($_SESSION['page'])) {
 	$page = $_SESSION['page'];
 }
 
+if (!empty($_SESSION['enter_year'])) {
+	$enter_year = $_SESSION['enter_year'];
+}
 echo "<script>console.log($page);</script>";
+//echo "<script>console.log($enter_year);</script>";
 
-echo $user->load($page);
+echo $user->load($page, $enter_year);
 ?>
 
 <script type="text/javascript">

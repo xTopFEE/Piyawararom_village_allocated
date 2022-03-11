@@ -1,9 +1,43 @@
+
 <?php require_once "includes/db.php";
+session_start();
+if (isset($_GET['next'])) {
+    if ($_SESSION['page'] + 20 < $length) {
+        $_SESSION['page'] += 20;
+        echo "<script> window.location.href = './payment.php' </script>";
+    }
+} else if (isset($_GET['back'])) {
+    if ($_SESSION['page'] > 0) {
+        $_SESSION['page'] -= 20;
+        echo "<script> window.location.href = './payment.php' </script>";
+    }
+} else if (isset($_GET['page'])) {
+    $goPage = $_GET['page'];
+    $_SESSION['page'] = ($goPage * 20) - 20;
+    echo "<script> console.log(' get page = '+ $goPage);</script>";
+} else if (isset($_GET['clear_page'])) {
+    $_SESSION['page'] = 0;
+    echo "<script> window.location.href = './payment.php' </script>";
+} else if(isset($_GET['year'])){
+    $_SESSION['page'] = 0;
+    $year = $_GET['year'];
+    $_SESSION['enter_year'] = $year;
+    echo "<script> console.log(' year = '+ $year);</script>";
+    // $_SESSION['enter_year'] = $_GET['year'];
+}
+
 class user extends db
 {
     public function getLength()
     {
-        $lengthquery = "SELECT * FROM payment";
+        if (!empty($_SESSION['enter_year'])) {
+            $enter_year = $_SESSION['enter_year'];
+        }else { 
+            $enter_year = 0;
+        }
+        
+        echo "<script> console.log('enter_year :'+$enter_year) </script>";
+        $lengthquery = "SELECT * FROM payment WHERE year=$enter_year";
         $stmtlength = $this->connect()->prepare($lengthquery);
         $stmtlength->execute();
         $length = 0;
@@ -12,8 +46,9 @@ class user extends db
         }
         return $length;
     }
+    
 }
-session_start();
+
 
 if (!isset($_SESSION['username'])) {
     $_SESSION['msg'] = "กรุณาล็อกอินก่อน";
@@ -138,13 +173,15 @@ if (!isset($_SESSION['username'])) {
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
         </head>
 
-        
+
         <body>
             <div class="container shadow-lg bg-light py-3" style="border-radius: 12px;">
                 <h2 align="center">upload ไฟล์ข้อมูลการชำระเงินของหมู่บ้าน</h2>
                 <br>
                 <div class="panel panel-default">
-                    <div class="panel-heading"><h4>นำเข้าข้อมูลจากไฟล์ Excel หรือ CSV</h4></div>
+                    <div class="panel-heading">
+                        <h4>นำเข้าข้อมูลจากไฟล์ Excel หรือ CSV</h4>
+                    </div>
                     <div class="panel-body">
                         <div class="table-responsive">
                             <span id="message"></span>
@@ -162,7 +199,7 @@ if (!isset($_SESSION['username'])) {
             </div>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
         </body>
-        
+
 
         <head>
             <meta charset="utf-8">
@@ -244,11 +281,42 @@ if (!isset($_SESSION['username'])) {
                         <input type="text" id="q" name='q' placeholder="ค้นหา..." class='form-control col-sm-5 mx-auto' autocomplete='off'>
                     </div>
                     <br>
+                    <form action="payment.php/enter_year=2564" id='regForm' method="post">
+                            <?php 
+                                $now = new DateTime();
+                                $thisyear = $now->format("Y") +543;
+                                $selectedYear = $_SESSION['enter_year'];
+                                echo "<select name='enter_year' id='enter_year' onchange='changeYear()'>";
+                                echo "<script> console.log('hello : '+$thisyear +' selectedYear :' +$selectedYear) </script>";
+                                
+                                for ($thisyear ;$thisyear >= 2554; $thisyear--){
+                                    if($selectedYear == $thisyear){
+                                        echo "<option value='$thisyear' selected>$thisyear</option>";
+                                    }else{
+                                        echo "<option value='$thisyear'>$thisyear</option>";
+                                    }
+                                }
+                                echo "</select>";
+                            ?>
+                            <!-- <option value="2564" action="payment.php/enter_year=2564">2564</option>';
+                            <option value="2563">2563</option>';
+                            <option value="2562">2562</option>';
+                            <option value="2561">2561</option>';
+                            <option value="2560">2560</option>';
+                            <option value="2560">2559</option>';
+                            <option value="2560">2558</option>';
+                            <option value="2560">2557</option>';
+                            <option value="2560">2556</option>';
+                            <option value="2560">2555</option>';
+                            <option value="2559">2554</option> -->
+                        
+                    </form>
                     <div class="row align-items-center">
                         <div id="msg" class='mx-auto'></div>
                     </div>
 
                     <div id="table" class='text-center mx-auto '></div>
+
 
                     <br>
 
@@ -259,6 +327,7 @@ if (!isset($_SESSION['username'])) {
                     $user = new user;
                     $page = 0;
                     $length = $user->getLength();
+                    
                     for ($i = 1; $i <= $length; $i++) {
                         if ($i % 20 == 0) {
                             $page++;
@@ -303,24 +372,8 @@ if (!isset($_SESSION['username'])) {
 
 
     <?php
-    if (isset($_GET['next'])) {
-        if ($_SESSION['page'] + 20 < $length) {
-            $_SESSION['page'] += 20;
-            echo "<script> window.location.href = './payment.php' </script>";
-        }
-    } else if (isset($_GET['back'])) {
-        if ($_SESSION['page'] > 0) {
-            $_SESSION['page'] -= 20;
-            echo "<script> window.location.href = './payment.php' </script>";
-        }
-    } else if (isset($_GET['page'])) {
-        $goPage = $_GET['page'];
-        $_SESSION['page'] = ($goPage * 20) - 20;
-        echo "<script> console.log(' get page = '+ $goPage);</script>";
-    } else if (isset($_GET['clear_page'])) {
-        $_SESSION['page'] = 0;
-        echo "<script> window.location.href = './payment.php' </script>";
-    }
+    
+
 
     ?>
 
@@ -349,6 +402,11 @@ if (!isset($_SESSION['username'])) {
             } else {
                 x.style.display = "none";
             }
+        }
+        function changeYear(){
+            var year = document.getElementById("enter_year").value
+            console.log(year)
+            window.location.href = './payment.php?year='+year;
         }
     </script>
 
