@@ -281,7 +281,7 @@ if (!isset($_SESSION['username'])) {
                         <input type="text" id="q" name='q' placeholder="ค้นหา..." class='form-control col-sm-5 mx-auto' autocomplete='off'>
                     </div>
                     <br>
-                    <form action="payment.php/enter_year=2564" id='regForm' method="post">
+                    <form action="payment.php/enter_year=2565" id='regForm' method="post">
                             <?php 
                                 $now = new DateTime();
                                 $thisyear = $now->format("Y") +543;
