@@ -99,7 +99,11 @@ if (isset($_POST['login_user'])) {
                                         $_SESSION['username'] = $username;
                                         $_SESSION['success'] = "คุณได้เข้าสู่ระบบ";
                                         header("location: director/Backend.php");
-                                    } 
+                                    } else {
+                                        array_push($error, "username หรือ รหัสผ่าน ของคุณผิด!");
+                                        $_SESSION['error'] = "username หรือ รหัสผ่าน ของคุณผิด!";
+                                        header("location: Login.php");
+                                    }
                                 }
                             }
                         }
