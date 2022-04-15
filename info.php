@@ -19,6 +19,41 @@
 
     <!-- Boxicons CDN -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        .hero-image2 {
+            background-image: url("https://cdn.discordapp.com/attachments/881086120367104030/958330459199254538/tito2.jpg");
+            background-color: #cccccc;
+            height: 400px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+        .hero-text2 {
+            text-align: center;
+            position: absolute;
+            top: 52%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+        }
+        /*กรอบข่าว*/
+        .try-image2 {
+            background-color: #EE7621;
+            height: 50px;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+        .try-text2 {
+            text-align: center;
+            position: absolute;
+            top: 59%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+        }
+    </style>
 </head>
 
 <body>
@@ -36,7 +71,7 @@
                         <a class="nav-link" aria-current="page" href="index.php">หน้าหลัก</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">เกี่ยวกับ</a>
+                        <a class="nav-link active" href="info.php">เกี่ยวกับ</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="contact.php">ติดต่อ</a>
@@ -50,20 +85,26 @@
     </nav>
 
     <!-- BANNER -->
-    <div class="bg-image" style="
-    background-image: url('img/vill_4.jpg');
-    height: 305px ; background-size: 100%; padding-top: 100px;
-  ">
-        <div class="row align-items-center">
+    <div class="hero-image2">
+        <!-- <div class="row align-items-center">
             <div class="col">
                 <div class="col-md-4 text-light offset-1">
-                    <h1 class="display-7 fw-bolder">เกี่ยวกับ</h1>
-                    <!-- <p class="lead">เว็บแอพพลิเคชั่นหมู่บ้านจัดสรรปิยวรารมย์</p> -->
+                    <h1 class="display-7 fw-bolder"><font color="#000000"> ติดต่อ </font></h1> 
+                    <p class="lead">เว็บแอพพลิเคชั่นหมู่บ้านจัดสรรปิยวรารมย์</p>
                 </div>
             </div>
-        </div>
-
+        </div> -->
     </div>
+
+
+    <div class="try-image2">
+        <div class="try-text2">
+            <h1 style="font-size:25px">เกี่ยวกับ</h1>
+        </div>
+    </div>
+
+
+   
 
     <!-- bottom nav -->
     <div class="row pt-5 px-3 border-top mt-1 " style="font-size: 5px;">
@@ -93,18 +134,7 @@
             </ul>
 
         </div>
-        <div class="col">
-
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link text-info" href="#">การช่วยเหลือ</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-info" href="login.php">ผู้ดูแล</a>
-                </li>
-            </ul>
-
-        </div>
+        
     </div>
     <nav class="nav mt-5 ml-3" style="font-size: 5px;">
 

@@ -85,7 +85,7 @@ if (!isset($_SESSION['username'])) {
                 <span class="tooltip">ข่าวสารประชาสัมพันธ์</span>
             </li>
             <li>
-                <a href="#">
+                <a href="../nav_petition/petition.php">
                     <i class='bx bx-chat'></i>
                     <span class="links_name">การร้องเรียนทั่วไป</span>
                 </a>
@@ -229,11 +229,11 @@ if (!isset($_SESSION['username'])) {
                                     <h4>ตำแหน่ง</h4>
                                 </label><br>
                                 <select name="rank" id="fullname">
-                                    <option value="director">ประธานกรรมการ</option>
-                                    <option value="director">รองประธานกรรมการ ฝ่ายการเงิน</option>
-                                    <option value="director">รองประธานกรรมการ ฝ่ายโยธา</option>
+                                    <option value="president">ประธานกรรมการ</option>
+                                    <option value="vice_president_financial">รองประธานกรรมการ ฝ่ายการเงิน</option>
+                                    <option value="vice_president_civil">รองประธานกรรมการ ฝ่ายโยธา</option>
                                     <option value="financial_director">กรรมการและเหรัญญิก</option>
-                                    <option value="director">กรรมการฝ่ายประชาสัมพันธ์</option>
+                                    <option value="director_public_relations">กรรมการฝ่ายประชาสัมพันธ์</option>
                                     <option value="director">กรรมการและเลขานุการ</option>
                                 </select>
                             </div>

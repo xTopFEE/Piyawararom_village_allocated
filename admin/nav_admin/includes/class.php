@@ -3,7 +3,7 @@ class user extends db
 {
 	public function insert($username, $fullname, $password)
 	{
-		$query = "INSERT INTO admin (username,fullname,password) VALUES(?,?,?) ";
+		$query = "INSERT INTO adminn (username,fullname,password) VALUES(?,?,?) ";
 		$stmt = $this->connect()->prepare($query);
 		if ($stmt->execute([$username, $fullname, $password])) {
 			echo "เพิ่มข้อมูลเรียบร้อย!";
@@ -48,7 +48,7 @@ class user extends db
 	// update data
 	public function update($username, $fullname, $password, $admin_id)
 	{
-		$query = "UPDATE admin SET username = ?,fullname = ?,password = ? where admin_id = ? ";
+		$query = "UPDATE adminn SET username = ?,fullname = ?,password = ? where admin_id = ? ";
 		$stmt = $this->connect()->prepare($query);
 		if ($stmt->execute([$username, $fullname, $password, $admin_id])) {
 			echo "ข้อมูลถูกแก้ไขแล้ว! <a href='admin.php'>ดูข้อมูล</a>";

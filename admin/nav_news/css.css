@@ -1,0 +1,58 @@
+.holder_wrap{
+	position:relative;
+	margin:auto;
+	display:block;
+	height:120px; /* กำหนดความสูงส่วนพื้นที่คลุมเนื้อหาทั้งหมด */
+}
+.holder_wrap_img{
+	position:absolute;/* กำหนดการจัดตำแหน่งส่วนพื้นที่คลุมเนื้อหารุปและข้อความซ้อนทับ */
+}
+.holder_wrap_img img{
+	position:relative; /* กำหนดการจัดตำแหน่งของรูป */
+}
+
+/* css ซ้อนทับ ชิดขอบบน */
+.inner_position_top{
+	position:absolute;
+	display:block;	
+	background-color:#CC99FF;	
+	height:50px; /* กำหนดความสูงส่วนของเนื้อหาที่นำมาซ้อนทับ */
+	width:100%; /* กำหนดความกว้างของเนื้อหาที่นำมาซ้อนทับ แบบขยายเต็ม */
+	top:0px; /* css กำหนดชิดด้านบน  */
+	z-index:999;
+}
+
+/* css ซ้อนทับ ชิดขอบด้านซ้าย */
+.inner_position_left{
+	position:absolute;
+	display:block;	
+	background-color:#99FFCC;	
+	height:100%;/* กำหนดความสูงส่วนของเนื้อหาที่นำมาซ้อนทับ แบบขยายเต็ม */
+	width:50px; /* กำหนดความกว้างของเนื้อหาที่นำมาซ้อนทับ */
+	top:0px; /* css กำหนดชิดด้านบน  */
+	left:0px; /* css กำหนดชิดซ้าย  */
+	z-index:999;
+}
+
+/* css ซ้อนทับ ชิดขอบล่าง */
+.inner_position_bottom{
+	position:absolute;
+	display:block;	
+	background-color:#FFCCCC;	
+	height:50px; /* กำหนดความสูงส่วนของเนื้อหาที่นำมาซ้อนทับ */
+	width:100%; /* กำหนดความกว้างของเนื้อหาที่นำมาซ้อนทับ แบบขยายเต็ม */
+	bottom:0px; /* css กำหนดชิดด้านล่าง  */
+	z-index:999;	
+}
+
+/* css ซ้อนทับ ชิดขอบด้านขวา */
+.inner_position_right{
+	position:absolute;
+	display:block;	
+	background-color:#FFFF99;	
+	height:100%;/* กำหนดความสูงส่วนของเนื้อหาที่นำมาซ้อนทับ แบบขยายเต็ม */
+	width:50px; /* กำหนดความกว้างของเนื้อหาที่นำมาซ้อนทับ */
+	top:0px; /* css กำหนดชิดด้านบน  */
+	right:0px; /* css กำหนดชิดขวา  */
+	z-index:999;
+}

@@ -65,14 +65,14 @@ $conn = mysqli_connect("localhost", "root", "", "project");
                 <span class="tooltip">แบบฟอร์มเอกสาร</span>
             </li>
             <li>
-                <a href="#">
+                <a href="./nav_news/news.php">
                     <i class='bx bx-broadcast'></i>
                     <span class="links_name">ข่าวสารประชาสัมพันธ์</span>
                 </a>
                 <span class="tooltip">ข่าวสารประชาสัมพันธ์</span>
             </li>
             <li>
-                <a href="#">
+                <a href="./nav_petition/petition.php">
                     <i class='bx bx-chat'></i>
                     <span class="links_name">การร้องเรียนทั่วไป</span>
                 </a>
