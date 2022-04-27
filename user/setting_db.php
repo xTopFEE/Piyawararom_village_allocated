@@ -10,7 +10,9 @@ $errors = array();
 if (isset($_POST['edit_user'])) {
     $password_1 = $_POST['password_1'];
     $password_2 = $_POST['password_2'];
-
+    $password_old = $_POST['password_old'];
+    
+    //if (password_old)
     if (empty($password_1)) {
         array_push($errors, "กรุณาใส่รหัสผ่าน");
         $_SESSION['error'] = "กรุณาใส่รหัสผ่าน";

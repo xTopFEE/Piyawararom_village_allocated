@@ -37,6 +37,13 @@ if (!isset($_SESSION['username'])) {
             </li>
             <li>
                 <a href="#">
+                    <i class='bx bx-calendar'></i>
+                    <span class="links_name">ยอดค้างชำระ</span>
+                </a>
+                <span class="tooltip">ยอดค้างชำระ</span>
+            </li>
+            <li>
+                <a href="#">
                     <i class='bx bx-file'></i>
                     <span class="links_name">แบบฟอร์มเอกสาร</span>
                 </a>
@@ -99,6 +106,14 @@ if (!isset($_SESSION['username'])) {
                         <?php endif ?>
                         <div class="input-group">
                             <div class="container">
+                                <label for="password_old">รหัสผ่านปัจจุบัน</label>
+                            </div>
+                            <div class="container">
+                                <input type="password" name="password_old" required>
+                            </div>
+                        </div><br>
+                        <div class="input-group">
+                            <div class="container">
                                 <label for="password_1">รหัสผ่านใหม่</label>
                             </div>
                             <div class="container">
@@ -107,7 +122,7 @@ if (!isset($_SESSION['username'])) {
                         </div><br>
                         <div class="input-group">
                             <div class="container">
-                                <label for="password_2">ยืนยันรหัสผ่าน</label>
+                                <label for="password_2">ยืนยันรหัสผ่านใหม่</label>
                             </div>
                             <div class="container">
                                 <input type="password" name="password_2" required>

@@ -86,6 +86,13 @@ $conn = mysqli_connect("localhost", "root", "", "project");
                 <span class="tooltip">การชำระเงิน</span>
             </li>
             <li>
+                <a href="./nav_debt/debt.php">
+                    <i class='bx bx-calendar'></i>
+                    <span class="links_name">ยอดค้างชำระ</span>
+                </a>
+                <span class="tooltip">ยอดค้างชำระ</span>
+            </li>
+            <li>
                 <a href="./setting.php">
                     <i class='bx bx-cog'></i>
                     <span class="links_name">การตั้งค่า</span>

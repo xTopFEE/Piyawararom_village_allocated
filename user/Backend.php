@@ -38,6 +38,13 @@ $conn = mysqli_connect("localhost", "root", "", "project");
             </li>
             <li>
                 <a href="#">
+                    <i class='bx bx-calendar'></i>
+                    <span class="links_name">ยอดค้างชำระ</span>
+                </a>
+                <span class="tooltip">ยอดค้างชำระ</span>
+            </li>
+            <li>
+                <a href="#">
                     <i class='bx bx-file'></i>
                     <span class="links_name">แบบฟอร์มเอกสาร</span>
                 </a>
@@ -82,13 +89,13 @@ $conn = mysqli_connect("localhost", "root", "", "project");
             <!-- END -->
         </ul>
     </div>
-    
+
     <section class="home-section">
         <div class="text">Dashboard</div>
 
 
     </section>
-    
+
     <script>
         let sidebar = document.querySelector(".sidebar");
         let closeBtn = document.querySelector("#btn");
@@ -103,7 +110,7 @@ $conn = mysqli_connect("localhost", "root", "", "project");
             menuBtnChange();
         });
 
-       
+
         function menuBtnChange() {
             if (sidebar.classList.contains("open")) {
                 closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");
@@ -112,7 +119,7 @@ $conn = mysqli_connect("localhost", "root", "", "project");
             }
         }
     </script>
-    
+
 </body>
 
 </html>
