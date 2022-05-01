@@ -23,15 +23,15 @@ class user extends db
 		if(!empty($enter_year))
 		echo "<script> console.log('enter year in load :' + $enter_year) </script>";
 		if (!empty($enter_year)) {
-			$query = "SELECT *,SUM(amount) as 'sum' FROM payment WHERE year='$enter_year' GROUP BY house_id HAVING SUM(amount) < 3600 ORDER BY seq DESC LIMIT 20 OFFSET $page";
+			$query = "SELECT *,SUM(amount) as 'sum' FROM payment WHERE year='$enter_year' GROUP BY house_id HAVING SUM(amount) < 3600 ORDER BY cast(SUBSTRING_INDEX(house_id, '/', -1)as int) LIMIT 20 OFFSET $page";
 		} else {
-			$query = "SELECT *,SUM(amount) as 'sum' FROM payment WHERE GROUP BY house_id HAVING SUM(amount) < 3600 ORDER BY seq DESC LIMIT 20 OFFSET $page";
+			$query = "SELECT *,SUM(amount) as 'sum' FROM payment WHERE GROUP BY house_id HAVING SUM(amount) < 3600 ORDER BY cast(SUBSTRING_INDEX(house_id, '/', -1)as int) DESC LIMIT 20 OFFSET $page";
 		}
 
 		$stmt = $this->connect()->prepare($query);
 		$stmt->execute();
 		$out = "";
-		$out .= "<table style='font-size:14px;' class='table table-responsive table-hover'><tr class='bg-light'><th>ลำดับ</th><th colspan='3'>ชื่อเล่ม</th><th>ปี</th><th>ค่าส่วนกลางประจำเดือน</th><th>บ้านเลขที่</th><th>เล่มที่</th><th>เลขที่</th><th>วันที่จ่าย</th><th>จ่ายไปแล้ว</th><th colspan='2'>หมายเหตุ</th></tr>";
+		$out .= "<table style='font-size:14px;' class='table table-responsive table-hover'><tr class='bg-light'><th colspan='2'>ลำดับ</th><th>ปี</th><th>บ้านเลขที่</th><th>จ่ายไปแล้ว</th><th>ค้างชำระ</th><th>หมายเหตุ</th><th>รายละเอียด</th></tr>";
 		$count = 1;
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 			$resultcount = $page + $count;
@@ -47,8 +47,22 @@ class user extends db
 			$amount = $row['amount'];
 			$other = $row['other'];
 			$sum = $row['sum'];
-			$out .= "<tr><td colspan='2'>$seq</td><td colspan='2'>$book_name</td><td>$year</td><td>$month</td><td>$house_id</td><td>$book_number</td><td>$number</td><td>$date_paid</td><td>$sum</td><td>$other</td>";
-			//$out .= "<td><a href='edit.php?payment_id=$payment_id' class='edit btn btn-sm btn-success' title='edit'><i class='fa fa-fw fa-pencil'></i></a></td>";
+			$amountsum = 3600 - $sum;
+			$out .= "<tr><td colspan='2'>$seq</td><td>$year</td><td>$house_id</td><td>$sum / 3600 บาท</td><td>$amountsum บาท</td>";
+			$strhref = "";
+			if(strpos($house_id, '/') !== false) {
+				$array_houseid = explode('/', $house_id);
+				$first_houseid = $array_houseid[0];
+				$array_length = count($array_houseid);
+				$last_houseid = $array_houseid[$array_length-1];
+				$strhref = "../nav_debt_detail/debt_detail.php?first_houseid=$first_houseid&last_houseid=$last_houseid&enter_year=$enter_year";
+			} else {
+				$first_houseid = $house_id;
+				$last_houseid = "false";
+				$strhref = "../nav_debt_detail/debt_detail.php?first_houseid=$first_houseid&enter_year=$enter_year";
+			}
+			$out .= "<td><a href='$strhref' class='edit btn btn-sm btn-info' title='edit'><i class='bx bx-detail'></i></a></td>";
+			$out .= "<td>$other</td>";
 			//$out .= "<td><span payment_id='$payment_id' class='del btn btn-sm btn-danger' onclick='myFunction()' title='delete'><i class='fa fa-fw fa-trash'></i></span></td>";
 			$count++;
 		}

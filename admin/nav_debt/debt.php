@@ -350,9 +350,9 @@ if (!isset($_SESSION['username'])) {
                     echo "<script> console.log('page = '+$testvar + ' length = '+ $length);</script>";
 
                     ?>
-                    <a href='?next=true'>
+                    <!-- <a href='?next=true'>
                         <input type='submit' id='nextpage' name="nextpage" value='ถัดไป' class='btn btn-info'>
-                    </a>
+                    </a> -->
 
                 </div>
             </div>
