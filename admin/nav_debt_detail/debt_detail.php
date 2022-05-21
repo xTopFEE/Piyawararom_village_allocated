@@ -6,18 +6,18 @@ if (isset($_GET['next'])) {
         echo "<script> window.location.href = './debt_detail.php' </script>";
     }
 } else if (isset($_GET['back'])) {
-    if ($_SESSION['page'] > 0) {
-        $_SESSION['page'] -= 20;
-        echo "<script> window.location.href = './debt_detail.php' </script>";
-    }
+    // if ($_SESSION['page'] > 0) {
+    //     $_SESSION['page'] -= 20;
+    //     echo "<script> window.location.href = './debt_detail.php' </script>";
+    // }
 } else if (isset($_GET['page'])) {
     $goPage = $_GET['page'];
     $_SESSION['page'] = ($goPage * 20) - 20;
-    echo "<script> console.log(' get page = '+ $goPage);</script>";
+    // echo "<script> console.log(' get page = '+ $goPage);</script>";
 } else if (isset($_GET['clear_page'])) {
     $_SESSION['page'] = 0;
     echo "<script> window.location.href = './debt_detail.php' </script>";
-} else if(isset($_GET['year'])){
+} else if (isset($_GET['year'])) {
     $_SESSION['page'] = 0;
     $year = $_GET['year'];
     $_SESSION['enter_year'] = $year;
@@ -27,12 +27,12 @@ if (isset($_GET['next'])) {
 
 if (isset($_GET['first_houseid']) && isset($_GET['last_houseid'])) {
 
-	(string)$first_houseid = $_GET['first_houseid'];
+    (string)$first_houseid = $_GET['first_houseid'];
     (string)$last_houseid = $_GET['last_houseid'];
     (string)$house_id = "{$first_houseid}/{$last_houseid}";
-	$_SESSION['first_houseid'] = (string)$first_houseid;
-	$_SESSION['last_houseid'] = (string)$last_houseid;
-}else if(isset($_GET['first_houseid']) && !isset($_GET['last_houseid'])){
+    $_SESSION['first_houseid'] = (string)$first_houseid;
+    $_SESSION['last_houseid'] = (string)$last_houseid;
+} else if (isset($_GET['first_houseid']) && !isset($_GET['last_houseid'])) {
     $_SESSION['first_houseid'] = $_GET['first_houseid'];
     unset($_SESSION['last_houseid']);
 }
@@ -43,10 +43,10 @@ class user extends db
     {
         if (!empty($_SESSION['enter_year'])) {
             $enter_year = $_SESSION['enter_year'];
-        }else { 
+        } else {
             $enter_year = 0;
         }
-        
+
         echo "<script> console.log('enter_year :'+$enter_year) </script>";
         $lengthquery = "SELECT *,SUM(amount) as 'sum' FROM payment WHERE year=$enter_year GROUP BY house_id HAVING SUM(amount) < 3600";
         $stmtlength = $this->connect()->prepare($lengthquery);
@@ -57,7 +57,6 @@ class user extends db
         }
         return $length;
     }
-    
 }
 
 
@@ -117,7 +116,7 @@ if (!isset($_SESSION['username'])) {
                 <span class="tooltip">แอดมิน</span>
             </li>
             <li>
-                <a href="#">
+                <a href="../nav_form/form.php">
                     <i class='bx bx-file'></i>
                     <span class="links_name">แบบฟอร์มเอกสาร</span>
                 </a>
@@ -292,31 +291,34 @@ if (!isset($_SESSION['username'])) {
                     <?php
                     // echo $_SESSION['page'];
                     ?>
+                    <a href="../nav_debt/debt.php">
+                        <h4><span class="links_name">ย้อนกลับ</span></h4>
+                    </a>
 
                     <h2 class='text-center'>ข้อมูลการชำระเงินค่าส่วนกลาง</h2><br>
 
-                    <div class="row align-items-center">
+                    <!-- <div class="row align-items-center">
                         <input type="text" id="q" name='q' placeholder="ค้นหา..." class='form-control col-sm-5 mx-auto' autocomplete='off'>
-                    </div>
+                    </div> -->
                     <br>
                     <form action="debt_detail.php/enter_year=2565" id='regForm' method="post">
-                            <?php 
-                                $now = new DateTime();
-                                $thisyear = $now->format("Y") +543;
-                                $selectedYear = $_SESSION['enter_year'];
-                                echo "<select name='enter_year' id='enter_year' onchange='changeYear()'>";
-                                echo "<script> console.log('hello : '+$thisyear +' selectedYear :' +$selectedYear) </script>";
-                                
-                                for ($thisyear ;$thisyear >= 2554; $thisyear--){
-                                    if($selectedYear == $thisyear){
-                                        echo "<option value='$thisyear' selected>$thisyear</option>";
-                                    }else{
-                                        echo "<option value='$thisyear'>$thisyear</option>";
-                                    }
-                                }
-                                echo "</select>";
-                            ?>
-                            <!-- <option value="2564" action="payment.php/enter_year=2564">2564</option>';
+                        <?php
+                        // $now = new DateTime();
+                        // $thisyear = $now->format("Y") +543;
+                        // $selectedYear = $_SESSION['enter_year'];
+                        // echo "<select name='enter_year' id='enter_year' onchange='changeYear()'>";
+                        // echo "<script> console.log('hello : '+$thisyear +' selectedYear :' +$selectedYear) </script>";
+
+                        // for ($thisyear ;$thisyear >= 2554; $thisyear--){
+                        //     if($selectedYear == $thisyear){
+                        //         echo "<option value='$thisyear' selected>$thisyear</option>";
+                        //     }else{
+                        //         echo "<option value='$thisyear'>$thisyear</option>";
+                        //     }
+                        // }
+                        // echo "</select>";
+                        ?>
+                        <!-- <option value="2564" action="payment.php/enter_year=2564">2564</option>';
                             <option value="2563">2563</option>';
                             <option value="2562">2562</option>';
                             <option value="2561">2561</option>';
@@ -327,7 +329,7 @@ if (!isset($_SESSION['username'])) {
                             <option value="2560">2556</option>';
                             <option value="2560">2555</option>';
                             <option value="2559">2554</option> -->
-                        
+
                     </form>
                     <div class="row align-items-center">
                         <div id="msg" class='mx-auto'></div>
@@ -338,14 +340,14 @@ if (!isset($_SESSION['username'])) {
 
                     <br>
 
-                    <a href='?back=true'>
+                    <!-- <a href='?back=true'>
                         <input type='submit' id='backpage' value='ย้อนกลับ' class='btn btn-info'>
                     </a>
                     <?php
                     $user = new user;
                     $page = 0;
                     $length = $user->getLength();
-                    
+
                     for ($i = 1; $i <= $length; $i++) {
                         if ($i % 20 == 0) {
                             $page++;
@@ -363,7 +365,7 @@ if (!isset($_SESSION['username'])) {
                     ?>
                     <a href='?next=true'>
                         <input type='submit' id='nextpage' name="nextpage" value='ถัดไป' class='btn btn-info'>
-                    </a>
+                    </a> -->
 
                 </div>
             </div>
@@ -390,7 +392,7 @@ if (!isset($_SESSION['username'])) {
 
 
     <?php
-    
+
 
 
     ?>
@@ -421,10 +423,11 @@ if (!isset($_SESSION['username'])) {
                 x.style.display = "none";
             }
         }
-        function changeYear(){
+
+        function changeYear() {
             var year = document.getElementById("enter_year").value
             console.log(year)
-            window.location.href = './debt_detail.php?year='+year;
+            window.location.href = './debt_detail.php?year=' + year;
         }
     </script>
 

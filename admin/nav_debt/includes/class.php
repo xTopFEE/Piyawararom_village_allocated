@@ -31,7 +31,7 @@ class user extends db
 		$stmt = $this->connect()->prepare($query);
 		$stmt->execute();
 		$out = "";
-		$out .= "<table style='font-size:14px;' class='table table-responsive table-hover'><tr class='bg-light'><th colspan='2'>ลำดับ</th><th>ปี</th><th>บ้านเลขที่</th><th>จ่ายไปแล้ว</th><th>ค้างชำระ</th><th>หมายเหตุ</th><th>รายละเอียด</th></tr>";
+		$out .= "<table style='font-size:14px;' class='table table-responsive table-hover'><tr class='bg-light'><th colspan='2'>ลำดับ</th><th>ปี</th><th>บ้านเลขที่</th><th>จ่ายไปแล้ว (บาท)</th><th>ค้างชำระ (บาท)</th><th>รายละเอียด</th></tr>";
 		$count = 1;
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 			$resultcount = $page + $count;
@@ -61,8 +61,8 @@ class user extends db
 				$last_houseid = "false";
 				$strhref = "../nav_debt_detail/debt_detail.php?first_houseid=$first_houseid&enter_year=$enter_year";
 			}
-			$out .= "<td><a href='$strhref' class='edit btn btn-sm btn-info' title='edit'><i class='bx bx-detail'></i></a></td>";
-			$out .= "<td>$other</td>";
+			$out .= "<td><a href='$strhref' class='edit btn btn-sm btn-info' title='ดูรายละเอียด'><i class='bx bx-detail'></i></a></td>";
+			// $out .= "<td>$other</td>";
 			//$out .= "<td><span payment_id='$payment_id' class='del btn btn-sm btn-danger' onclick='myFunction()' title='delete'><i class='fa fa-fw fa-trash'></i></span></td>";
 			$count++;
 		}

@@ -71,14 +71,14 @@ if (!isset($_SESSION['username'])) {
                 <span class="tooltip">แอดมิน</span>
             </li>
             <li>
-                <a href="#">
+                <a href="../nav_form/form.php">
                     <i class='bx bx-file'></i>
                     <span class="links_name">แบบฟอร์มเอกสาร</span>
                 </a>
                 <span class="tooltip">แบบฟอร์มเอกสาร</span>
             </li>
             <li>
-                <a href="#">
+                <a href="../nav_news/news.php">
                     <i class='bx bx-broadcast'></i>
                     <span class="links_name">ข่าวสารประชาสัมพันธ์</span>
                 </a>
@@ -191,6 +191,7 @@ if (!isset($_SESSION['username'])) {
 
             <div class="container">
                 <div class="container shadow-lg bg-light py-3" style="border-radius: 12px;" id='regBox'>
+                    <br>
                     <h2 class='text-center'>เพิ่มข้อมูลกรรมการ</h2><br>
                     <div id='msgReg'></div>
                     <form action="" id='regForm' method="post"><br>
@@ -262,7 +263,7 @@ if (!isset($_SESSION['username'])) {
                     <?php
                     // echo $_SESSION['page'];
                     ?>
-
+                    <br>
                     <h2 class='text-center'>ข้อมูลกรรมการ</h2><br>
 
                     <div class="row align-items-center">

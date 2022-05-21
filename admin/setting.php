@@ -56,7 +56,7 @@ if (!isset($_SESSION['username'])) {
                 <span class="tooltip">แอดมิน</span>
             </li>
             <li>
-                <a href="#">
+                <a href="./nav_form/form.php">
                     <i class='bx bx-file'></i>
                     <span class="links_name">แบบฟอร์มเอกสาร</span>
                 </a>
@@ -126,6 +126,7 @@ if (!isset($_SESSION['username'])) {
 
             <div class="container">
                 <div class="container shadow-lg bg-light py-3" style="border-radius: 12px;">
+                <br>
                     <h2 class='text-center'>เปลี่ยนรหัสผ่าน</h2><br>
                     <form action="setting_db.php" method="POST">
                         <?php if (isset($_SESSION['error'])) : ?>

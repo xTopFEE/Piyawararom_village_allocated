@@ -38,7 +38,7 @@ class user extends db
 		$stmt = $this->connect()->prepare($query);
 		$stmt->execute();
 		$out = "";
-		$out .= "<table style='font-size:14px;' class='table table-responsive table-hover'><tr class='bg-light'><th>ลำดับ</th><th colspan='2'>ปี</th><th>ค่าส่วนกลางประจำเดือน</th><th>บ้านเลขที่</th><th>วันที่จ่าย</th><th>จำนวน</th><th colspan='2'>หมายเหตุ</th></tr>";
+		$out .= "<table style='font-size:14px;' class='table table-responsive table-hover'><tr class='bg-light'><th>ลำดับ</th><th colspan='2'>ปี</th><th>ค่าส่วนกลางประจำเดือน</th><th>บ้านเลขที่</th><th>วันที่จ่าย</th><th>จำนวน (บาท)</th><th colspan='2'>หมายเหตุ</th></tr>";
 		$count = 1;
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 			$resultcount = $page + $count;

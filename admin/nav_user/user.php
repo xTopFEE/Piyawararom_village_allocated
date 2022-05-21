@@ -64,14 +64,15 @@ if (!isset($_SESSION['username'])) {
                 <span class="tooltip">กรรมการ</span>
             </li>
             <li>
-                <a href="../nav_admin/admin.php"> <!-- ?clear_page=true -->
+                <a href="../nav_admin/admin.php">
+                    <!-- ?clear_page=true -->
                     <i class='bx bx-code-block'></i>
                     <span class="links_name">แอดมิน</span>
                 </a>
                 <span class="tooltip">แอดมิน</span>
             </li>
             <li>
-                <a href="#">
+                <a href="../nav_form/form.php">
                     <i class='bx bx-file'></i>
                     <span class="links_name">แบบฟอร์มเอกสาร</span>
                 </a>
@@ -147,10 +148,13 @@ if (!isset($_SESSION['username'])) {
 
         <body>
             <div class="container shadow-lg bg-light py-3" style="border-radius: 12px;">
+                <br>
                 <h2 align="center">upload ไฟล์ข้อมูลสมาชิกในหมู่บ้านเพื่อใช้สำหรับการเข้าสู่ระบบ</h2>
                 <br>
                 <div class="panel panel-default">
-                    <div class="panel-heading"><h4>นำเข้าข้อมูลจากไฟล์ Excel หรือ CSV</h4></div>
+                    <div class="panel-heading">
+                        <h4>นำเข้าข้อมูลจากไฟล์ Excel หรือ CSV</h4>
+                    </div>
                     <div class="panel-body">
                         <div class="table-responsive">
                             <span id="message"></span>
@@ -168,7 +172,7 @@ if (!isset($_SESSION['username'])) {
             </div>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
         </body>
-        
+
         <head>
             <meta charset="utf-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -204,7 +208,7 @@ if (!isset($_SESSION['username'])) {
             <div class="container">
                 <br>
                 <div class="container shadow-lg bg-light py-3" style="border-radius: 12px;">
-
+                    <br>
                     <h2 class='text-center'>ข้อมูลสมาชิกในหมู่บ้าน</h2><br>
 
                     <div class="row align-items-center">

@@ -106,7 +106,7 @@ if (!isset($_SESSION['username'])) {
                 <span class="tooltip">แอดมิน</span>
             </li>
             <li>
-                <a href="#">
+                <a href="../nav_form/form.php">
                     <i class='bx bx-file'></i>
                     <span class="links_name">แบบฟอร์มเอกสาร</span>
                 </a>
@@ -281,7 +281,7 @@ if (!isset($_SESSION['username'])) {
                     <?php
                     // echo $_SESSION['page'];
                     ?>
-
+                    <br>
                     <h2 class='text-center'>ข้อมูลการชำระเงินค่าส่วนกลาง</h2><br>
 
                     <div class="row align-items-center">

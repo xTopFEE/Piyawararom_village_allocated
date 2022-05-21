@@ -106,7 +106,7 @@ if (!isset($_SESSION['username'])) {
                 <span class="tooltip">แอดมิน</span>
             </li>
             <li>
-                <a href="#">
+                <a href="../nav_form/form.php">
                     <i class='bx bx-file'></i>
                     <span class="links_name">แบบฟอร์มเอกสาร</span>
                 </a>
@@ -183,7 +183,8 @@ if (!isset($_SESSION['username'])) {
 
         <body>
             <div class="container shadow-lg bg-light py-3" style="border-radius: 12px;">
-                <h2 align="center">upload ไฟล์ข้อมูลการชำระเงินของหมู่บ้าน</h2>
+            <br>    
+            <h2 align="center">upload ไฟล์ข้อมูลการชำระเงินของหมู่บ้าน</h2>
                 <br>
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -281,7 +282,7 @@ if (!isset($_SESSION['username'])) {
                     <?php
                     // echo $_SESSION['page'];
                     ?>
-
+                    <br>
                     <h2 class='text-center'>ข้อมูลการชำระเงินค่าส่วนกลาง</h2><br>
 
                     <div class="row align-items-center">
@@ -317,7 +318,7 @@ if (!isset($_SESSION['username'])) {
                             <option value="2560">2555</option>';
                             <option value="2559">2554</option> -->
                         
-                    </form>
+                    </form><br>
                     <div class="row align-items-center">
                         <div id="msg" class='mx-auto'></div>
                     </div>
