@@ -57,7 +57,7 @@ if (!isset($_SESSION['username'])) {
                 <span class="tooltip">สมาชิกในหมู่บ้าน</span>
             </li>
             <li>
-                <a href="../nav_director/director.php?clear_page=true">
+                <a href="../nav_director/director.php">
                     <i class='bx bx-group'></i>
                     <span class="links_name">กรรมการ</span>
                 </a>
@@ -71,7 +71,7 @@ if (!isset($_SESSION['username'])) {
                 <span class="tooltip">แอดมิน</span>
             </li>
             <li>
-                <a href="form.php">
+                <a href="../nav_form/form.php">
                     <i class='bx bx-file'></i>
                     <span class="links_name">แบบฟอร์มเอกสาร</span>
                 </a>
@@ -137,112 +137,148 @@ if (!isset($_SESSION['username'])) {
             <!-- END -->
         </ul>
     </div>
+
     <section class="home-section">
-        <div class="text">แบบฟอร์มเอกสาร</div>
+        <div class="text">แบบฟอร์ม</div>
 
         <head>
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
         </head>
 
-        <!--
+
         <body>
-             <div class="container">
+            <!-- <div class="container shadow-lg bg-light py-3" style="border-radius: 12px;">
                 <br />
-                <div class="container bg-light py-3">
-                    <h2 align="center">Upload ไฟล์ข้อมูลสมาชิกในหมู่บ้านเพื่อใช้สำหรับการเข้าสู่ระบบ</h2>
+                <div class="container">
+                    <h2 align="center">ยื่นแบบฟอร์ม</h2>
                     <br />
                 </div>
                 <div class="panel panel-default">
-                    <div class="panel-heading">นำเข้าข้อมูลจากไฟล์ Excel หรือ CSV</div>
+                    <div class="panel-heading">นำเข้าข้อมูลจากไฟล์ที่ต้องการ</div>
                     <div class="panel-body">
                         <div class="table-responsive">
                             <span id="message"></span>
-                            <form method="post" id="import_excel_form" enctype="multipart/form-data">
-                                <table class="table">
-                                    <tr>
-                                        <td width="50%"><input type="file" name="import_excel" /></td>
-                                        <td width="25%"><input type="submit" name="import" id="import" class="btn btn-primary" value="Upload" /></td>
-                                    </tr>
-                                </table>
-                            </form>
-                            <br />
-
+                            <form action="add_file_db.php" id='import_excel_form' method="post" enctype="multipart/form-data"><br>
+                                <div class="row">
+                                    <div class="col">
+                                        <label>
+                                            <h4>ไฟล์เอกสาร</h4>
+                                        </label>
+                                        <div class="form-group">
+                                            <td width="50%"><input type="file" name="fileupload" id="fileupload" required="required" /></td>
+                                        </div><br>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label>
+                                            <h4>รายละเอียด</h4>
+                                        </label>
+                                        <div class="form-group">
+                                            <textarea type="text" id="orther" name="orther" placeholder="รายละเอียด" class="form-control col-sm-9 mx-auto"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <br>
+                                        <input type="submit" id="import" value="อัพโหลดแบบฟอร์ม" class='btn btn-info'>
+                                    </div>
+                                </div>
+                                <br />
                         </div>
                     </div>
                 </div>
-            </div>
+
+            </div> -->
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
         </body>
-        -->
+
 
         <head>
             <meta charset="utf-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1">
-            <title>สมาชิกในหมู่บ้าน</title>
+            <title>แบบฟอร์ม</title>
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
             <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
             <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
         </head>
 
-        <body>
+        <body style="font-family:roboto,sans-serif;">
+            <!-- <div class="container shadow-lg bg-light py-3" style="border-radius: 12px;">
+                <br>
+                <div>
 
-            <div class="container">
-                <div class="container shadow-lg bg-light py-3" style="border-radius: 12px;" id='regBox'>
+                    <h2 class='text-center'>ข้อมูลข่าวสาร</h2><br>
+
+                    <div class="row align-items-center">
+                        <input type="text" id="q" name='q' placeholder="ค้นหา..." class='form-control col-sm-5 mx-auto' autocomplete='off'>
+                    </div>
+                    <div class="row align-items-center">
+                        <div id="msg" class='mx-auto'></div>
+                    </div> 
+                   
                     <br>
-                    <h2 class='text-center'>เพิ่มข้อมูลแอดมิน</h2><br>
-                    <div id='msgReg'></div>
-                    <form action="" id='regForm' method="post"><br>
-                        <div class="row">
-                            <div class="col">
-                                <label>
-                                    <h4>username</h4>
-                                </label>
-                                <div class="form-group">
-                                    <input type="text" id="username" name="username" placeholder="username" class='form-control col-sm-5 mx-auto' required>
-                                </div><br><br>
-                            </div>
-                            <div class="col">
-                                <label>
-                                    <h4>รหัสผ่าน</h4>
-                                </label>
-                                <div class="form-group">
-                                    <input type="text" id="password" name="password" placeholder="รหัสผ่าน" class='form-control col-sm-5 mx-auto' required>
-                                </div><br><br>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <label>
-                                    <h4>ชื่อ-นามสกุล</h4>
-                                </label>
-                                <div class="form-group">
-                                    <input type="text" id="fullname" name="fullname" placeholder="ชื่อ-นามสกุล" class='form-control col-sm-5 mx-auto' required>
-                                </div><br><br>
-                            </div>
-                            <div class="col">
-                                <label>
-                                    <h4>ยืนยันรหัสผ่าน</h4>
-                                </label>
-                                <div class="form-group">
-                                    <input type="text" id="password_2" name="password_2" placeholder="ยืนยันรหัสผ่าน" class='form-control col-sm-5 mx-auto' required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <br>
-                                <input type="submit" id="btnPost" value="เพิ่มข้อมูลกรรมการ" class='btn btn-info'>
-                            </div>
-                        </div>
-                    </form>
+                    <br>   
+                    <?php
+                    //1. เชื่อมต่อ database: 
+                    include('connection.php');  //ไฟล์เชื่อมต่อกับ database ที่เราได้สร้างไว้ก่อนหน้าน้ี
+                    //2. query ข้อมูลจากตาราง: 
+                    $query = "SELECT * FROM form" or die("Error:" . mysqli_error($con));
+                    //3.เก็บข้อมูลที่ query ออกมาไว้ในตัวแปร result . 
+                    $result = mysqli_query($con, $query);
+                    //4 . แสดงข้อมูลที่ query ออกมา โดยใช้ตารางในการจัดข้อมูล: 
+                    echo "<table border='1' align='center' width='100%'>";
+                    echo "<tr align='center' bgcolor=''>
+                                <td>ลำดับที่</td>
+                                <td>id</td>
+                                <td>ไฟล์</td>
+                                <td>หัวข้อข่าวสาร</td>
+                                <td>รายละเอียดข่าวสาร</td>
+                                <td>วันที่</td>
+                                <td>การทำงาน</td>
+                              </tr>";
+                    //หัวข้อตาราง
+                    $i = 1;
+                    echo "<tr align='center' bgcolor=''></tr>";
+                    while ($row = mysqli_fetch_array($result)) {
+                        echo "<tr>";
+                        echo "<td align='center'>" . $i++ . "</td> ";
+                        echo "<td align='center'>" . $row['id'];
+                        echo "<td align='center'>" . "<img src='fileupload/" . $row['fileupload'] . "' width='100'>" . "</td>";
+                        echo "<td align='center'>" . $row['headlines1'];
+                        echo "<td align='center'>" . $row['news1'];
+                        echo "<td align='center'>" . $row['dateup'];
+
+                        //ลบข้อมูล
+                        echo "<td align='center'>
+                        <a href='edit.php?id=$row[1]' type='button' class='btn btn-info' onclick=\"return confirm('ยืนยันการแก้ไขข้อมูล')\">แก้ไข</a>
+                        <a href='UserDelete.php?id=$row[1]' type='button' class='btn btn-danger' onclick=\"return confirm('ยืนยันการลบข้อมูล')\">ลบ</a></td></td> ";
+                        echo "</tr>";
+                    }
+                    echo "</table>";
+                    //5. close connection
+                    mysqli_close($con);
+                    ?>
+                   
+
                     <br>
+                    <a href='?back=true'>
+                        <input type='submit' id='backpage' value='ย้อนกลับ' class='btn btn-info'>
+                    </a>
+                    
+
+                    <a href='?next=true'>
+                        <input type='submit' id='nextpage' name="nextpage" value='ถัดไป' class='btn btn-info'>
+                    </a>
 
                 </div>
-            </div>
-            </div>
+
+            </div> -->
 
             <div class="container">
                 <br>
@@ -250,12 +286,12 @@ if (!isset($_SESSION['username'])) {
                     <?php
                     // echo $_SESSION['page'];
                     ?>
-                    <br>
-                    <h2 class='text-center'>ข้อมูลแอดมิน</h2><br>
 
-                    <div class="row align-items-center">
+                    <h2 class='text-center'>แบบฟอร์มที่ยื่น</h2><br>
+
+                    <!-- <div class="row align-items-center">
                         <input type="text" id="q" name='q' placeholder="ค้นหา..." class='form-control col-sm-5 mx-auto' autocomplete='off'>
-                    </div>
+                    </div> -->
                     <br>
                     <div class="row align-items-center">
                         <div id="msg" class='mx-auto'></div>
@@ -293,103 +329,12 @@ if (!isset($_SESSION['username'])) {
 
                 </div>
             </div>
-
-            <br> <br>
-            <!-- <form action='./user.php' id='' method='GET'><input type='submit' id='page' value='20' class='btn btn-info' name='page'></form> <br> -->
-            <!-- <a href='./user.php?page=20'><input type='submit' id='' value='ถัดไป' class='btn btn-info'></a> <br> -->
-            </div>
-            <br>
-            <br>
-            <br>
         </body>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="js/main.js"></script>
 
 
     </section>
-    <?php
-    function testalet()
-    {
-        echo "<script> alert('hello')</script>";
-    }
-    ?>
-
-
-    <?php
-    if (isset($_GET['next'])) {
-        if ($_SESSION['page'] + 20 < $length) {
-            $_SESSION['page'] += 20;
-            echo "<script> window.location.href = './director.php' </script>";
-        }
-    } else if (isset($_GET['back'])) {
-        if ($_SESSION['page'] > 0) {
-            $_SESSION['page'] -= 20;
-            echo "<script> window.location.href = './director.php' </script>";
-        }
-    } else if (isset($_GET['page'])) {
-        $goPage = $_GET['page'];
-        $_SESSION['page'] = ($goPage * 20) - 20;
-        echo "<script> console.log(' get page = '+ $goPage);</script>";
-    } else if (isset($_GET['clear_page'])) {
-        $_SESSION['page'] = 0;
-        echo "<script> window.location.href = './director.php' </script>";
-    }
-
-    ?>
-
-    <script>
-        // $("#nextpage").on('submit', function() {
-        //     <?php
-                //         $_SESSION['page'] = $_SESSION['page'] + 20;
-                //         
-                ?>
-        // });
-        // $("#backpage").on('submit', function() {
-        //     <?php
-                //         $_SESSION['page'] = $_SESSION['page'] - 20;
-                //         
-                ?>
-        // });
-    </script>
-
-    <script>
-        function hidepass(test) {
-            console.log(test);
-            var fullhide_pass_id = "hide_pass_" + test;
-            var x = document.getElementById(fullhide_pass_id);
-            if (x.style.display === "none") {
-                x.style.display = "block";
-            } else {
-                x.style.display = "none";
-            }
-        }
-    </script>
-
-    <script>
-        $(document).ready(function() {
-            $('#import_excel_form').on('submit', function(event) {
-                event.preventDefault();
-                $.ajax({
-                    url: "import.php",
-                    method: "POST",
-                    data: new FormData(this),
-                    contentType: false,
-                    cache: false,
-                    processData: false,
-                    beforeSend: function() {
-                        $('#import').attr('disabled', 'disabled');
-                        $('#import').val('Importing...');
-                    },
-                    success: function(data) {
-                        $('#message').html(data);
-                        $('#import_excel_form')[0].reset();
-                        $('#import').attr('disabled', false);
-                        $('#import').val('Import');
-                    }
-                })
-            });
-        });
-    </script>
 
     <script>
         let sidebar = document.querySelector(".sidebar");
