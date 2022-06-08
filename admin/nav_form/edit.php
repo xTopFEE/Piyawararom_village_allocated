@@ -206,12 +206,12 @@
 
 
 					<div id='msgEdit'></div>
-					<form action="" id='id' method="post">
+					<form action="" id='editForm' method="post">
 						<div class="form-group">
 							<label>
 								<h4>แก้ไขสถานะแบบฟอร์ม</h4>
 							</label><br>
-							<select name="rank" id="fullname">
+							<select name="upd_status" id="upd_status">
 								<option value="1">รอการตรวจสอบ</option>
 								<option value="2">ได้รับการอนุมัติ</option>
 								<option value="3">ไม่ผ่านการอนุมัติ</option>
@@ -221,7 +221,7 @@
 							<label>
 								<h4>ตอบกลับ</h4>
 							</label><br>
-							<textarea type="text" id="news1" name="news1" placeholder="ข้อมูลการตอบกลับ" class="form-control col-sm-9 mx-auto"></textarea><br><br>
+							<textarea type="text" id="upd_reply" name="upd_reply" placeholder="ข้อมูลการตอบกลับ" class="form-control col-sm-9 mx-auto"></textarea><br><br>
 						</div><br><br>
 						<center>
 							<input type="submit" value="แก้ไข" class='btn update btn-success '>

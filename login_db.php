@@ -26,6 +26,7 @@ if (isset($_POST['login_user'])) {
         //echo strval($result);
 
         if (mysqli_num_rows($result) == 1) {
+            $_SESSION['usertype'] = "user"; // add $_SESSION['usertype']
             $_SESSION['username'] = $username;
             $_SESSION['success'] = "คุณได้เข้าสู่ระบบ";
             header("location: user/Backend.php");
@@ -36,9 +37,11 @@ if (isset($_POST['login_user'])) {
             //echo strval($result);
 
             if (mysqli_num_rows($result) == 1) {
+                $_SESSION['usertype'] = "admin"; // add $_SESSION['usertype']
                 $_SESSION['username'] = $username;
                 $_SESSION['success'] = "คุณได้เข้าสู่ระบบ";
                 header("location: admin/Backend.php");
+                
             } else if (mysqli_num_rows($result) == 0) {
                 echo $password;
                 $query = "SELECT * FROM director WHERE username = '$username' AND password ='$password' AND rank ='director'";
@@ -46,6 +49,7 @@ if (isset($_POST['login_user'])) {
                 //echo strval($result);
 
                 if (mysqli_num_rows($result) == 1) {
+                    $_SESSION['usertype'] = "director"; // add $_SESSION['usertype']
                     $_SESSION['username'] = $username;
                     $_SESSION['success'] = "คุณได้เข้าสู่ระบบ";
                     header("location: director/Backend.php");
@@ -56,6 +60,7 @@ if (isset($_POST['login_user'])) {
                     //echo strval($result);
 
                     if (mysqli_num_rows($result) == 1) {
+                        $_SESSION['usertype'] = "director"; // add $_SESSION['usertype']
                         $_SESSION['username'] = $username;
                         $_SESSION['success'] = "คุณได้เข้าสู่ระบบ";
                         header("location: financial_director/Backend.php");
@@ -64,8 +69,9 @@ if (isset($_POST['login_user'])) {
                         $query = "SELECT * FROM director WHERE username = '$username' AND password ='$password' AND rank ='vice_president_financial'";
                         $result = mysqli_query($conn, $query);
                         //echo strval($result);
-    
+
                         if (mysqli_num_rows($result) == 1) {
+                            $_SESSION['usertype'] = "director"; // add $_SESSION['usertype']
                             $_SESSION['username'] = $username;
                             $_SESSION['success'] = "คุณได้เข้าสู่ระบบ";
                             header("location: financial_director/Backend.php");
@@ -74,8 +80,9 @@ if (isset($_POST['login_user'])) {
                             $query = "SELECT * FROM director WHERE username = '$username' AND password ='$password' AND rank ='president'";
                             $result = mysqli_query($conn, $query);
                             //echo strval($result);
-        
+
                             if (mysqli_num_rows($result) == 1) {
+                                $_SESSION['usertype'] = "director"; // add $_SESSION['usertype']
                                 $_SESSION['username'] = $username;
                                 $_SESSION['success'] = "คุณได้เข้าสู่ระบบ";
                                 header("location: director/Backend.php");
@@ -84,8 +91,9 @@ if (isset($_POST['login_user'])) {
                                 $query = "SELECT * FROM director WHERE username = '$username' AND password ='$password' AND rank ='vice_president_civil'";
                                 $result = mysqli_query($conn, $query);
                                 //echo strval($result);
-            
+
                                 if (mysqli_num_rows($result) == 1) {
+                                    $_SESSION['usertype'] = "director"; // add $_SESSION['usertype']
                                     $_SESSION['username'] = $username;
                                     $_SESSION['success'] = "คุณได้เข้าสู่ระบบ";
                                     header("location: director/Backend.php");
@@ -94,8 +102,9 @@ if (isset($_POST['login_user'])) {
                                     $query = "SELECT * FROM director WHERE username = '$username' AND password ='$password' AND rank ='director_public_relations'";
                                     $result = mysqli_query($conn, $query);
                                     //echo strval($result);
-                
+
                                     if (mysqli_num_rows($result) == 1) {
+                                        $_SESSION['usertype'] = "director"; // add $_SESSION['usertype']
                                         $_SESSION['username'] = $username;
                                         $_SESSION['success'] = "คุณได้เข้าสู่ระบบ";
                                         header("location: director/Backend.php");
