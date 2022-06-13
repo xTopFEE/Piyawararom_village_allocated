@@ -173,7 +173,7 @@ if (!isset($_SESSION['username'])) {
         </ul>
     </div>
     <section class="home-section">
-        <div class="text">ยอดค้างชำระ</div>
+        <div class="text">ยอดค้างชำระรวมทุกปี</div>
 
         <head>
             <meta name="viewport" content="width=device-width, initial-scale=1.0">

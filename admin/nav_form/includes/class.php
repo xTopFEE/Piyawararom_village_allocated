@@ -1,4 +1,5 @@
 <?php require_once "db.php";
+session_start();
 class user extends db {
 	public function insert($fileupload){
 		$query = "INSERT INTO user(fileupload,) VALUES(?) ";
@@ -7,12 +8,22 @@ class user extends db {
 			echo "เพิ่มข้อมูลเรียบร้อย!";
 		}
 	}
-	public function get_row($form_id){
+	public function get_row($form_id)
+	{
 		$query = "SELECT * FROM form WHERE form_id = ? ";
 		$stmt = $this->connect()->prepare($query);
 		$stmt->execute([$form_id]);
 		while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
 			return $row;		
+		}
+	}
+	public function find_houseid($user_id) 
+	{
+		$query = "SELECT * FROM user WHERE user_id = '$user_id'";
+		$stmt = $this->connect()->prepare($query);
+		$stmt->execute();
+		while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+			return $row['username'];		
 		}
 	}
 	public function load($page)
@@ -21,7 +32,7 @@ class user extends db {
 		$stmt = $this->connect()->prepare($query);
 		$stmt->execute();
 		$out = "";
-		$out .= "<table style='font-size:14px;' class='table table-responsive table-hover'><tr class='bg-light'><th>ลำดับ</th><th>รายละเอียด</th><th>วันที่ยื่นแบบฟอร์ม</th><th>สถานะ</th><th colspan='2'>การดำเนินการ</th><th>การตอบกลับ</th></tr>";
+		$out .= "<table style='font-size:14px;' class='table table-responsive table-hover'><tr class='bg-light'><th>ลำดับ</th><th>บ้านเลขที่</th><th>รายละเอียด</th><th>วันที่ยื่นแบบฟอร์ม</th><th>สถานะ</th><th colspan='2'>การดำเนินการ</th><th>การตอบกลับ</th></tr>";
 		$count = 1;
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 			$resultcount = $page + $count;
@@ -33,7 +44,8 @@ class user extends db {
 			$reply = $row['reply'];
 			$other = $row['other'];
 			$status	 = $row['status'];
-			$out .= "<tr><td>$resultcount</td><td>$other</td><td>$date</td><td>$status</td>";
+			$house_id = $this->find_houseid($row['user_id']);
+			$out .= "<tr><td>$resultcount</td><td>$house_id</td><td>$other</td><td>$date</td><td>$status</td>";
 			$out .= "<td><a href='edit.php?id=$id' class='edit btn btn-sm btn-success' title='edit'><i class='fa fa-fw fa-pencil'></i></a></td>";
 			$out .= "<td><span id='$id' class='del btn btn-sm btn-danger' onclick='myFunction()' title='delete'><i class='fa fa-fw fa-trash'></i></span></td>";
 			$out .= "<td>$reply</td>";
@@ -50,7 +62,27 @@ class user extends db {
 
 	// update data
 	public function update($form_id, $reply, $status){
-		$query = "UPDATE form SET reply = ?,status = ? where form_id = ? ";
+
+		
+		// echo "<script> console.log('$user');</script>";
+		$type = $_SESSION['usertype'];
+		// echo "<script> console.log('$type');</script>";
+		$userid = $_SESSION['userid'];
+
+		// if ($type == 'user') {
+		// 	$table = "user";
+		// 	$setrow = "user_id";
+		// }
+		if ($type == 'admin') {
+			$table = "adminn";
+			$setrow = "admin_id";
+		}
+		else if ($type == 'director') {
+			$table = "director";
+			$setrow = "director_id";
+		}
+
+		$query = "UPDATE form SET reply = ?,status = ?,$setrow = '$userid' where form_id = ? ";
 
 		$stmt = $this->connect()->prepare($query);
 		if($stmt->execute([$reply, $status, $form_id])){

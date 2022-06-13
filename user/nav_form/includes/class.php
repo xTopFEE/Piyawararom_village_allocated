@@ -1,4 +1,5 @@
 <?php require_once "db.php";
+
 class user extends db {
 	public function insert($fileupload){
 		$query = "INSERT INTO user(fileupload,) VALUES(?) ";
@@ -15,8 +16,38 @@ class user extends db {
 			return $row;		
 		}
 	}
+	public function get_id() {
+		$user = $_SESSION['username'];
+		echo "<script> console.log('$user');</script>";
+		$type = $_SESSION['usertype'];
+		echo "<script> console.log('$type');</script>";
+
+		if ($type == 'user') {
+			$table = "user";
+			$setrow = "user_id";
+		}
+		else if ($type == 'admin') {
+			$table = "adminn";
+			$setrow = "admin_id";
+		}
+		else if ($type == 'director') {
+			$table = "director";
+			$setrow = "director_id";
+		}
+
+		$qy = "SELECT * FROM $table WHERE username='$user'";
+		$stmt = $this->connect()->prepare($qy);
+		$stmt->execute();
+		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+			$_SESSION['userid'] = $row[$setrow];
+		}
+		$SESSION_userid = $_SESSION['userid'];
+		echo "<script> console.log('$SESSION_userid' + '(id)');</script>";
+	}
 	public function load($page)
 	{
+		$this->get_id();
+
 		$query = "SELECT * FROM form LIMIT 20 OFFSET $page";
 		$stmt = $this->connect()->prepare($query);
 		$stmt->execute();

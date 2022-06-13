@@ -1,5 +1,4 @@
 <?php require_once "class.php";
-session_start();
 
 $user = new user;
 
