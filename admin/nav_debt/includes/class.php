@@ -31,7 +31,7 @@ class user extends db
 		$stmt = $this->connect()->prepare($query);
 		$stmt->execute();
 		$out = "";
-		$out .= "<table style='font-size:14px;' class='table table-responsive table-hover'><tr class='bg-light'><th colspan='2'>ลำดับ</th><th>ปี</th><th>บ้านเลขที่</th><th>จ่ายไปแล้ว (บาท)</th><th>ค้างชำระ (บาท)</th><th>รายละเอียด</th></tr>";
+		$out .= "<table style='font-size:14px;' class='table table-responsive table-hover'><tr class='bg-light'><th colspan='2'>ลำดับ</th><th>ปี</th><th>บ้านเลขที่</th><th>จ่ายไปแล้ว (บาท)</th><th>ยังไม่ได้ชำระเงินปี$enter_year (บาท)</th><th>รายละเอียด</th></tr>";
 		$count = 1;
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 			$resultcount = $page + $count;
@@ -48,7 +48,7 @@ class user extends db
 			$other = $row['other'];
 			$sum = $row['sum'];
 			$amountsum = 3600 - $sum;
-			$out .= "<tr><td colspan='2'>$seq</td><td>$year</td><td>$house_id</td><td>$sum / 3600 บาท</td><td>$amountsum บาท</td>";
+			$out .= "<tr><td colspan='2'>$seq</td><td>$year</td><td>$house_id</td><td>$sum / 3600</td><td>$amountsum</td>";
 			$strhref = "";
 			if(strpos($house_id, '/') !== false) {
 				$array_houseid = explode('/', $house_id);

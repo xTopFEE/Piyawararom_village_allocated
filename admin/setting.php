@@ -28,7 +28,7 @@ if (!isset($_SESSION['username'])) {
         </div>
         <ul class="nav-list">
             <li>
-                <a href="./Backend.php">
+                <a href="./nav_backend/backend.php">
                     <i class='bx bx-grid-alt'></i>
                     <span class="links_name">Dashboard</span>
                 </a>
