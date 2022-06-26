@@ -4,12 +4,12 @@ session_start();
 if (isset($_GET['next'])) {
     if ($_SESSION['page'] + 20 < $length) {
         $_SESSION['page'] += 20;
-        echo "<script> window.location.href = './debt.php' </script>";
+        echo "<script> window.location.href = './backend.php' </script>";
     }
 } else if (isset($_GET['back'])) {
     if ($_SESSION['page'] > 0) {
         $_SESSION['page'] -= 20;
-        echo "<script> window.location.href = './debt.php' </script>";
+        echo "<script> window.location.href = './backend.php' </script>";
     }
 } else if (isset($_GET['page'])) {
     $goPage = $_GET['page'];
@@ -17,7 +17,7 @@ if (isset($_GET['next'])) {
     echo "<script> console.log(' get page = '+ $goPage);</script>";
 } else if (isset($_GET['clear_page'])) {
     $_SESSION['page'] = 0;
-    echo "<script> window.location.href = './debt.php' </script>";
+    echo "<script> window.location.href = './backend.php' </script>";
 } else if(isset($_GET['year'])){
     $_SESSION['page'] = 0;
     $year = $_GET['year'];
@@ -288,7 +288,7 @@ if (!isset($_SESSION['username'])) {
                         <input type="text" id="q" name='q' placeholder="ค้นหา..." class='form-control col-sm-5 mx-auto' autocomplete='off'>
                     </div>
                     <br>
-                    <form action="debt.php/enter_year=2565" id='regForm' method="post">
+                    <form action="backend.php/enter_year=2565" id='regForm' method="post">
                             <?php 
                                 $now = new DateTime();
                                 $thisyear = $now->format("Y") +543;
@@ -413,7 +413,7 @@ if (!isset($_SESSION['username'])) {
         function changeYear(){
             var year = document.getElementById("enter_year").value
             console.log(year)
-            window.location.href = './debt.php?year='+year;
+            window.location.href = './backend.php?year='+year;
         }
     </script>
 

@@ -44,6 +44,10 @@ class user extends db
 			$book_number = $row['book_number'];
 			$number = $row['number'];
 			$date_paid = $row['date_paid'];
+			// เดือนออกแล้ว แต่ค่อยคิดเงื่อนไข if เพื่อแปลงเดือนเป็นเดือนไทย
+			$test_date = strtotime($date_paid);
+			$test_date = getdate($test_date);
+			echo "<script> console.log('$test_date[month]') </script>";
 			$amount = $row['amount'];
 			$other = $row['other'];
 			$out .= "<tr><td colspan='2'>$seq</td><td colspan='2'>$book_name</td><td>$year</td><td>$month</td><td>$house_id</td><td>$book_number</td><td>$number</td><td>$date_paid</td><td>$amount</td><td>$other</td>";

@@ -19,7 +19,8 @@ class user extends db
 		}
 	}
 
-	public function get_id() {
+	public function get_id()
+	{
 		$user = $_SESSION['username'];
 		echo "<script> console.log('$user');</script>";
 		$type = $_SESSION['usertype'];
@@ -28,12 +29,10 @@ class user extends db
 		if ($type == 'user') {
 			$table = "user";
 			$setrow = "user_id";
-		}
-		else if ($type == 'admin') {
+		} else if ($type == 'admin') {
 			$table = "adminn";
 			$setrow = "admin_id";
-		}
-		else if ($type == 'director') {
+		} else if ($type == 'director') {
 			$table = "director";
 			$setrow = "director_id";
 		}
@@ -52,13 +51,37 @@ class user extends db
 	{
 		$this->get_id();
 
-		if(!empty($enter_year))
-		echo "<script> console.log('enter year in load :' + $enter_year) </script>";
+		if (!empty($enter_year))
+			echo "<script> console.log('enter year in load :' + $enter_year) </script>";
 		if (!empty($enter_year)) {
 			$query = "SELECT *,SUM(amount) as 'sum' FROM payment WHERE year='$enter_year' GROUP BY house_id HAVING SUM(amount) < 3600 ORDER BY cast(SUBSTRING_INDEX(house_id, '/', -1)as int) LIMIT 20 OFFSET $page";
 		} else {
 			$query = "SELECT *,SUM(amount) as 'sum' FROM payment WHERE GROUP BY house_id HAVING SUM(amount) < 3600 ORDER BY cast(SUBSTRING_INDEX(house_id, '/', -1)as int) DESC LIMIT 20 OFFSET $page";
 		}
+
+		$this_year = date("Y");
+		$this_year = $this_year + 543; // change year to thai
+		echo "<script> console.log('This year :' + $this_year) </script>";
+		$min_year = 2557;
+
+		$start = new DateTime('2014-01-01 00:00:00');
+		$end = new DateTime('2021-03-15 00:00:00');
+		$diff = $end->diff($start);
+
+		$yearsInMonths = $diff->format('%r%y') * 12;
+		$months = $diff->format('%r%m');
+		$totalMonths = $yearsInMonths + $months;
+		echo "<script> console.log('totalMonths :' + $totalMonths) </script>";
+		echo $totalMonths;
+		while ($min_year <= $this_year) {
+
+			$query = "SELECT *,SUM(amount) as 'sum' FROM payment WHERE year='$min_year' GROUP BY house_id HAVING SUM(amount) < 3600 ORDER BY cast(SUBSTRING_INDEX(house_id, '/', -1)as int) LIMIT 20 OFFSET $page";
+
+			echo "<script> console.log('Min year :' + $min_year) </script>";
+			$min_year++;
+		}
+
+
 
 		$stmt = $this->connect()->prepare($query);
 		$stmt->execute();
@@ -82,11 +105,11 @@ class user extends db
 			$amountsum = 3600 - $sum;
 			$out .= "<tr><td colspan='2'>$seq</td><td>$year</td><td>$house_id</td><td>$sum / 3600 บาท</td><td>$amountsum บาท</td>";
 			$strhref = "";
-			if(strpos($house_id, '/') !== false) {
+			if (strpos($house_id, '/') !== false) {
 				$array_houseid = explode('/', $house_id);
 				$first_houseid = $array_houseid[0];
 				$array_length = count($array_houseid);
-				$last_houseid = $array_houseid[$array_length-1];
+				$last_houseid = $array_houseid[$array_length - 1];
 				$strhref = "../nav_debt_detail/debt_detail.php?first_houseid=$first_houseid&last_houseid=$last_houseid&enter_year=$enter_year";
 			} else {
 				$first_houseid = $house_id;
