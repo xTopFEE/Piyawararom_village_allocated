@@ -18,10 +18,61 @@ class user extends db
 			return $row;
 		}
 	}
+	public function change_date_format($date)
+	{
+		// 1(เดือน)/2(วัน)/2565(ปี)
+		$split_date = explode(" ", $date);
+		$newformat = "";
+		return "สวัสดี";
+		if (count($split_date) > 1) {
+			//(int)$split_date[0] คือ เดือน
+			switch ($split_date[1]) {
+				case 'Jan':
+					$newformat = "$split_date[0] ม.ค. $split_date[2]";
+					break;
+				case 'Feb':
+					$newformat = "$split_date[0] ก.พ. $split_date[2]";
+					break;
+				case 'Mar':
+					$newformat = "$split_date[0] มี.ค. $split_date[2]";
+					break;
+				case 'Apr':
+					$newformat = "$split_date[0] เม.ย. $split_date[2]";
+					break;
+				case 'May':
+					$newformat = "$split_date[0] พ.ค. $split_date[2]";
+					break;
+				case 'Jun':
+					$newformat = "$split_date[0] มิ.ย. $split_date[2]";
+					break;
+				case 'Jul':
+					$newformat = "$split_date[0] ก.ค. $split_date[2]";
+					break;
+				case 'Aug':
+					$newformat = "$split_date[0] ส.ค. $split_date[2]";
+					break;
+				case 'Sep':
+					$newformat = "$split_date[0] ก.ย. $split_date[2]";
+					break;
+				case 'Oct':
+					$newformat = "$split_date[0] ต.ค. $split_date[2]";
+					break;
+				case 'Nov':
+					$newformat = "$split_date[0] พ.ย. $split_date[2]";
+					break;
+				case 'Dec':
+					$newformat = "$split_date[0] ธ.ค. $split_date[2]";
+					break;
+			}
+		}else{
+			$newformat = $date;
+		}
+		return $newformat;
+	}
 	public function load($page, $enter_year)
 	{
-		if(!empty($enter_year))
-		echo "<script> console.log('enter year in load :' + $enter_year) </script>";
+		if (!empty($enter_year))
+			echo "<script> console.log('enter year in load :' + $enter_year) </script>";
 		if (!empty($enter_year)) {
 			$query = "SELECT * FROM payment WHERE year='$enter_year' ORDER BY seq DESC LIMIT 20 OFFSET $page";
 		} else {
@@ -40,6 +91,8 @@ class user extends db
 			$book_name = $row['book_name'];
 			$year = $row['year'];
 			$month = $row['month'];
+			//แปลงเดือน
+			$month = $this->change_date_format($month);
 			$house_id = $row['house_id'];
 			$book_number = $row['book_number'];
 			$number = $row['number'];

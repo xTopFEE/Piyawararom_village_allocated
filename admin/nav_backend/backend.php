@@ -288,36 +288,24 @@ if (!isset($_SESSION['username'])) {
                         <input type="text" id="q" name='q' placeholder="ค้นหา..." class='form-control col-sm-5 mx-auto' autocomplete='off'>
                     </div>
                     <br>
-                    <form action="backend.php/enter_year=2565" id='regForm' method="post">
+                    <!-- <form action="backend.php/enter_year=2565" id='regForm' method="post">
                             <?php 
-                                $now = new DateTime();
-                                $thisyear = $now->format("Y") +543;
-                                $selectedYear = $_SESSION['enter_year'];
-                                echo "<select name='enter_year' id='enter_year' onchange='changeYear()'>";
-                                echo "<script> console.log('hello : '+$thisyear +' selectedYear :' +$selectedYear) </script>";
+                                // $now = new DateTime();
+                                // $thisyear = $now->format("Y") +543;
+                                // $selectedYear = $_SESSION['enter_year'];
+                                // echo "<select name='enter_year' id='enter_year' onchange='changeYear()'>";
+                                // echo "<script> console.log('hello : '+$thisyear +' selectedYear :' +$selectedYear) </script>";
                                 
-                                for ($thisyear ;$thisyear >= 2554; $thisyear--){
-                                    if($selectedYear == $thisyear){
-                                        echo "<option value='$thisyear' selected>$thisyear</option>";
-                                    }else{
-                                        echo "<option value='$thisyear'>$thisyear</option>";
-                                    }
-                                }
-                                echo "</select>";
-                            ?>
-                            <!-- <option value="2564" action="payment.php/enter_year=2564">2564</option>';
-                            <option value="2563">2563</option>';
-                            <option value="2562">2562</option>';
-                            <option value="2561">2561</option>';
-                            <option value="2560">2560</option>';
-                            <option value="2560">2559</option>';
-                            <option value="2560">2558</option>';
-                            <option value="2560">2557</option>';
-                            <option value="2560">2556</option>';
-                            <option value="2560">2555</option>';
-                            <option value="2559">2554</option> -->
-                        
-                    </form>
+                                // for ($thisyear ;$thisyear >= 2554; $thisyear--){
+                                //     if($selectedYear == $thisyear){
+                                //         echo "<option value='$thisyear' selected>$thisyear</option>";
+                                //     }else{
+                                //         echo "<option value='$thisyear'>$thisyear</option>";
+                                //     }
+                                // }
+                                // echo "</select>";
+                            ?>                       
+                    </form> -->
                     <div class="row align-items-center">
                         <div id="msg" class='mx-auto'></div>
                     </div>

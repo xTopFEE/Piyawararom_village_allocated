@@ -47,47 +47,83 @@ class user extends db
 		echo "<script> console.log('$SESSION_userid' + '(id)');</script>";
 	}
 
+	public function get_month_number($month)
+	{
+		$number = 0;
+		switch ($month) {
+			case "มกราคม": 
+				$number = 1;
+				break;
+			case "กุมภาพันธ์": 
+				$number = 2;
+				break;
+			case "มีนาคม": 
+				$number = 3;
+				break;
+			case "เมษายน": 
+				$number = 4;
+				break;
+			case "พฤษภาคม":
+				$number = 5;
+				break;
+			case "มิถุนายน":
+				$number = 6;
+				break;
+			case "กรกฎาคม":
+				$number = 7;
+				break;
+			case "สิงหาคม":
+				$number = 8;
+				break;
+			case "กันยายน":
+				$number = 9;
+				break;
+			case "ตุลาคม":
+				$number = 10;
+				break;
+			case "พฤศจิกายน":
+				$number = 11;
+				break;
+			case "ธันวาคม":
+				$number = 12;
+				break;
+		}
+		return $number;
+	}
+
+
 	public function load($page, $enter_year)
 	{
 		$this->get_id();
 
-		if (!empty($enter_year))
-			echo "<script> console.log('enter year in load :' + $enter_year) </script>";
-		if (!empty($enter_year)) {
-			$query = "SELECT *,SUM(amount) as 'sum' FROM payment WHERE year='$enter_year' GROUP BY house_id HAVING SUM(amount) < 3600 ORDER BY cast(SUBSTRING_INDEX(house_id, '/', -1)as int) LIMIT 20 OFFSET $page";
-		} else {
-			$query = "SELECT *,SUM(amount) as 'sum' FROM payment WHERE GROUP BY house_id HAVING SUM(amount) < 3600 ORDER BY cast(SUBSTRING_INDEX(house_id, '/', -1)as int) DESC LIMIT 20 OFFSET $page";
-		}
+		
+		// echo "<script> console.log('thismonth :' + $thismonth) </script>";	
+		$query = "WITH added_row_number AS ( SELECT *,SUM(amount) as 'sum' , ROW_NUMBER() OVER(PARTITION BY `house_id`) AS 'row_number' FROM payment WHERE month IN('มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม') GROUP BY house_id ORDER BY cast(SUBSTRING_INDEX(house_id, '/', -1)as int) ) SELECT * FROM added_row_number LIMIT 20 OFFSET $page";
 
-		$this_year = date("Y");
-		$this_year = $this_year + 543; // change year to thai
-		echo "<script> console.log('This year :' + $this_year) </script>";
-		$min_year = 2557;
 
-		$start = new DateTime('2014-01-01 00:00:00');
-		$end = new DateTime('2021-03-15 00:00:00');
-		$diff = $end->diff($start);
+		
 
-		$yearsInMonths = $diff->format('%r%y') * 12;
-		$months = $diff->format('%r%m');
-		$totalMonths = $yearsInMonths + $months;
-		echo "<script> console.log('totalMonths :' + $totalMonths) </script>";
-		echo $totalMonths;
-		while ($min_year <= $this_year) {
+		
+		
+		// while ($min_year <= $this_year) {
 
-			$query = "SELECT *,SUM(amount) as 'sum' FROM payment WHERE year='$min_year' GROUP BY house_id HAVING SUM(amount) < 3600 ORDER BY cast(SUBSTRING_INDEX(house_id, '/', -1)as int) LIMIT 20 OFFSET $page";
+		// 	$query = "SELECT *,SUM(amount) as 'sum' FROM payment WHERE year='$min_year' GROUP BY house_id HAVING SUM(amount) < 3600 ORDER BY cast(SUBSTRING_INDEX(house_id, '/', -1)as int) LIMIT 20 OFFSET $page";
 
-			echo "<script> console.log('Min year :' + $min_year) </script>";
-			$min_year++;
-		}
+		// 	echo "<script> console.log('Min year :' + $min_year) </script>";
+		// 	$min_year++;
+		// }
 
 
 
 		$stmt = $this->connect()->prepare($query);
 		$stmt->execute();
 		$out = "";
-		$out .= "<table style='font-size:14px;' class='table table-responsive table-hover'><tr class='bg-light'><th colspan='2'>ลำดับ</th><th>ปี</th><th>บ้านเลขที่</th><th>จ่ายไปแล้ว (บาท)</th><th>ค้างชำระ (บาท)</th><th>รายละเอียด</th></tr>";
+		$out .= "<table style='font-size:14px;' class='table table-responsive table-hover'><tr class='bg-light'><th colspan='2'>ลำดับ</th><th>ปี</th><th>บ้านเลขที่</th><th>จ่ายไปแล้ว (บาท)</th><th>จำนวนที่ต้องจ่ายทั้งหมด (บาท)</th><th>เดือนทั้งหมด</th></tr>";
 		$count = 1;
+
+		$thismonth = date("m");
+		$this_year = date("Y"); // 2565
+		$this_year = $this_year + 543; // change year to thai
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 			$resultcount = $page + $count;
 			$payment_id = $row['payment_id'];
@@ -95,6 +131,11 @@ class user extends db
 			$book_name = $row['book_name'];
 			$year = $row['year'];
 			$month = $row['month'];
+			// ส่วนการคำนวณระยะเวลาเดือนตั้งแต่อยู่จนถึงปัจจุบัน
+			$RemainYear = ($this_year - $year) * 12;
+			$datamonth = $this->get_month_number($month);
+			$totalmonth = $RemainYear - ($datamonth - $thismonth);
+			//
 			$house_id = $row['house_id'];
 			$book_number = $row['book_number'];
 			$number = $row['number'];
@@ -102,8 +143,8 @@ class user extends db
 			$amount = $row['amount'];
 			$other = $row['other'];
 			$sum = $row['sum'];
-			$amountsum = 3600 - $sum;
-			$out .= "<tr><td colspan='2'>$seq</td><td>$year</td><td>$house_id</td><td>$sum / 3600 บาท</td><td>$amountsum บาท</td>";
+			$amountsum = $totalmonth*300 ;
+			$out .= "<tr><td colspan='2'>$seq</td><td>$year</td><td>$house_id</td><td>$sum</td><td>$amountsum</td><td>$totalmonth</td>";
 			$strhref = "";
 			if (strpos($house_id, '/') !== false) {
 				$array_houseid = explode('/', $house_id);
@@ -116,7 +157,7 @@ class user extends db
 				$last_houseid = "false";
 				$strhref = "../nav_debt_detail/debt_detail.php?first_houseid=$first_houseid&enter_year=$enter_year";
 			}
-			$out .= "<td><a href='$strhref' class='edit btn btn-sm btn-info' title='ดูรายละเอียด'><i class='bx bx-detail'></i></a></td>";
+			// $out .= "<td><a href='$strhref' class='edit btn btn-sm btn-info' title='ดูรายละเอียด'><i class='bx bx-detail'></i></a></td>";
 			// $out .= "<td>$other</td>";
 			//$out .= "<td><span payment_id='$payment_id' class='del btn btn-sm btn-danger' onclick='myFunction()' title='delete'><i class='fa fa-fw fa-trash'></i></span></td>";
 			$count++;
