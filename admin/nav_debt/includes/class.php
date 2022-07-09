@@ -23,9 +23,9 @@ class user extends db
 		if(!empty($enter_year))
 		echo "<script> console.log('enter year in load :' + $enter_year) </script>";
 		if (!empty($enter_year)) {
-			$query = "SELECT *,SUM(amount) as 'sum' FROM payment WHERE year='$enter_year' GROUP BY house_id HAVING SUM(amount) < 3600 ORDER BY cast(SUBSTRING_INDEX(house_id, '/', -1)as int) LIMIT 20 OFFSET $page";
+			$query = "SELECT *,SUM(amount) as 'sum' FROM payment WHERE year='$enter_year' GROUP BY house_id ORDER BY cast(SUBSTRING_INDEX(house_id, '/', -1)as int) LIMIT 20 OFFSET $page";
 		} else {
-			$query = "SELECT *,SUM(amount) as 'sum' FROM payment WHERE GROUP BY house_id HAVING SUM(amount) < 3600 ORDER BY cast(SUBSTRING_INDEX(house_id, '/', -1)as int) DESC LIMIT 20 OFFSET $page";
+			$query = "SELECT *,SUM(amount) as 'sum' FROM payment WHERE GROUP BY house_id ORDER BY cast(SUBSTRING_INDEX(house_id, '/', -1)as int) DESC LIMIT 20 OFFSET $page";
 		}
 
 		$stmt = $this->connect()->prepare($query);
