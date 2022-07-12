@@ -28,15 +28,15 @@ if (!isset($_SESSION['username'])) {
         </div>
         <ul class="nav-list">
         <ul class="nav-list">
-            <li>
-                <a href="./Backend.php">
+        <li>
+                <a href="./nav_backend/backend.php">
                     <i class='bx bx-grid-alt'></i>
-                    <span class="links_name">Dashboard</span>
+                    <span class="links_name">ยอดค้างชำระรวมทุกปี</span>
                 </a>
-                <span class="tooltip">Dashboard</span>
+                <span class="tooltip">ยอดค้างชำระรวมทุกปี</span>
             </li>
             <li>
-                <a href="#">
+                <a href="./nav_debt/debt.php">
                     <i class='bx bx-calendar'></i>
                     <span class="links_name">ยอดค้างชำระ</span>
                 </a>
@@ -50,14 +50,14 @@ if (!isset($_SESSION['username'])) {
                 <span class="tooltip">แบบฟอร์มเอกสาร</span>
             </li>
             <li>
-                <a href="#">
+                <a href="./babfrom.php">
                     <i class='bx bx-chat'></i>
                     <span class="links_name">การร้องเรียนทั่วไป</span>
                 </a>
                 <span class="tooltip">การร้องเรียนทั่วไป</span>
             </li>
             <li>
-                <a href="./setting.php">
+                <a href="setting.php">
                     <i class='bx bx-cog'></i>
                     <span class="links_name">การตั้งค่า</span>
                 </a>

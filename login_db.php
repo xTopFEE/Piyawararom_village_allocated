@@ -29,7 +29,7 @@ if (isset($_POST['login_user'])) {
             $_SESSION['usertype'] = "user"; // add $_SESSION['usertype']
             $_SESSION['username'] = $username;
             $_SESSION['success'] = "คุณได้เข้าสู่ระบบ";
-            header("location: user/backend.php");
+            header("location: user/nav_backend/backend.php");
         } else if (mysqli_num_rows($result) == 0) {
             echo $password;
             $query = "SELECT * FROM adminn WHERE username = '$username' AND password ='$password'";

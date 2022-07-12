@@ -1,24 +1,16 @@
-<?php require_once "includes/db.php";
-class user extends db
-{
-    public function getLength()
-    {
-        $lengthquery = "SELECT * FROM director";
-        $stmtlength = $this->connect()->prepare($lengthquery);
-        $stmtlength->execute();
-        $length = 0;
-        while ($row = $stmtlength->fetch(PDO::FETCH_ASSOC)) {
-            $length++;
-        }
-        return $length;
-    }
-}
+<?php
 session_start();
 
 if (!isset($_SESSION['username'])) {
     $_SESSION['msg'] = "กรุณาล็อกอินก่อน";
     header('location: ../../login.php');
 }
+
+$con = mysqli_connect("localhost", "root", "", "project");
+$query = "SELECT * FROM news ORDER BY news_id  DESC" or die("Error:" . mysqli_error($con));
+$result_select = mysqli_query($con, $query);
+
+// print_r(mysqli_fetch_array($result_select));
 ?>
 
 <!DOCTYPE html>
@@ -28,14 +20,18 @@ if (!isset($_SESSION['username'])) {
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
     <!-- Boxicons CDN -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Comfirm box -->
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
+<style>
+    .text-center {
+        font-size: 12px;
+    }
+</style>
 
 <body>
-    <div class="sidebar">
+<div class="sidebar">
         <div class="logo-details">
             <i class='bx bx-home-alt icon'></i>
             <div class="logo_name">หมู่บ้านปิยวรารมย์</div>
@@ -45,9 +41,9 @@ if (!isset($_SESSION['username'])) {
             <li>
                 <a href="../nav_backend/backend.php">
                     <i class='bx bx-grid-alt'></i>
-                    <span class="links_name">Dashboard</span>
+                    <span class="links_name">ยอดค้างชำระรวมทุกปี</span>
                 </a>
-                <span class="tooltip">Dashboard</span>
+                <span class="tooltip">ยอดค้างชำระรวมทุกปี</span>
             </li>
             <li>
                 <a href="../nav_user/user.php?clear_page=true">
@@ -78,7 +74,7 @@ if (!isset($_SESSION['username'])) {
                 <span class="tooltip">แบบฟอร์มเอกสาร</span>
             </li>
             <li>
-                <a href="../nav_news/news.php">
+                <a href="./news.php">
                     <i class='bx bx-broadcast'></i>
                     <span class="links_name">ข่าวสารประชาสัมพันธ์</span>
                 </a>
@@ -137,12 +133,127 @@ if (!isset($_SESSION['username'])) {
             <!-- END -->
         </ul>
     </div>
+
     <section class="home-section">
-        <div class="text">ข่าวสารประชาสัมพันธ์</div>
+        <div class="text">หัวข้อข่าวสาร</div>
 
         <head>
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+            <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+            <link rel="stylesheet" href="dist/image-uploader.min.css">
+
+            <style>
+                    .container {
+                    width: 60%;
+                    max-width: 1200px;
+                    margin: 0 auto;
+                    position: relative;
+                }
+
+                .step {
+                    font-size: 1.6em;
+                    font-weight: 600;
+                    margin-right: .5rem;
+                }
+
+                .option {
+                    margin-top: 2rem;
+                    border-bottom: 1px solid #d9d9d9;
+                }
+
+                .modal {
+                    position: fixed;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    background: rgba(0, 0, 0, .5);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                .modal .content {
+                    background: #fff;
+                    display: inline-block;
+                    padding: 2rem;
+                    position: relative;
+                }
+
+                .modal .content h4 {
+                    margin-top: 0;
+                }
+
+                .modal .content a.close {
+                    position: absolute;
+                    top: 1rem;
+                    right: 1rem;
+                    color: inherit;
+                }
+
+                ::-webkit-scrollbar {
+                    width: 10px;
+                    height: 10px;
+                }
+
+                ::-webkit-scrollbar-track {
+                    background: transparent;
+                }
+
+                ::-webkit-scrollbar-thumb {
+                    background: #888;
+                }
+
+                ::-webkit-scrollbar-thumb:hover {
+                    background: #555;
+                }
+
+                @media screen and (max-width: 1366px) {
+                    body {
+                        font-size: 15px;
+                    }
+
+                    nav ul li a {
+                        font-size: 1.1em;
+
+                    }
+                }
+
+                @media screen and (max-width: 992px) {
+                    main {
+                        margin: 2rem 0;
+                    }
+
+                    nav {
+                        margin-left: -10em;
+                    }
+                }
+
+                @media screen and (max-width: 786px) {
+                    body {
+                        font-size: 14px;
+                    }
+
+                    nav {
+                        display: none;
+                    }
+
+                    .container {
+                        width: 80%;
+                    }
+                }
+
+                @media screen and (max-width: 450px) {
+                    .container {
+                        width: 90%;
+                    }
+                }
+
+                .modal-backdrop.fade.show {
+                    display: none !important;
+                }
+            </style>
         </head>
 
 
@@ -158,23 +269,19 @@ if (!isset($_SESSION['username'])) {
                     <div class="panel-body">
                         <div class="table-responsive">
                             <span id="message"></span>
-                            <form action="add_file_db.php" id='import_excel_form' method="post" enctype="multipart/form-data"><br>
+                            <form action="#" method="post" name="news_form" id="news_form" enctype="multipart/form-data"><br>
                                 <div class="row">
-                                    <div class="col">
-                                        <label>
-                                            <h4>รูปหัวข่าว</h4>
-                                        </label>
-                                        <div class="form-group">
-                                            <td width="50%"><input type="file" name="fileupload" id="fileupload" required="required" /></td>
-                                        </div><br>
-                                    </div>
                                     <div class="col">
                                         <label>
                                             <h4>หัวข้อข่าวสาร</h4>
                                         </label>
                                         <div class="form-group">
-                                            <input type="text" id="headlines1" name="headlines1" placeholder="หัวข้อข่าวสาร" class='form-control col-sm-5 mx-auto' required>
-                                        </div><br><br>
+
+                                            <input type="hidden" id="action" name="action" value="register"></input>
+                                            <input type="hidden" id="id" name="id"></input>
+                                            <input type="hidden" id="old_img" name="old_img" value="0"></input>
+                                            <input type="text" id="title" name="title" placeholder="หัวข้อข่าวสาร" class="form-control"></input>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -183,32 +290,152 @@ if (!isset($_SESSION['username'])) {
                                             <h4>รายละเอียดข่าวสาร</h4>
                                         </label>
                                         <div class="form-group">
-                                            <textarea type="text" id="news1" name="news1" placeholder="รายละเอียดข่าวสาร" class="form-control col-sm-9 mx-auto"></textarea>
+                                            <textarea type="text" id="description" name="description" placeholder="รายละเอียดข่าวสาร" class="form-control"></textarea>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
+                                        <label>
+                                            <h4>รูปที่เกี่ยวข้องกับข่าวสาร</h4>
+                                        </label>
+                                        <div class="form-group">
+                                            <td width="50%">
+                                                <div class="input-field">
+                                                    <div class="input-images-1" style="padding-top: .5rem;"></div>
+                                                </div>
+
+                                            </td>
+                                        </div><br>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
                                         <br>
-                                        <input type="submit" id="import" value="เพิ่มข้อมูลข่าวสาร" class='btn btn-info'>
+                                        <button id="submit2" value="เพิ่มข่าวสาร" class='btn btn-info'>เพิ่มข่าวสาร</button>
                                     </div>
                                 </div>
                                 <br />
+                            </form>
                         </div>
                     </div>
                 </div>
-
             </div>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 
+            <form action="#" method="post" id="form_to_update">
+                <input type="hidden" id="title2" name="title2">
+                <input type="hidden" id="id2" name="id2">
+                <input type="hidden" id="do_update2" name="do_update2">
+                <input type="hidden" id="description2" name="description2">
+                <input type="hidden" id="img2" name="img2">
+            </form>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+            <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+            <script type="text/javascript" src="dist/image-uploader.min.js"></script>
         </body>
+
+        <script>
+            <?php
+            if (!isset($_POST['do_update2'])) {
+            ?>
+                $('.input-images-1').imageUploader();
+            <?php
+            } else {
+            ?>
+                $('#title').val('<?= $_POST['title2'] ?>')
+                $('#id').val(<?= $_POST['id2'] ?>)
+                $('#action').val('update')
+                $('#description').val('<?= $_POST['description2'] ?>')
+                $('#submit2').text('แก้ไขข้อมูลข่าวสาร')
+                let img = '<?= $_POST['img2'] ?>'
+                if (img != '') {
+                    let arr_img = img.split("|")
+                    let preloaded = arr_img.map((img, index) => {
+                        return {
+                            id: index,
+                            src: img
+                        }
+                    });
+                    $('.input-images-1').imageUploader({
+                        preloaded: preloaded,
+                        preloadedInputName: 'old'
+                    });
+                } else {
+                    $('.input-images-1').imageUploader();
+                }
+            <?php
+            }
+            ?>
+        </script>
+
+        <?php
+        if (isset($_POST['title']) && isset($_POST['description']) && isset($_POST['action'])) {
+            $title = $_POST['title'];
+            $description = $_POST['description'];
+            if ($_POST['action'] == "register") {
+                $countfiles = count($_FILES['images']['name']);
+                $upload_location = "uploads/";
+                $files_arr = array();
+                for ($index = 0; $index < $countfiles; $index++) {
+                    $filename = $_FILES['images']['name'][$index];
+                    $ext = pathinfo($filename, PATHINFO_EXTENSION);
+                    $valid_ext = array("png", "jpeg", "jpg");
+                    if (in_array($ext, $valid_ext)) {
+                        $path = $upload_location . $filename;
+                        if (move_uploaded_file($_FILES['images']['tmp_name'][$index], $path)) {
+                            $files_arr[] = $path;
+                        }
+                    }
+                }
+
+                $path_all = implode("|", $files_arr);
+
+
+                $query = "INSERT into news (news_title,Description,file) 
+                VALUES ('$title','$description','" . $path_all . "')" or die("Error:" . mysqli_error($con));
+                $result = mysqli_query($con, $query);
+                echo '<script>window.location.href = \'news.php\'</script>';
+            } elseif ($_POST['action'] == "update") {
+
+                $countfiles = count($_FILES['images']['name']);
+                $upload_location = "uploads/";
+                $files_arr = array();
+                for ($index = 0; $index < $countfiles; $index++) {
+                    $filename = $_FILES['images']['name'][$index];
+                    $ext = pathinfo($filename, PATHINFO_EXTENSION);
+                    $valid_ext = array("png", "jpeg", "jpg");
+                    if (in_array($ext, $valid_ext)) {
+                        $path = $upload_location . $filename;
+                        if (move_uploaded_file($_FILES['images']['tmp_name'][$index], $path)) {
+                            $files_arr[] = $path;
+                        }
+                    }
+                }
+
+                if($_POST['old_img'] != "0"){
+                    if(count($files_arr) == 0){
+                        $path_all = $_POST['old_img'];
+                    }else{
+                        $path_all = implode("|", $files_arr)."|".$_POST['old_img'];
+                    }
+                }else{
+                    $path_all = implode("|", $files_arr);
+                }
+                    
+                $query = "UPDATE news SET news_title = '" . $title . "',Description = '" . $description . "' , file = '".$path_all."' where news_id = '" . $_POST['id'] . "'";
+                $result = mysqli_query($con, $query);
+                echo '<script>window.location.href = \'news.php\'</script>';
+            }
+        }
+        ?>
 
 
         <head>
             <meta charset="utf-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1">
-            <title>ข่าวสารประชาสัมพันธ์</title>
+            <title>ข้อมูลข่าวสาร</title>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
             <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
             <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -216,126 +443,113 @@ if (!isset($_SESSION['username'])) {
         </head>
 
         <body style="font-family:roboto,sans-serif;">
-            <!-- <div class="container shadow-lg bg-light py-3" style="border-radius: 12px;">
-                <br>
-                <div>
 
-                    <h2 class='text-center'>ข้อมูลข่าวสาร</h2><br>
-
-                    <div class="row align-items-center">
-                        <input type="text" id="q" name='q' placeholder="ค้นหา..." class='form-control col-sm-5 mx-auto' autocomplete='off'>
-                    </div>
-                    <div class="row align-items-center">
-                        <div id="msg" class='mx-auto'></div>
-                    </div> 
-                   
-                    <br>
-                    <br>   
-                    <?php
-                    //1. เชื่อมต่อ database: 
-                    include('connection.php');  //ไฟล์เชื่อมต่อกับ database ที่เราได้สร้างไว้ก่อนหน้าน้ี
-                    //2. query ข้อมูลจากตาราง: 
-                    $query = "SELECT * FROM uploadfile" or die("Error:" . mysqli_error($con));
-                    //3.เก็บข้อมูลที่ query ออกมาไว้ในตัวแปร result . 
-                    $result = mysqli_query($con, $query);
-                    //4 . แสดงข้อมูลที่ query ออกมา โดยใช้ตารางในการจัดข้อมูล: 
-                    echo "<table border='1' align='center' width='100%'>";
-                    echo "<tr align='center' bgcolor=''>
-                                <td>ลำดับที่</td>
-                                <td>id</td>
-                                <td>รูปภาพ</td>
-                                <td>หัวข้อข่าวสาร</td>
-                                <td>รายละเอียดข่าวสาร</td>
-                                <td>วันที่</td>
-                                <td>การทำงาน</td>
-                              </tr>";
-                    //หัวข้อตาราง
-                    $i = 1;
-                    echo "<tr align='center' bgcolor=''></tr>";
-                    while ($row = mysqli_fetch_array($result)) {
-                        echo "<tr>";
-                        echo "<td align='center'>" . $i++ . "</td> ";
-                        echo "<td align='center'>" . $row['id'];
-                        echo "<td align='center'>" . "<img src='fileupload/" . $row['fileupload'] . "' width='100'>" . "</td>";
-                        echo "<td align='center'>" . $row['headlines1'];
-                        echo "<td align='center'>" . $row['news1'];
-                        echo "<td align='center'>" . $row['dateup'];
-
-                        //ลบข้อมูล
-                        echo "<td align='center'>
-                        <a href='edit.php?id=$row[1]' type='button' class='btn btn-info' onclick=\"return confirm('ยืนยันการแก้ไขข้อมูล')\">แก้ไข</a>
-                        <a href='UserDelete.php?id=$row[1]' type='button' class='btn btn-danger' onclick=\"return confirm('ยืนยันการลบข้อมูล')\">ลบ</a></td></td> ";
-                        echo "</tr>";
-                    }
-                    echo "</table>";
-                    //5. close connection
-                    mysqli_close($con);
-                    ?>
-                   
-
-                    <br>
-                    <a href='?back=true'>
-                        <input type='submit' id='backpage' value='ย้อนกลับ' class='btn btn-info'>
-                    </a>
-                    
-
-                    <a href='?next=true'>
-                        <input type='submit' id='nextpage' name="nextpage" value='ถัดไป' class='btn btn-info'>
-                    </a>
-
-                </div>
-
-            </div> -->
-            
             <div class="container">
                 <br>
                 <div class="container shadow-lg bg-light py-3" style="border-radius: 12px;">
-                    <?php
-                    // echo $_SESSION['page'];
-                    ?>
-
-                    <h2 class='text-center'>ข้อมูลแอดมิน</h2><br>
-
-                    <!-- <div class="row align-items-center">
-                        <input type="text" id="q" name='q' placeholder="ค้นหา..." class='form-control col-sm-5 mx-auto' autocomplete='off'>
-                    </div> -->
+                  
+                    <h2 class='text-center'>ข้อมูลข่าวสาร</h2><br>
                     <br>
                     <div class="row align-items-center">
                         <div id="msg" class='mx-auto'></div>
                     </div>
 
-                    <div id="table" class='text-center mx-auto '></div>
 
-                    <br>
-
-                    <a href='?back=true'>
-                        <input type='submit' id='backpage' value='ย้อนกลับ' class='btn btn-info'>
-                    </a>
+                    <div class="row" id="" class='text-center mx-auto'>
+                        <div class="col-1 text-center">
+                            <h4><b>วันที่</b></h4>
+                        </div>
+                        <div class="col-3 text-center">
+                            <h4><b>รูป</b></h4>
+                        </div>
+                        <div class="col-2 text-center">
+                            <h4><b>หัวข้อข่าวสาร</b></h4>
+                        </div>
+                        <div class="col-2 text-center">
+                            <h4><b>รายละเอียดข่าวสาร</b></h4>
+                        </div>
+                        <div class="col-2 text-center">
+                            <h4><b>การทำงาน</b></h4>
+                        </div>
+                    </div>
+                    <hr>
                     <?php
-                    $user = new user;
-                    $page = 0;
-                    $length = $user->getLength();
-                    for ($i = 1; $i <= $length; $i++) {
-                        if ($i % 20 == 0) {
-                            $page++;
-                            echo "<a href='?page=$page'> <input type='submit' id='backpage' value='$page' class='btn btn-info'></a>";
-                        }
-                    }
-                    if ($length % 20 != 0) {
-                        $lastpage = $page + 1;
-                        echo "<a href='?page=$lastpage'> <input type='submit' id='backpage' value='$lastpage' class='btn btn-info'></a>";
-                    }
-
-                    $testvar = $_SESSION['page'];
-                    echo "<script> console.log('page = '+$testvar + ' length = '+ $length);</script>";
-
+                    while ($row = mysqli_fetch_array($result_select)) {
                     ?>
-                    <a href='?next=true'>
-                        <input type='submit' id='nextpage' name="nextpage" value='ถัดไป' class='btn btn-info'>
-                    </a>
+                        <div class="row" id="" class='text-center mx-auto '>
+                            <div class="col-1 text-center">
+                                <?= $row['Date_time'] ?>
+                            </div>
+                            <div class="col-3 text-center">
+                                <?php
+                                if ($row['file'] != null) {
+                                ?>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong<?= $row[0] ?>">
+                                        คลิกเพื่อดูรูปภาพ
+                                    </button>
+                                <?php
+                                }
 
+                                ?>
+
+                                <div class="modal fade" id="exampleModalLong<?= $row[0] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">รูปภาพ</h5>
+                                                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button> -->
+                                            </div>
+                                            <div class="">
+                                                <?php
+                                                $image = explode("|", $row['file']);
+                                                $count = 0;
+                                                $row_num = ceil(count($image) / 4);
+                                                for ($i = 0; $i < $row_num; $i++) {
+                                                ?>
+                                                    <div class="row">
+                                                        <?php
+                                                        for ($j = 0; $j < 4; $j++) {
+                                                            if (isset($image[$count])) {
+                                                                ?>
+                                                            <div class="col-md-3">
+                                                                <img src="<?= $image[$count++] ?>" alt="" style="width: 100%;height: 150px;">
+                                                            </div>
+                                                        <?php
+                                                            }
+                                                        }
+                                                        ?>
+                                                    </div>
+                                                <?php
+                                                }  ?>
+                                                 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2 text-center">
+                                <?= $row['news_title'] ?>
+                            </div>
+                            <div class="col-2 text-center">
+                                <?= $row['Description'] ?>
+                            </div>
+                       
+        
+                            <div class="col-2 text-center">
+                                <button type="button" class="btn btn-success bi bi-trash" onclick="editPetition(<?= $row[0] ?>, '<?= $row['news_title'] ?>', '<?= $row['Description'] ?>','<?= $row['file'] ?>' )"><i class='fa fa-fw fa-edit'></i></button>
+                                <button type="button" class="btn btn-danger bi bi-trash" onclick="deletePetition(<?= $row[0] ?>, '<?= $row['news_title'] ?>')"><i class='fa fa-fw fa-trash'></i></button>
+                            </div>
+                        </div>
+                        <?php
+                    } ?>
                 </div>
             </div>
+
+            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         </body>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="js/main.js"></script>
@@ -346,21 +560,110 @@ if (!isset($_SESSION['username'])) {
     <script>
         let sidebar = document.querySelector(".sidebar");
         let closeBtn = document.querySelector("#btn");
+        let submit2 = document.querySelector("#submit2");
 
-        closeBtn.addEventListener("click", () => {
-            sidebar.classList.toggle("open");
-            menuBtnChange(); //calling the function
-        });
 
-        // following are the code to change sidebar button
+        // closeBtn.addEventListener("click", () => {
+        //     sidebar.classList.toggle("open");
+        //     menuBtnChange();
+        // });
+
+
+        $('#submit2').click(function(e) {
+            let edit = $('#submit2').text()
+            let titter = "ต้องการที่จะเพิ่มข้อมูล"
+            let titter2 = "ยืนยัน"
+
+            if (edit == "เพิ่มข้อมูลการร้องเรียน") {
+                titter = "ต้องการที่จะเพิ่มข้อมูล"
+                titter2 = "ยืนยัน"
+            }
+
+            e.preventDefault() //ให้มันอยุ่นาน
+            e.stopPropagation();
+
+            Swal.fire({
+                title: titter,
+                showCancelButton: true,
+                confirmButtonText: titter2,
+                cancelButtonText: 'ยกเลิก',
+            }).then((result) => {
+
+                if (result.isConfirmed) {
+
+                    if (edit == "แก้ไขข้อมูลข่าวสาร") {
+                        let $form = $(".uploaded")
+                        let $inputImages = $form.find('img');
+
+                        const old = []
+                        for (let file of $inputImages) {
+                            if(file.currentSrc.search("uploads") != -1)
+                                old.push(file.currentSrc.substring(file.currentSrc.search("uploads")))
+                        }
+                        $("#old_img").val(old.join('|'))
+                    }
+                    
+
+                    $("#news_form").submit(); //ให้มันเพิ่มลงform
+                } else if (result.isDenied) {
+                    Swal.fire('Changes are not saved', '', 'info')
+                }
+            })
+        })
+
         function menuBtnChange() {
             if (sidebar.classList.contains("open")) {
-                closeBtn.classList.replace("bx-menu", "bx-menu-alt-right"); //replacing the iocns class
+                closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");
             } else {
-                closeBtn.classList.replace("bx-menu-alt-right", "bx-menu"); //replacing the iocns class
+                closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");
             }
         }
+
+        function deletePetition(id, name) {
+
+
+            Swal.fire({
+                title: 'ต้องการที่จะลบข้อมูล?',
+                showCancelButton: true,
+                confirmButtonText: 'ลบข้อมูล',
+                cancelButtonText: 'ยกเลิก',
+            }).then((result) => {
+
+                if (result.isConfirmed) {
+
+                    $.ajax({
+                        url: 'delete.php',
+                        type: 'POST',
+                        data: {
+                            id
+                        },
+                        success: async function(data) {
+                            await Swal.fire('ลบข้อมูลแล้ว!', '', 'success')
+                            window.location.reload()
+                        },
+                        error: function(err) {
+                            Swal.fire('ลบข้อมูลไม่สำเร็จ!', '', 'error')
+                        }
+                    });
+
+                } else if (result.isDenied) {
+                    Swal.fire('Changes are not saved', '', 'info')
+                }
+            })
+
+        }
+
+        function editPetition(id, title, desc, img) {
+            $("#title2").val(title)
+            $("#id2").val(id)
+            $("#do_update2").val(true)
+            $("#description2").val(desc)
+            $("#img2").val(img)
+            $("#form_to_update").submit();
+
+        }
     </script>
+
 </body>
 
 </html>

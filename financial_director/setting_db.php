@@ -23,7 +23,7 @@ if (isset($_POST['edit_user'])) {
     }
     if (count($errors) == 0) {
 
-        $sql = "UPDATE user SET password='$password_1' WHERE username='$_SESSION[username]'";
+        $sql = "UPDATE director SET password='$password_1' WHERE username='$_SESSION[username]'";
         mysqli_query($conn, $sql);
         header("location: setting.php");
     }

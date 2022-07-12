@@ -18,6 +18,29 @@ class user extends db
 			return $row;
 		}
 	}
+	public function translate_rank($rank) {
+		switch ($rank) {
+			case 'president': 
+				$rank = "ประธานกรรมการ";
+				break;
+			case "vice_president_financial": 
+				$rank = "รองประธานกรรมการ ฝ่ายการเงิน";
+				break;
+			case "vice_president_civil": 
+				$rank = "รองประธานกรรมการ ฝ่ายโยธา";
+				break;
+			case "financial_director": 
+				$rank = "กรรมการและเหรัญญิก";
+				break;
+			case "director_public_relations": 
+				$rank = "กรรมการฝ่ายประชาสัมพันธ์";
+				break;
+			case "director": 
+				$rank = "กรรมการและเลขานุการ";
+				break;
+		}
+		return $rank;	
+	}
 	public function load($page)
 	{
 		$query = "SELECT * FROM director LIMIT 20 OFFSET $page";
@@ -32,6 +55,8 @@ class user extends db
 			$username = $row['username'];
 			$password = $row['password'];
 			$rank = $row['rank'];
+			//แปลงตำแหน่ง
+			$rank = $this->translate_rank($rank);
 			$fullname = $row['fullname'];
 			$out .= "<tr><td>$resultcount</td><td>$username</td><td><p style='display:none' id='hide_pass_$resultcount'>$password</p><i onclick='hidepass($resultcount)' class='bx bx-hide'></i></td><td>$rank</td><td>$fullname</td>";
 			$out .= "<td><a href='edit.php?director_id=$director_id' class='edit btn btn-sm btn-success' title='edit'><i class='fa fa-fw fa-pencil'></i></a></td>";

@@ -80,9 +80,9 @@ if (!isset($_SESSION['username'])) {
             <li>
                 <a href="../nav_backend/backend.php">
                     <i class='bx bx-grid-alt'></i>
-                    <span class="links_name">Dashboard</span>
+                    <span class="links_name">ยอดค้างชำระรวมทุกปี</span>
                 </a>
-                <span class="tooltip">Dashboard</span>
+                <span class="tooltip">ยอดค้างชำระรวมทุกปี</span>
             </li>
             <li>
                 <a href="../nav_user/user.php?clear_page=true">
@@ -293,7 +293,7 @@ if (!isset($_SESSION['username'])) {
                             <?php 
                                 $now = new DateTime();
                                 $thisyear = $now->format("Y") +543;
-                                $selectedYear = $_SESSION['enter_year'];
+                                $selectedYear = isset($_SESSION['enter_year']) ? $_SESSION['enter_year'] : $thisyear;
                                 echo "<select name='enter_year' id='enter_year' onchange='changeYear()'>";
                                 echo "<script> console.log('hello : '+$thisyear +' selectedYear :' +$selectedYear) </script>";
                                 

@@ -47,8 +47,8 @@ class user extends db {
 	public function load($page)
 	{
 		$this->get_id();
-
-		$query = "SELECT * FROM form LIMIT 20 OFFSET $page";
+		$current_user_id = $_SESSION['userid'];
+		$query = "SELECT * FROM form WHERE user_id = '$current_user_id' LIMIT 20 OFFSET $page";
 		$stmt = $this->connect()->prepare($query);
 		$stmt->execute();
 		$out = "";
@@ -67,6 +67,7 @@ class user extends db {
 			$out .= "<tr><td>$resultcount</td><td>$other</td><td>$date</td><td>$status</td>";
 			$out .= "<td><a href='edit.php?id=$id' class='edit btn btn-sm btn-success' title='edit'><i class='fa fa-fw fa-pencil'></i></a></td>";
 			$out .= "<td><span id='$id' class='del btn btn-sm btn-danger' onclick='myFunction()' title='delete'><i class='fa fa-fw fa-trash'></i></span></td>";
+			$out .= "<td>$reply</td>";
 			$count++;
 		}
 		$out .= "</table>";

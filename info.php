@@ -39,7 +39,7 @@
         }
         /*กรอบข่าว*/
         .try-image2 {
-            background-color: #EE7621;
+            background-color: #3399FF;
             height: 50px;
             background-repeat: no-repeat;
             background-size: cover;
@@ -52,6 +52,17 @@
             left: 50%;
             transform: translate(-50%, -50%);
             color: white;
+        }
+        .hero-image5 {
+            background-image: url("./img/me.JPG");
+            background-color: #cccccc;
+            background-size: 50%;
+            height: 550px;
+            width: 1500px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
         }
     </style>
 </head>
@@ -88,6 +99,7 @@
     <div class="hero-image2">
         <!-- <div class="row align-items-center">
             <div class="col">
+                
                 <div class="col-md-4 text-light offset-1">
                     <h1 class="display-7 fw-bolder"><font color="#000000"> ติดต่อ </font></h1> 
                     <p class="lead">เว็บแอพพลิเคชั่นหมู่บ้านจัดสรรปิยวรารมย์</p>
@@ -101,6 +113,17 @@
         <div class="try-text2">
             <h1 style="font-size:25px">เกี่ยวกับ</h1>
         </div>
+    </div>
+    
+    <div class="hero-image5">
+        <!-- <div class="row align-items-center">
+            <div class="col">
+                <div class="col-md-4 text-light offset-1">
+                    <h1 class="display-7 fw-bolder"><font color="#000000"> ติดต่อ </font></h1> 
+                    <p class="lead">เว็บแอพพลิเคชั่นหมู่บ้านจัดสรรปิยวรารมย์</p>
+                </div>
+            </div>
+        </div> -->
     </div>
 
 

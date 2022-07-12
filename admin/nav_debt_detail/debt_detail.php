@@ -335,7 +335,11 @@ if (!isset($_SESSION['username'])) {
                         <div id="msg" class='mx-auto'></div>
                     </div>
 
-                    <div id="table" class='text-center mx-auto '></div>
+                    <!-- Center Table -->
+                    <div style="display:flex; justify-content:center;">
+                        <div id="table" class='text-center mx-auto'></div>
+                    </div>
+                    <!-- Center Table -->
 
 
                     <br>

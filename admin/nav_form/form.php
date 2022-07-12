@@ -45,9 +45,9 @@ if (!isset($_SESSION['username'])) {
             <li>
                 <a href="../nav_backend/backend.php">
                     <i class='bx bx-grid-alt'></i>
-                    <span class="links_name">Dashboard</span>
+                    <span class="links_name">ยอดค้างชำระรวมทุกปี</span>
                 </a>
-                <span class="tooltip">Dashboard</span>
+                <span class="tooltip">ยอดค้างชำระรวมทุกปี</span>
             </li>
             <li>
                 <a href="../nav_user/user.php?clear_page=true">
@@ -289,15 +289,19 @@ if (!isset($_SESSION['username'])) {
 
                     <h2 class='text-center'>แบบฟอร์มที่ยื่น</h2><br>
 
-                    <!-- <div class="row align-items-center">
+                    <div class="row align-items-center">
                         <input type="text" id="q" name='q' placeholder="ค้นหา..." class='form-control col-sm-5 mx-auto' autocomplete='off'>
-                    </div> -->
+                    </div>
                     <br>
                     <div class="row align-items-center">
                         <div id="msg" class='mx-auto'></div>
                     </div>
 
-                    <div id="table" class='text-center mx-auto '></div>
+                    <!-- Center Table -->
+                    <div style="display:flex; justify-content:center;">
+                        <div id="table" class='text-center mx-auto'></div>
+                    </div>
+                    <!-- Center Table -->
 
                     <br>
 

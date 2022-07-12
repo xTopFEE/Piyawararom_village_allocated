@@ -27,34 +27,47 @@ if (!isset($_SESSION['username'])) {
             <i class='bx bx-menu' id="btn"></i>
         </div>
         <ul class="nav-list">
-        <ul class="nav-list">
             <li>
-                <a href="./Backend.php">
+                <a href="./nav_backend/backend.php">
                     <i class='bx bx-grid-alt'></i>
-                    <span class="links_name">Dashboard</span>
+                    <span class="links_name">ยอดค้างชำระรวมทุกปี</span>
                 </a>
-                <span class="tooltip">Dashboard</span>
+                <span class="tooltip">ยอดค้างชำระรวมทุกปี</span>
             </li>
             <li>
-                <a href="#">
+                <a href="./nav_form/form.php">
                     <i class='bx bx-file'></i>
                     <span class="links_name">แบบฟอร์มเอกสาร</span>
                 </a>
                 <span class="tooltip">แบบฟอร์มเอกสาร</span>
             </li>
             <li>
-                <a href="#">
+                <a href="./nav_news/news.php">
+                    <i class='bx bx-broadcast'></i>
+                    <span class="links_name">ข่าวสารประชาสัมพันธ์</span>
+                </a>
+                <span class="tooltip">ข่าวสารประชาสัมพันธ์</span>
+            </li>
+            <li>
+                <a href="./nav_petition/petition.php">
                     <i class='bx bx-chat'></i>
                     <span class="links_name">การร้องเรียนทั่วไป</span>
                 </a>
                 <span class="tooltip">การร้องเรียนทั่วไป</span>
             </li>
             <li>
-                <a href="#">
-                    <i class='bx bx-calculator'></i>
-                    <span class="links_name">รายรับรายจ่าย</span>
+                <a href="./nav_payment/payment.php">
+                    <i class='bx bx-spreadsheet'></i>
+                    <span class="links_name">การชำระเงิน</span>
                 </a>
-                <span class="tooltip">รายรับรายจ่าย</span>
+                <span class="tooltip">การชำระเงิน</span>
+            </li>
+            <li>
+                <a href="./nav_debt/debt.php">
+                    <i class='bx bx-calendar'></i>
+                    <span class="links_name">ยอดค้างชำระ</span>
+                </a>
+                <span class="tooltip">ยอดค้างชำระ</span>
             </li>
             <li>
                 <a href="./setting.php">
@@ -92,6 +105,7 @@ if (!isset($_SESSION['username'])) {
 
             <div class="container">
                 <div class="container shadow-lg bg-light py-3" style="border-radius: 12px;">
+                    <br>
                     <h2 class='text-center'>เปลี่ยนรหัสผ่าน</h2><br>
                     <form action="setting_db.php" method="POST">
                         <?php if (isset($_SESSION['error'])) : ?>
@@ -106,6 +120,14 @@ if (!isset($_SESSION['username'])) {
                         <?php endif ?>
                         <div class="input-group">
                             <div class="container">
+                                <label for="password_old">รหัสผ่านปัจจุบัน</label>
+                            </div>
+                            <div class="container">
+                                <input type="password" name="password_old" required>
+                            </div>
+                        </div><br>
+                        <div class="input-group">
+                            <div class="container">
                                 <label for="password_1">รหัสผ่านใหม่</label>
                             </div>
                             <div class="container">
@@ -114,7 +136,7 @@ if (!isset($_SESSION['username'])) {
                         </div><br>
                         <div class="input-group">
                             <div class="container">
-                                <label for="password_2">ยืนยันรหัสผ่าน</label>
+                                <label for="password_2">ยืนยันรหัสผ่านใหม่</label>
                             </div>
                             <div class="container">
                                 <input type="password" name="password_2" required>

@@ -4,7 +4,11 @@ session_start();
 $user = new user;
 
 $page = 0;
-$enter_year = 2564;
+
+$now = new DateTime();
+$thisyear = $now->format("Y") +543;
+$enter_year = $thisyear;
+
 if (!empty($_SESSION['page'])) {
 	$page = $_SESSION['page'];
 }

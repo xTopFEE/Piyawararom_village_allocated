@@ -23,7 +23,8 @@ class user extends db
 		// 1(เดือน)/2(วัน)/2565(ปี)
 		$split_date = explode(" ", $date);
 		$newformat = "";
-		return "สวัสดี";
+		// $split_date[2] = $split_date[2]+43;
+		// return "สวัสดี";
 		if (count($split_date) > 1) {
 			//(int)$split_date[0] คือ เดือน
 			switch ($split_date[1]) {
@@ -63,6 +64,8 @@ class user extends db
 				case 'Dec':
 					$newformat = "$split_date[0] ธ.ค. $split_date[2]";
 					break;
+				default:
+					$newformat = $date;
 			}
 		}else{
 			$newformat = $date;
@@ -91,12 +94,12 @@ class user extends db
 			$book_name = $row['book_name'];
 			$year = $row['year'];
 			$month = $row['month'];
-			//แปลงเดือน
-			$month = $this->change_date_format($month);
 			$house_id = $row['house_id'];
 			$book_number = $row['book_number'];
 			$number = $row['number'];
 			$date_paid = $row['date_paid'];
+			//แปลง format date
+			$date_paid = $this->change_date_format($date_paid);
 			// เดือนออกแล้ว แต่ค่อยคิดเงื่อนไข if เพื่อแปลงเดือนเป็นเดือนไทย
 			$test_date = strtotime($date_paid);
 			$test_date = getdate($test_date);
@@ -129,8 +132,9 @@ class user extends db
 	//user search results
 	public function search($text)
 	{
+		$enter_year = $_SESSION['enter_year'];
 		$text = strtolower($text);
-		$query = "SELECT * FROM payment WHERE house_id LIKE ? ";
+		$query = "SELECT * FROM payment WHERE year='$enter_year' AND house_id LIKE ? ";
 		$stmt = $this->connect()->prepare($query);
 		$stmt->execute([$text]);
 		$out = "";
@@ -146,6 +150,9 @@ class user extends db
 			$book_number = $row['book_number'];
 			$number = $row['number'];
 			$date_paid = $row['date_paid'];
+			//แปลง format date
+			$date_paid = $this->change_date_format($date_paid);
+			// เดือนออกแล้ว แต่ค่อยคิดเงื่อนไข if เพื่อแปลงเดือนเป็นเดือนไทย
 			$amount = $row['amount'];
 			$other = $row['other'];
 			$out .= "<tr><td colspan='2'>$seq</td><td colspan='2'>$book_name</td><td>$year</td><td>$month</td><td>$house_id</td><td>$book_number</td><td>$number</td><td>$date_paid</td><td>$amount</td><td>$other</td>";
