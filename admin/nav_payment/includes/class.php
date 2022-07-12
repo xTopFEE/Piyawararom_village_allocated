@@ -23,7 +23,10 @@ class user extends db
 		// 1(เดือน)/2(วัน)/2565(ปี)
 		$split_date = explode(" ", $date);
 		$newformat = "";
+		
+		// แก้ ปี ค.ศ. เป็น พ.ศ.
 		// $split_date[2] = $split_date[2]+43;
+
 		// return "สวัสดี";
 		if (count($split_date) > 1) {
 			//(int)$split_date[0] คือ เดือน
