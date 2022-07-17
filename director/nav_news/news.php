@@ -23,12 +23,9 @@ $result_select = mysqli_query($con, $query);
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
 </head>
-<style>
-    .text-center {
-        font-size: 12px;
-    }
-</style>
 
 <body>
     <div class="sidebar">
@@ -53,7 +50,7 @@ $result_select = mysqli_query($con, $query);
                 <span class="tooltip">แบบฟอร์มเอกสาร</span>
             </li>
             <li>
-                <a href="./news.php">
+                <a href="news.php">
                     <i class='bx bx-broadcast'></i>
                     <span class="links_name">ข่าวสารประชาสัมพันธ์</span>
                 </a>
@@ -81,28 +78,25 @@ $result_select = mysqli_query($con, $query);
                 <span class="tooltip">การตั้งค่า</span>
             </li>
             <!-- Logged in user detail -->
-            <?php if (isset($_SESSION['username'])) : ?>
-
-                <li class="profile">
-                    <div class="profile_content">
-                        <h1 href="#">
-                            <div class="profile-details">
-                                <img src="./user.png" alt="profileImg">
-                                <div class="name_job">
-                                    <div class="name"><?php echo $_SESSION['username'] ?></div>
-                                    <!-- RODJANAPHADIT -->
-                                    <div class="job">Admin</div>
-                                </div>
+            <?php if (isset($_SESSION['username']))?>
+            <li class="profile">
+                <div class="profile_content">
+                    <h1 href="#">
+                        <div class="profile-details">
+                            <img src="./user.png" alt="profileImg">
+                            <div class="name_job">
+                                <div class="name"><?php echo $_SESSION['username'] ?></div>
+                                <!-- RODJANAPHADIT -->
+                                <div class="job">Admin</div>
                             </div>
-                        </h1>
-                        <a href="../../logout.php">
-                            <i class='bx bx-log-out' id="log_out"></i>
-                        </a>
-                    </div>
-                </li>
+                        </div>
+                    </h1>
+                    <a href="../../logout.php">
+                        <i class='bx bx-log-out' id="log_out"></i>
+                    </a>
+                </div>
+            </li>
 
-            <?php endif ?>
-            <!-- END -->
         </ul>
     </div>
 
@@ -116,7 +110,7 @@ $result_select = mysqli_query($con, $query);
             <link rel="stylesheet" href="dist/image-uploader.min.css">
 
             <style>
-                .container {
+                /* .container {
                     width: 60%;
                     max-width: 1200px;
                     margin: 0 auto;
@@ -214,7 +208,7 @@ $result_select = mysqli_query($con, $query);
                     .container {
                         width: 80%;
                     }
-                }
+                } */
 
                 @media screen and (max-width: 450px) {
                     .container {
@@ -469,9 +463,9 @@ $result_select = mysqli_query($con, $query);
                                         <div class="modal-content">
                                             <div class="">
                                                 <h5 class="modal-title" id="exampleModalLongTitle">รูปภาพ</h5>
-                                                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
-                                                </button> -->
+                                                </button>
                                             </div>
                                             <div class="">
                                                 <?php
@@ -530,17 +524,6 @@ $result_select = mysqli_query($con, $query);
     </section>
 
     <script>
-        let sidebar = document.querySelector(".sidebar");
-        let closeBtn = document.querySelector("#btn");
-        let submit2 = document.querySelector("#submit2");
-
-
-        // closeBtn.addEventListener("click", () => {
-        //     sidebar.classList.toggle("open");
-        //     menuBtnChange();
-        // });
-
-
         $('#submit2').click(function(e) {
             let edit = $('#submit2').text()
             let titter = "ต้องการที่จะเพิ่มข้อมูล"
@@ -583,13 +566,7 @@ $result_select = mysqli_query($con, $query);
             })
         })
 
-        function menuBtnChange() {
-            if (sidebar.classList.contains("open")) {
-                closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");
-            } else {
-                closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");
-            }
-        }
+
 
         function deletePetition(id, name) {
 
@@ -636,6 +613,24 @@ $result_select = mysqli_query($con, $query);
         }
     </script>
 
+    <script>
+        let sidebar = document.querySelector(".sidebar");
+        let closeBtn = document.querySelector("#btn");
+
+        closeBtn.addEventListener("click", () => {
+            sidebar.classList.toggle("open");
+            menuBtnChange(); //calling the function
+        });
+
+        // following are the code to change sidebar button
+        function menuBtnChange() {
+            if (sidebar.classList.contains("open")) {
+                closeBtn.classList.replace("bx-menu", "bx-menu-alt-right"); //replacing the iocns class
+            } else {
+                closeBtn.classList.replace("bx-menu-alt-right", "bx-menu"); //replacing the iocns class
+            }
+        }
+    </script>
 </body>
 
 </html>

@@ -23,12 +23,9 @@ $result_select = mysqli_query($con, $query);
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   
 </head>
-<style>
-    .text-center {
-        font-size: 12px;
-    }
-</style>
 
 <body>
 <div class="sidebar">
@@ -60,7 +57,7 @@ $result_select = mysqli_query($con, $query);
                 <span class="tooltip">กรรมการ</span>
             </li>
             <li>
-                <a href="../nav_admin/admin.php">
+                <a href="admin.php">
                     <i class='bx bx-code-block'></i>
                     <span class="links_name">แอดมิน</span>
                 </a>
@@ -74,7 +71,7 @@ $result_select = mysqli_query($con, $query);
                 <span class="tooltip">แบบฟอร์มเอกสาร</span>
             </li>
             <li>
-                <a href="./news.php">
+                <a href="../nav_news/news.php">
                     <i class='bx bx-broadcast'></i>
                     <span class="links_name">ข่าวสารประชาสัมพันธ์</span>
                 </a>
@@ -108,8 +105,7 @@ $result_select = mysqli_query($con, $query);
                 </a>
                 <span class="tooltip">การตั้งค่า</span>
             </li>
-            <!-- Logged in user detail -->
-            <?php if (isset($_SESSION['username'])) : ?>
+         
 
                 <li class="profile">
                     <div class="profile_content">
@@ -129,8 +125,6 @@ $result_select = mysqli_query($con, $query);
                     </div>
                 </li>
 
-            <?php endif ?>
-            <!-- END -->
         </ul>
     </div>
 
@@ -144,7 +138,7 @@ $result_select = mysqli_query($con, $query);
             <link rel="stylesheet" href="dist/image-uploader.min.css">
 
             <style>
-                    .container {
+                    /* .container {
                     width: 60%;
                     max-width: 1200px;
                     margin: 0 auto;
@@ -242,7 +236,7 @@ $result_select = mysqli_query($con, $query);
                     .container {
                         width: 80%;
                     }
-                }
+                } */
 
                 @media screen and (max-width: 450px) {
                     .container {
@@ -497,9 +491,9 @@ $result_select = mysqli_query($con, $query);
                                         <div class="modal-content">
                                             <div class="">
                                                 <h5 class="modal-title" id="exampleModalLongTitle">รูปภาพ</h5>
-                                                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
-                                                </button> -->
+                                                </button>
                                             </div>
                                             <div class="">
                                                 <?php
@@ -558,15 +552,7 @@ $result_select = mysqli_query($con, $query);
     </section>
 
     <script>
-        let sidebar = document.querySelector(".sidebar");
-        let closeBtn = document.querySelector("#btn");
-        let submit2 = document.querySelector("#submit2");
-
-
-        // closeBtn.addEventListener("click", () => {
-        //     sidebar.classList.toggle("open");
-        //     menuBtnChange();
-        // });
+      
 
 
         $('#submit2').click(function(e) {
@@ -611,13 +597,7 @@ $result_select = mysqli_query($con, $query);
             })
         })
 
-        function menuBtnChange() {
-            if (sidebar.classList.contains("open")) {
-                closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");
-            } else {
-                closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");
-            }
-        }
+       
 
         function deletePetition(id, name) {
 
@@ -664,6 +644,24 @@ $result_select = mysqli_query($con, $query);
         }
     </script>
 
+<script>
+        let sidebar = document.querySelector(".sidebar");
+        let closeBtn = document.querySelector("#btn");
+
+        closeBtn.addEventListener("click", () => {
+            sidebar.classList.toggle("open");
+            menuBtnChange(); //calling the function
+        });
+
+        // following are the code to change sidebar button
+        function menuBtnChange() {
+            if (sidebar.classList.contains("open")) {
+                closeBtn.classList.replace("bx-menu", "bx-menu-alt-right"); //replacing the iocns class
+            } else {
+                closeBtn.classList.replace("bx-menu-alt-right", "bx-menu"); //replacing the iocns class
+            }
+        }
+    </script>
 </body>
 
 </html>

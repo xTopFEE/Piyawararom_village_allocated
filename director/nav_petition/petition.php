@@ -57,72 +57,71 @@ $number_of_complaint = mysqli_num_rows($result_of_complaint);
             <div class="logo_name">หมู่บ้านปิยวรารมย์</div>
             <i class='bx bx-menu' id="btn"></i>
         </div>
-        <ul class="nav-list">
         <li>
-                <a href="../nav_backend/backend.php">
-                    <i class='bx bx-grid-alt'></i>
-                    <span class="links_name">ยอดค้างชำระรวมทุกปี</span>
-                </a>
-                <span class="tooltip">ยอดค้างชำระรวมทุกปี</span>
-            </li>
-            <li>
-                <a href="../nav_form/form.php">
-                    <i class='bx bx-file'></i>
-                    <span class="links_name">แบบฟอร์มเอกสาร</span>
-                </a>
-                <span class="tooltip">แบบฟอร์มเอกสาร</span>
-            </li>
-            <li>
-                <a href="../nav_news/news.php">
-                    <i class='bx bx-broadcast'></i>
-                    <span class="links_name">ข่าวสารประชาสัมพันธ์</span>
-                </a>
-                <span class="tooltip">ข่าวสารประชาสัมพันธ์</span>
-            </li>
-            <li>
-                <a href="./petition.php">
-                    <i class='bx bx-chat'></i>
-                    <span class="links_name">การร้องเรียนทั่วไป</span>
-                </a>
-                <span class="tooltip">การร้องเรียนทั่วไป</span>
-            </li>
-            <li>
-                <a href="../nav_debt/debt.php">
-                    <i class='bx bx-calendar'></i>
-                    <span class="links_name">ยอดค้างชำระ</span>
-                </a>
-                <span class="tooltip">ยอดค้างชำระ</span>
-            </li>
-            <li>
-                <a href="../setting.php">
-                    <i class='bx bx-cog'></i>
-                    <span class="links_name">การตั้งค่า</span>
-                </a>
-                <span class="tooltip">การตั้งค่า</span>
-            </li>
-            <!-- Logged in user detail -->
-            <?php if (isset($_SESSION['username'])) : ?>
+            <a href="../nav_backend/backend.php">
+                <i class='bx bx-grid-alt'></i>
+                <span class="links_name">ยอดค้างชำระรวมทุกปี</span>
+            </a>
+            <span class="tooltip">ยอดค้างชำระรวมทุกปี</span>
+        </li>
+        <li>
+            <a href="../nav_form/form.php">
+                <i class='bx bx-file'></i>
+                <span class="links_name">แบบฟอร์มเอกสาร</span>
+            </a>
+            <span class="tooltip">แบบฟอร์มเอกสาร</span>
+        </li>
+        <li>
+            <a href="../nav_news/news.php">
+                <i class='bx bx-broadcast'></i>
+                <span class="links_name">ข่าวสารประชาสัมพันธ์</span>
+            </a>
+            <span class="tooltip">ข่าวสารประชาสัมพันธ์</span>
+        </li>
+        <li>
+            <a href="petition.php">
+                <i class='bx bx-chat'></i>
+                <span class="links_name">การร้องเรียนทั่วไป</span>
+            </a>
+            <span class="tooltip">การร้องเรียนทั่วไป</span>
+        </li>
+        <li>
+            <a href="../nav_debt/debt.php">
+                <i class='bx bx-calendar'></i>
+                <span class="links_name">ยอดค้างชำระ</span>
+            </a>
+            <span class="tooltip">ยอดค้างชำระ</span>
+        </li>
+        <li>
+            <a href="../setting.php">
+                <i class='bx bx-cog'></i>
+                <span class="links_name">การตั้งค่า</span>
+            </a>
+            <span class="tooltip">การตั้งค่า</span>
+        </li>
+        <!-- Logged in user detail -->
+        <?php if (isset($_SESSION['username'])) : ?>
 
-                <li class="profile">
-                    <div class="profile_content">
-                        <h1 href="#">
-                            <div class="profile-details">
-                                <img src="./user.png" alt="profileImg">
-                                <div class="name_job">
-                                    <div class="name"><?php echo $_SESSION['username'] ?></div>
-                                    <!-- RODJANAPHADIT -->
-                                    <div class="job">Admin</div>
-                                </div>
+            <li class="profile">
+                <div class="profile_content">
+                    <h1 href="#">
+                        <div class="profile-details">
+                            <img src="./user.png" alt="profileImg">
+                            <div class="name_job">
+                                <div class="name"><?php echo $_SESSION['username'] ?></div>
+                                <!-- RODJANAPHADIT -->
+                                <div class="job">Admin</div>
                             </div>
-                        </h1>
-                        <a href="../../logout.php">
-                            <i class='bx bx-log-out' id="log_out"></i>
-                        </a>
-                    </div>
-                </li>
+                        </div>
+                    </h1>
+                    <a href="../../logout.php">
+                        <i class='bx bx-log-out' id="log_out"></i>
+                    </a>
+                </div>
+            </li>
 
-            <?php endif ?>
-            <!-- END -->
+        <?php endif ?>
+        <!-- END -->
         </ul>
     </div>
 
@@ -595,7 +594,7 @@ $number_of_complaint = mysqli_num_rows($result_of_complaint);
                                                                     if (isset($image[$count])) {
                                                                 ?>
                                                                         <div class="col-md-3">
-                                                                            <img src="../../user/nav_petition/<?= $image[$count++] ?>" alt="" style="width: 100%;height: 150px;">
+                                                                            <img src="../../user/<?= $image[$count++] ?>" alt="" style="width: 100%;height: 150px;">
                                                                         </div>
                                                                 <?php
                                                                     }
@@ -716,7 +715,7 @@ $number_of_complaint = mysqli_num_rows($result_of_complaint);
                                             if (image[count]) {
 
                                                 html += `<div class="col-md-3">
-                                                                            <img src="../../user/nav_petition/${image[count++]}" alt="" style="width: 100%;height: 150px;">
+                                                                            <img src="../../user/${image[count++]}" alt="" style="width: 100%;height: 150px;">
                                                                         </div>`
 
                                             }

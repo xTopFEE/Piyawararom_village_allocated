@@ -3,7 +3,7 @@ session_start();
 
 $user = new user;
 
-$page = 0;
+$page = 1;
 $enter_year = 2564;
 if (!empty($_SESSION['page'])) {
 	$page = $_SESSION['page'];

@@ -102,11 +102,11 @@ $number_of_complaint = mysqli_num_rows($result_of_complaint);
             </li>
             <li>
                 <a href="../nav_petition/petition.php">
-                    <i class='bx bx-chat'></i>
-                    <span class="links_name">การร้องเรียนทั่วไป</span>
-                </a>
-                <span class="tooltip">การร้องเรียนทั่วไป</span>
-            </li>
+                        <i class='bx bx-chat'></i>
+                        <span class="links_name">การร้องเรียนทั่วไป</span>
+                    </a>
+                    <span class="tooltip">การร้องเรียนทั่วไป</span>
+                </li>
             <li>
                 <a href="../nav_payment/payment.php">
                     <i class='bx bx-spreadsheet'></i>
@@ -623,7 +623,7 @@ $number_of_complaint = mysqli_num_rows($result_of_complaint);
                                                                     if (isset($image[$count])) {
                                                                 ?>
                                                                         <div class="col-md-3">
-                                                                            <img src="../../user/nav_petition/<?= $image[$count++] ?>" alt="" style="width: 100%;height: 150px;">
+                                                                            <img src="../../user/<?= $image[$count++] ?>" alt="" style="width: 100%;height: 150px;">
                                                                         </div>
                                                                 <?php
                                                                     }
@@ -744,7 +744,7 @@ $number_of_complaint = mysqli_num_rows($result_of_complaint);
                                             if (image[count]) {
 
                                                 html += `<div class="col-md-3">
-                                                                            <img src="../../user/nav_petition/${image[count++]}" alt="" style="width: 100%;height: 150px;">
+                                                                            <img src="../../user/${image[count++]}" alt="" style="width: 100%;height: 150px;">
                                                                         </div>`
 
                                             }

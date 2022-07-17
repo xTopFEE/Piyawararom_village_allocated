@@ -315,6 +315,7 @@ if (!isset($_SESSION['username'])) {
                         echo "<a href='?page=$lastpage'> <input type='submit' id='backpage' value='$lastpage' class='btn btn-info'></a>";
                     }
 
+                    
                     $testvar = $_SESSION['page'];
                     echo "<script> console.log('page = '+$testvar + ' length = '+ $length);</script>";
 
