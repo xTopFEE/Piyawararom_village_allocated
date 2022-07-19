@@ -1,4 +1,3 @@
-
 <?php require_once "includes/db.php";
 session_start();
 if (isset($_GET['next'])) {
@@ -18,7 +17,7 @@ if (isset($_GET['next'])) {
 } else if (isset($_GET['clear_page'])) {
     $_SESSION['page'] = 0;
     echo "<script> window.location.href = './payment.php' </script>";
-} else if(isset($_GET['year'])){
+} else if (isset($_GET['year'])) {
     $_SESSION['page'] = 0;
     $year = $_GET['year'];
     $_SESSION['enter_year'] = $year;
@@ -32,10 +31,10 @@ class user extends db
     {
         if (!empty($_SESSION['enter_year'])) {
             $enter_year = $_SESSION['enter_year'];
-        }else { 
+        } else {
             $enter_year = 0;
         }
-        
+
         echo "<script> console.log('enter_year :'+$enter_year) </script>";
         $lengthquery = "SELECT * FROM payment WHERE year=$enter_year";
         $stmtlength = $this->connect()->prepare($lengthquery);
@@ -46,7 +45,6 @@ class user extends db
         }
         return $length;
     }
-    
 }
 
 
@@ -77,7 +75,7 @@ if (!isset($_SESSION['username'])) {
             <i class='bx bx-menu' id="btn"></i>
         </div>
         <ul class="nav-list">
-        <li>
+            <li>
                 <a href="../nav_backend/backend.php">
                     <i class='bx bx-grid-alt'></i>
                     <span class="links_name">ยอดค้างชำระรวมทุกปี</span>
@@ -118,6 +116,13 @@ if (!isset($_SESSION['username'])) {
                     <span class="links_name">ยอดค้างชำระ</span>
                 </a>
                 <span class="tooltip">ยอดค้างชำระ</span>
+            </li>
+            <li>
+                <a href="../nav_statement/statement.php">
+                    <i class='bx bxs-calculator'></i>
+                    <span class="links_name">รายรับรายจ่าย</span>
+                </a>
+                <span class="tooltip">รายรับรายจ่าย</span>
             </li>
             <li>
                 <a href="../setting.php">
@@ -162,8 +167,8 @@ if (!isset($_SESSION['username'])) {
 
         <body>
             <div class="container shadow-lg bg-light py-3" style="border-radius: 12px;">
-            <br>    
-            <h2 align="center">upload ไฟล์ข้อมูลการชำระเงินของหมู่บ้าน</h2>
+                <br>
+                <h2 align="center">upload ไฟล์ข้อมูลการชำระเงินของหมู่บ้าน</h2>
                 <br>
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -269,23 +274,23 @@ if (!isset($_SESSION['username'])) {
                     </div>
                     <br>
                     <form action="payment.php/enter_year=2565" id='regForm' method="post">
-                            <?php 
-                                $now = new DateTime();
-                                $thisyear = $now->format("Y") +543;
-                                $selectedYear = isset($_SESSION['enter_year']) ? $_SESSION['enter_year'] : $thisyear;
-                                echo "<select name='enter_year' id='enter_year' onchange='changeYear()'>";
-                                echo "<script> console.log('hello : '+$thisyear +' selectedYear :' +$selectedYear) </script>";
-                                
-                                for ($thisyear ;$thisyear >= 2554; $thisyear--){
-                                    if($selectedYear == $thisyear){
-                                        echo "<option value='$thisyear' selected>$thisyear</option>";
-                                    }else{
-                                        echo "<option value='$thisyear'>$thisyear</option>";
-                                    }
-                                }
-                                echo "</select>";
-                            ?>
-                            <!-- <option value="2564" action="payment.php/enter_year=2564">2564</option>';
+                        <?php
+                        $now = new DateTime();
+                        $thisyear = $now->format("Y") + 543;
+                        $selectedYear = isset($_SESSION['enter_year']) ? $_SESSION['enter_year'] : $thisyear;
+                        echo "<select name='enter_year' id='enter_year' onchange='changeYear()'>";
+                        echo "<script> console.log('hello : '+$thisyear +' selectedYear :' +$selectedYear) </script>";
+
+                        for ($thisyear; $thisyear >= 2554; $thisyear--) {
+                            if ($selectedYear == $thisyear) {
+                                echo "<option value='$thisyear' selected>$thisyear</option>";
+                            } else {
+                                echo "<option value='$thisyear'>$thisyear</option>";
+                            }
+                        }
+                        echo "</select>";
+                        ?>
+                        <!-- <option value="2564" action="payment.php/enter_year=2564">2564</option>';
                             <option value="2563">2563</option>';
                             <option value="2562">2562</option>';
                             <option value="2561">2561</option>';
@@ -296,7 +301,7 @@ if (!isset($_SESSION['username'])) {
                             <option value="2560">2556</option>';
                             <option value="2560">2555</option>';
                             <option value="2559">2554</option> -->
-                        
+
                     </form><br>
                     <div class="row align-items-center">
                         <div id="msg" class='mx-auto'></div>
@@ -314,7 +319,7 @@ if (!isset($_SESSION['username'])) {
                     $user = new user;
                     $page = 0;
                     $length = $user->getLength();
-                    
+
                     for ($i = 1; $i <= $length; $i++) {
                         if ($i % 20 == 0) {
                             $page++;
@@ -359,7 +364,7 @@ if (!isset($_SESSION['username'])) {
 
 
     <?php
-    
+
 
 
     ?>
@@ -390,10 +395,11 @@ if (!isset($_SESSION['username'])) {
                 x.style.display = "none";
             }
         }
-        function changeYear(){
+
+        function changeYear() {
             var year = document.getElementById("enter_year").value
             console.log(year)
-            window.location.href = './payment.php?year='+year;
+            window.location.href = './payment.php?year=' + year;
         }
     </script>
 

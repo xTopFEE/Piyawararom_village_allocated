@@ -50,27 +50,6 @@ if (!isset($_SESSION['username'])) {
                 <span class="tooltip">ยอดค้างชำระรวมทุกปี</span>
             </li>
             <li>
-                <a href="../nav_user/user.php?clear_page=true">
-                    <i class='bx bx-user'></i>
-                    <span class="links_name">สมาชิกในหมู่บ้าน</span>
-                </a>
-                <span class="tooltip">สมาชิกในหมู่บ้าน</span>
-            </li>
-            <li>
-                <a href="../nav_director/director.php?clear_page=true">
-                    <i class='bx bx-group'></i>
-                    <span class="links_name">กรรมการ</span>
-                </a>
-                <span class="tooltip">กรรมการ</span>
-            </li>
-            <li>
-                <a href="admin.php">
-                    <i class='bx bx-code-block'></i>
-                    <span class="links_name">แอดมิน</span>
-                </a>
-                <span class="tooltip">แอดมิน</span>
-            </li>
-            <li>
                 <a href="../nav_form/form.php">
                     <i class='bx bx-file'></i>
                     <span class="links_name">แบบฟอร์มเอกสาร</span>
@@ -92,7 +71,7 @@ if (!isset($_SESSION['username'])) {
                 <span class="tooltip">การร้องเรียนทั่วไป</span>
             </li>
             <li>
-                <a href="../nav_payment/payment.php">
+                <a href="./payment.php">
                     <i class='bx bx-spreadsheet'></i>
                     <span class="links_name">การชำระเงิน</span>
                 </a>
@@ -104,6 +83,13 @@ if (!isset($_SESSION['username'])) {
                     <span class="links_name">ยอดค้างชำระ</span>
                 </a>
                 <span class="tooltip">ยอดค้างชำระ</span>
+            </li>
+            <li>
+                <a href="./statement.php">
+                    <i class='bx bxs-calculator'></i>
+                    <span class="links_name">รายรับรายจ่าย</span>
+                </a>
+                <span class="tooltip">รายรับรายจ่าย</span>
             </li>
             <li>
                 <a href="../setting.php">
@@ -137,7 +123,7 @@ if (!isset($_SESSION['username'])) {
             <!-- END -->
         </ul>
     </div>
-    
+
     <section class="home-section">
         <div class="text">แอดมิน</div>
 

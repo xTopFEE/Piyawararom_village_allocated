@@ -18,14 +18,32 @@ class user extends db
 			return $row;
 		}
 	}
+	public function change_year_format($old_year){
+		$old_year = $old_year/100;
+		$old_year = $old_year ;
+		echo "<script> console.log('old_year: ' + $old_year) </script>";
+		$split_year = explode('.', $old_year);
+		echo "<script> console.log('split_year :' + $split_year[1]) </script>";
+		return $split_year[1];
+	}
 	public function change_date_format($date)
 	{
 		// 1(เดือน)/2(วัน)/2565(ปี)
 		$split_date = explode(" ", $date);
 		$newformat = "";
 		
-		// แก้ ปี ค.ศ. เป็น พ.ศ.
-		// $split_date[2] = $split_date[2]+43;
+		// // แก้ ปี ค.ศ. เป็น พ.ศ.
+		// // $split_date[2] = $split_date[2]+43;
+		// $now = new DateTime();
+        // $thisyear = $now->format("Y") +543;
+		// echo "<script> console.log('thisyear: ' + $thisyear) </script>";
+
+		// $old_year = $split_date[2] + 2500;
+		// if($thisyear < $old_year){ 
+		// 	$split_date[2] = $this->change_year_format($old_year); 
+		// 	// echo "<script> console.log('old_year: ' + $split_date[2]) </script>";
+		// }
+		
 
 		// return "สวัสดี";
 		if (count($split_date) > 1) {
