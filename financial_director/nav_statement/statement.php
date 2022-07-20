@@ -19,6 +19,14 @@ if (!isset($_SESSION['username'])) {
     $_SESSION['msg'] = "กรุณาล็อกอินก่อน";
     header('location: ../../login.php');
 }
+if(isset($_GET['year'])){
+    $year = $_GET['year'];
+    $_SESSION['statement_year'] = $year;
+}
+if(isset($_GET['month'])){
+    $month = $_GET['month'];
+    $_SESSION['statement_month'] = $month;
+}
 ?>
 
 <!DOCTYPE html>
@@ -32,6 +40,8 @@ if (!isset($_SESSION['username'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Comfirm box -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Apexcharts -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 </head>
 
 <body>
@@ -109,7 +119,7 @@ if (!isset($_SESSION['username'])) {
                                 <div class="name_job">
                                     <div class="name"><?php echo $_SESSION['username'] ?></div>
                                     <!-- RODJANAPHADIT -->
-                                    <div class="job">Admin</div>
+                                    <div class="job">กรรมการการเงิน</div>
                                 </div>
                             </div>
                         </h1>
@@ -125,7 +135,7 @@ if (!isset($_SESSION['username'])) {
     </div>
 
     <section class="home-section">
-        <div class="text">แอดมิน</div>
+        <div class="text">รายรับรายจ่าย</div>
 
         <head>
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -175,53 +185,75 @@ if (!isset($_SESSION['username'])) {
         </head>
 
         <body>
+            <div class="container">
+                <div class="container shadow-lg bg-light py-3" style="border-radius: 12px;" id='regBox'>
+                    <br>
+                    <h2 class='text-center'>Dashboard</h2><br>
+                    <div id="chart">
+                    </div>
+
+                </div>
+            </div><br>
 
             <div class="container">
                 <div class="container shadow-lg bg-light py-3" style="border-radius: 12px;" id='regBox'>
                     <br>
-                    <h2 class='text-center'>เพิ่มข้อมูลแอดมิน</h2><br>
+                    <h2 class='text-center'>เพิ่มข้อมูลรายรับรายจ่าย</h2><br>
                     <div id='msgReg'></div>
                     <form action="" id='regForm' method="post"><br>
                         <div class="row">
                             <div class="col">
                                 <label>
-                                    <h4>username</h4>
+                                    <h4>วันที่</h4>
                                 </label>
                                 <div class="form-group">
-                                    <input type="text" id="username" name="username" placeholder="username" class='form-control col-sm-5 mx-auto' required>
+                                    <input type="date" id="date" name="date" class='form-control col-sm-5 mx-auto'>
+                                </div><br><br>
+                            </div>
+                            <div class="col">
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label>
+                                    <h4>รายรับ</h4>
+                                </label>
+                                <div class="form-group">
+                                    <input type="text" id="income" name="income" placeholder="รายรับ" class='form-control col-sm-5 mx-auto'>
                                 </div><br><br>
                             </div>
                             <div class="col">
                                 <label>
-                                    <h4>รหัสผ่าน</h4>
+                                    <h4>รายจ่าย</h4>
                                 </label>
                                 <div class="form-group">
-                                    <input type="text" id="password" name="password" placeholder="รหัสผ่าน" class='form-control col-sm-5 mx-auto' required>
+                                    <input type="text" id="expense" name="expense" placeholder="รายจ่าย" class='form-control col-sm-5 mx-auto'>
                                 </div><br><br>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
                                 <label>
-                                    <h4>ชื่อ-นามสกุล</h4>
+                                    <h4>ยอดคงเหลือ</h4>
                                 </label>
                                 <div class="form-group">
-                                    <input type="text" id="fullname" name="fullname" placeholder="ชื่อ-นามสกุล" class='form-control col-sm-5 mx-auto' required>
+                                    <input type="text" id="balance" name="balance" placeholder="ยอดคงเหลือ" class='form-control col-sm-5 mx-auto' required>
                                 </div><br><br>
                             </div>
                             <div class="col">
                                 <label>
-                                    <h4>ยืนยันรหัสผ่าน</h4>
+                                    <h4>หมายเหตุ</h4>
                                 </label>
                                 <div class="form-group">
-                                    <input type="text" id="password_2" name="password_2" placeholder="ยืนยันรหัสผ่าน" class='form-control col-sm-5 mx-auto' required>
+                                    <input type="text" id="other" name="other" placeholder="หมายเหตุ" class='form-control col-sm-5 mx-auto'>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
                                 <br>
-                                <input type="submit" id="btnPost" value="เพิ่มข้อมูลกรรมการ" class='btn btn-info'>
+                                <input type="submit" id="btnPost" value="เพิ่มข้อมูล" class='btn btn-info'>
                             </div>
                         </div>
                     </form>
@@ -238,12 +270,64 @@ if (!isset($_SESSION['username'])) {
                     // echo $_SESSION['page'];
                     ?>
                     <br>
-                    <h2 class='text-center'>ข้อมูลแอดมิน</h2><br>
+                    <h2 class='text-center'>ข้อมูลรายรับรายจ่าย</h2><br>
 
-                    <div class="row align-items-center">
+                    <!-- <div class="row align-items-center">
                         <input type="text" id="q" name='q' placeholder="ค้นหา..." class='form-control col-sm-5 mx-auto' autocomplete='off'>
-                    </div>
+                    </div> -->
                     <br>
+                    <form action="statement.php/enter_year=2565" id='regForm' method="post">
+                            <?php 
+                                $now = new DateTime();
+                                $thisyear = $now->format("Y") +543;
+                                $selectedYear = isset($_SESSION['statement_year']) ? $_SESSION['statement_year'] : '0';
+                                echo "<select name='enter_year' id='enter_year' onchange='changeYearAndMonth()'>";
+                                echo " <script> console.log('hello : '+$thisyear +' selectedYear :' +$selectedYear) </script> ";
+                                echo "<option value='0' >ทุกปี</option>";
+                                for ($thisyear ;$thisyear >= 2554; $thisyear--){
+                                    if($selectedYear == $thisyear){
+                                        echo "<option value='$thisyear' selected>$thisyear</option>";
+                                    }else{
+                                        echo "<option value='$thisyear'>$thisyear</option>";
+                                    }
+                                }
+                                echo "</select>";
+                                echo "<script>document.getElementById('enter_year').value = '$selectedYear'</script>";
+                                $selectedMonth = isset($_SESSION['statement_month']) ? $_SESSION['statement_month'] : '0';
+                                echo "<select name='enter_month' id='enter_month' onchange='changeYearAndMonth()'>";
+                                for ($i=0 ;$i <= 12; $i++){
+                                    if($i == 0){
+                                        echo "<option value='0'>ทุกเดือน</option>";
+                                    }else if($i == 1){
+                                        echo "<option value='1'>มกราคม</option>";
+                                    }else if($i == 2){
+                                        echo "<option value='2'>กุมภาพันธ์</option>";
+                                    }else if($i == 3){
+                                        echo "<option value='3'>มีนาคม</option>";
+                                    }else if($i == 4){
+                                        echo "<option value='4'>เมษายน</option>";
+                                    }else if($i == 5){
+                                        echo "<option value='5'>พฤษภาคม</option>";
+                                    }else if($i == 6){
+                                        echo "<option value='6'>มิถุนายน</option>";
+                                    }else if($i == 7){
+                                        echo "<option value='7'>กรกฎาคม</option>";
+                                    }else if($i == 8){
+                                        echo "<option value='8'>สิงหาคม</option>";
+                                    }else if($i == 9){
+                                        echo "<option value='9'>กันยายน</option>";
+                                    }else if($i == 10){
+                                        echo "<option value='10'>ตุลาคม</option>";
+                                    }else if($i == 11){
+                                        echo "<option value='11'>พฤศจิกายน</option>";
+                                    }else if($i == 12){
+                                        echo "<option value='12'>ธันวาคม</option>";
+                                    }
+                                }
+                                echo "</select>";
+                                echo "<script>document.getElementById('enter_month').value = '$selectedMonth'</script>";
+                            ?>          
+                    </form>
                     <div class="row align-items-center">
                         <div id="msg" class='mx-auto'></div>
                     </div>
@@ -295,7 +379,14 @@ if (!isset($_SESSION['username'])) {
         </body>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="js/main.js"></script>
-
+        <script>
+            function changeYearAndMonth(){
+            var year = document.getElementById("enter_year").value
+            var month = document.getElementById("enter_month").value
+            console.log(year)
+            window.location.href = './statement.php?year='+year+'&month='+month;
+        }
+        </script>
 
     </section>
     <?php
@@ -327,21 +418,8 @@ if (!isset($_SESSION['username'])) {
     }
 
     ?>
+    
 
-    <script>
-        // $("#nextpage").on('submit', function() {
-        //     <?php
-                //         $_SESSION['page'] = $_SESSION['page'] + 20;
-                //         
-                ?>
-        // });
-        // $("#backpage").on('submit', function() {
-        //     <?php
-                //         $_SESSION['page'] = $_SESSION['page'] - 20;
-                //         
-                ?>
-        // });
-    </script>
 
     <script>
         function hidepass(test) {

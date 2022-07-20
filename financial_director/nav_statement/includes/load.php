@@ -9,9 +9,20 @@ if (!empty($_SESSION['page'])) {
 	$page = $_SESSION['page'];
 }
 
-echo "<script>console.log($page);</script>";
 
-echo $user->load($page);
+$SelectedYear = 0;
+$SelectedMonth = 0;
+if (!empty($_SESSION['statement_year'])) {
+	$SelectedYear = $_SESSION['statement_year'];
+}
+if (!empty($_SESSION['statement_month'])) {
+	$SelectedMonth = $_SESSION['statement_month'];
+}
+echo "<script>console.log($page);</script>";
+echo "<script>console.log('year on load = $SelectedYear');</script>";
+echo "<script>console.log('Month on load = $SelectedMonth');</script>";
+
+echo $user->load($page,$SelectedYear,$SelectedMonth);
 ?>
 
 <script type="text/javascript">
@@ -27,12 +38,12 @@ echo $user->load($page);
 			if (result.isConfirmed) {
 				Swal.fire('ลบข้อมูลแล้ว!', '', 'success')
 				//
-				var admin_id = $(this).attr('admin_id');
+				var accounting_id = $(this).attr('accounting_id');
 				$.ajax({
 					url: 'includes/delete.php',
 					type: 'POST',
 					data: {
-						admin_id: admin_id
+						accounting_id: accounting_id
 					},
 					success: function(data) {
 						$("#table").load("includes/load.php");

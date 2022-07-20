@@ -12,16 +12,16 @@ if (isset($_POST['q'])) {
 <script type="text/javascript">
 	function get_edit_id() {
 		let url = new URLSearchParams(window.location.search);
-		let admin_id = url.get('admin_id');
-		admin_id = parseInt(admin_id);
-		return admin_id;
+		let accounting_id = url.get('accounting_id');
+		accounting_id = parseInt(accounting_id);
+		return accounting_id;
 	}
 
 	function get_rows() {
-		let admin_id = get_edit_id();
+		let accounting_id = get_edit_id();
 		$.get(
 			"includes/get.php", {
-				admin_id: admin_id
+				accounting_id: accounting_id
 			},
 			function(data) {
 				data = JSON.parse(data);
@@ -48,12 +48,12 @@ if (isset($_POST['q'])) {
 				Swal.fire('ลบข้อมูลแล้ว!', '', 'success')
 				
 				e.preventDefault();
-				let admin_id = get_edit_id();
+				let accounting_id = get_edit_id();
 				$.ajax({
 						type: "POST",
 						url: "includes/update.php",
 						data: {
-							admin_id: admin_id,
+							accounting_id: accounting_id,
 							username: $('#upd_username').val(),
 							fullname: $('#upd_fullname').val(),
 							password: $('#upd_password').val()
@@ -86,12 +86,12 @@ if (isset($_POST['q'])) {
 			if (result.isConfirmed) {
 				Swal.fire('Deleted!', '', 'success')
 				//
-				var admin_id = $(this).attr('admin_id');
+				var accounting_id = $(this).attr('accounting_id');
 				$.ajax({
 					url: 'includes/delete.php',
 					type: 'POST',
 					data: {
-						admin_id: admin_id
+						accounting_id: accounting_id
 					},
 					success: function(data) {
 						$("#table").load("includes/load.php");

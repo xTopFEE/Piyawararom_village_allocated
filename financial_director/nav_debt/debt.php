@@ -290,19 +290,7 @@ if (!isset($_SESSION['username'])) {
                                     }
                                 }
                                 echo "</select>";
-                            ?>
-                            <!-- <option value="2564" action="payment.php/enter_year=2564">2564</option>';
-                            <option value="2563">2563</option>';
-                            <option value="2562">2562</option>';
-                            <option value="2561">2561</option>';
-                            <option value="2560">2560</option>';
-                            <option value="2560">2559</option>';
-                            <option value="2560">2558</option>';
-                            <option value="2560">2557</option>';
-                            <option value="2560">2556</option>';
-                            <option value="2560">2555</option>';
-                            <option value="2559">2554</option> -->
-                        
+                            ?>          
                     </form>
                     <div class="row align-items-center">
                         <div id="msg" class='mx-auto'></div>
