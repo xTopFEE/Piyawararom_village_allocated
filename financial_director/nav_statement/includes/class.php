@@ -14,7 +14,7 @@ class user extends db
 	}
 	public function get_row($accounting_id)
 	{
-		$query = "SELECT * FROM statement WHERE accounting_id = ? ";
+		$query = "SELECT * FROM accounting WHERE accounting_id = ? ";
 		$stmt = $this->connect()->prepare($query);
 		$stmt->execute([$accounting_id]);
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -221,7 +221,7 @@ class user extends db
                 }
             },
             title: {
-                text: "Series A",
+                text: "ยอดคงเหลือ",
                 style: {
                     color: "#FF1654"
                 }
@@ -261,12 +261,13 @@ class user extends db
 		return $out;
 	}
 	// update data
-	public function update($username, $fullname, $password, $accounting_id)
+	public function update($income, $expense, $balance, $other, $accounting_id)
 	{
-		$query = "UPDATE accounting SET username = ?,fullname = ?,password = ? where accounting_id = ? ";
+		// INSERT INTO accounting (date,income,expense,balance,other) VALUES(?,?,?,?,?)
+		$query = "UPDATE accounting SET income = ?,expense = ?,balance = ?,other = ? where accounting_id = ? ";
 		$stmt = $this->connect()->prepare($query);
-		if ($stmt->execute([$username, $fullname, $password, $accounting_id])) {
-			echo "ข้อมูลถูกแก้ไขแล้ว! <a href='admin.php'>ดูข้อมูล</a>";
+		if ($stmt->execute([$income, $expense, $balance, $other, $accounting_id])) {
+			echo "ข้อมูลถูกแก้ไขแล้ว! <a href='statement.php'>ดูข้อมูล</a>";
 		}
 	}
 	//user search results

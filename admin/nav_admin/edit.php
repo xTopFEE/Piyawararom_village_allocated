@@ -134,7 +134,7 @@ if (!isset($_SESSION['username'])) {
 			<meta charset="utf-8">
 			<meta http-equiv="X-UA-Compatible" content="IE=edge">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
-			<title>สมาชิกในหมู่บ้าน</title>
+			<title>แอดมิน</title>
 			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 		</head>
 
@@ -142,7 +142,7 @@ if (!isset($_SESSION['username'])) {
 			<br>
 			<div class="container">
 				<div class="container shadow-lg bg-light py-3" id='editBox' style="border-radius: 12px;">
-					<h2 class='text-center'>แก้ไขข้อมูลกรรมการ</h2><br>
+					<h2 class='text-center'>แก้ไขข้อมูลแอดมิน</h2><br>
 					<div id='msgEdit'></div>
 					<form action="" id='editForm' method="post">
 						<div class="form-group">

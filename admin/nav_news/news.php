@@ -57,7 +57,7 @@ $result_select = mysqli_query($con, $query);
                 <span class="tooltip">กรรมการ</span>
             </li>
             <li>
-                <a href="admin.php">
+                <a href="../nav_admin/admin.php">
                     <i class='bx bx-code-block'></i>
                     <span class="links_name">แอดมิน</span>
                 </a>

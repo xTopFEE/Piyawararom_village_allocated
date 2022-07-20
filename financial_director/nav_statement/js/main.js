@@ -9,10 +9,12 @@ $(document).ready(function() {
                 data: $(this).serialize(),
             })
             .done(function(data) {
+                // $income, $expense, $balance, $other, $accounting_id
                 $("#table").load("includes/load.php");
-                $("#username").val('');
-                $("#fullname").val('');
-                $("#password").val('');
+                $("#income").val('');
+                $("#expense").val('');
+                $("#balance").val('');
+                $("#other").val('');
                 $("#msgReg").html("<p class='text-center alert alert-success'>" + data + "</p>");
                 $("#msgReg").slideDown(1400);
                 setTimeout(function() {
