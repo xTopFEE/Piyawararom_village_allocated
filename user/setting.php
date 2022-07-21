@@ -27,64 +27,71 @@ if (!isset($_SESSION['username'])) {
             <i class='bx bx-menu' id="btn"></i>
         </div>
         <ul class="nav-list">
-        <ul class="nav-list">
-        <li>
-                <a href="./nav_backend/backend.php">
-                    <i class='bx bx-grid-alt'></i>
-                    <span class="links_name">ยอดค้างชำระรวมทุกปี</span>
-                </a>
-                <span class="tooltip">ยอดค้างชำระรวมทุกปี</span>
-            </li>
-            <li>
-                <a href="./nav_debt/debt.php">
-                    <i class='bx bx-calendar'></i>
-                    <span class="links_name">ยอดค้างชำระ</span>
-                </a>
-                <span class="tooltip">ยอดค้างชำระ</span>
-            </li>
-            <li>
-                <a href="./nav_form/form.php">
-                    <i class='bx bx-file'></i>
-                    <span class="links_name">แบบฟอร์มเอกสาร</span>
-                </a>
-                <span class="tooltip">แบบฟอร์มเอกสาร</span>
-            </li>
-            <li>
-                <a href="./babfrom.php">
-                    <i class='bx bx-chat'></i>
-                    <span class="links_name">การร้องเรียนทั่วไป</span>
-                </a>
-                <span class="tooltip">การร้องเรียนทั่วไป</span>
-            </li>
-            <li>
-                <a href="setting.php">
-                    <i class='bx bx-cog'></i>
-                    <span class="links_name">การตั้งค่า</span>
-                </a>
-                <span class="tooltip">การตั้งค่า</span>
-            </li>
-            <!-- Logged in user detail -->
-            <?php if (isset($_SESSION['username'])) : ?>
-
-                <li class="profile">
-                    <h1 href="#">
-                        <div class="profile-details">
-                            <img src="../user.png" alt="profileImg">
-                            <div class="name_job">
-                                <div class="name"><?php echo $_SESSION['username'] ?></div>
-                                <!-- RODJANAPHADIT -->
-                                <div class="job">สมาชิกในหมู่บ้าน</div>
-                            </div>
-                        </div>
-                    </h1>
-                    <a href="../logout.php">
-                        <i class='bx bx-log-out' id="log_out"></i>
+            <ul class="nav-list">
+                <li>
+                    <a href="./nav_backend/backend.php">
+                        <i class='bx bx-grid-alt'></i>
+                        <span class="links_name">ยอดค้างชำระรวมทุกปี</span>
                     </a>
+                    <span class="tooltip">ยอดค้างชำระรวมทุกปี</span>
                 </li>
+                <li>
+                    <a href="./nav_debt/debt.php">
+                        <i class='bx bx-calendar'></i>
+                        <span class="links_name">ยอดค้างชำระ</span>
+                    </a>
+                    <span class="tooltip">ยอดค้างชำระ</span>
+                </li>
+                <li>
+                    <a href="./nav_form/form.php">
+                        <i class='bx bx-file'></i>
+                        <span class="links_name">แบบฟอร์มเอกสาร</span>
+                    </a>
+                    <span class="tooltip">แบบฟอร์มเอกสาร</span>
+                </li>
+                <li>
+                    <a href="./babfrom.php">
+                        <i class='bx bx-chat'></i>
+                        <span class="links_name">การร้องเรียนทั่วไป</span>
+                    </a>
+                    <span class="tooltip">การร้องเรียนทั่วไป</span>
+                </li>
+                <li>
+                    <a href="./nav_statement/statement.php">
+                        <i class='bx bxs-calculator'></i>
+                        <span class="links_name">รายรับรายจ่าย</span>
+                    </a>
+                    <span class="tooltip">รายรับรายจ่าย</span>
+                </li>
+                <li>
+                    <a href="setting.php">
+                        <i class='bx bx-cog'></i>
+                        <span class="links_name">การตั้งค่า</span>
+                    </a>
+                    <span class="tooltip">การตั้งค่า</span>
+                </li>
+                <!-- Logged in user detail -->
+                <?php if (isset($_SESSION['username'])) : ?>
 
-            <?php endif ?>
-            <!-- END -->
-        </ul>
+                    <li class="profile">
+                        <h1 href="#">
+                            <div class="profile-details">
+                                <img src="../user.png" alt="profileImg">
+                                <div class="name_job">
+                                    <div class="name"><?php echo $_SESSION['username'] ?></div>
+                                    <!-- RODJANAPHADIT -->
+                                    <div class="job">สมาชิกในหมู่บ้าน</div>
+                                </div>
+                            </div>
+                        </h1>
+                        <a href="../logout.php">
+                            <i class='bx bx-log-out' id="log_out"></i>
+                        </a>
+                    </li>
+
+                <?php endif ?>
+                <!-- END -->
+            </ul>
     </div>
     <section class="home-section">
         <div>

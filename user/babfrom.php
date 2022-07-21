@@ -40,7 +40,7 @@ $result_select = mysqli_query($con, $query);
             <i class='bx bx-menu' id="btn"></i>
         </div>
         <ul class="nav-list">
-        <li>
+            <li>
                 <a href="./nav_backend/backend.php">
                     <i class='bx bx-grid-alt'></i>
                     <span class="links_name">ยอดค้างชำระรวมทุกปี</span>
@@ -67,6 +67,13 @@ $result_select = mysqli_query($con, $query);
                     <span class="links_name">การร้องเรียนทั่วไป</span>
                 </a>
                 <span class="tooltip">การร้องเรียนทั่วไป</span>
+            </li>
+            <li>
+                <a href="../nav_statement/statement.php">
+                    <i class='bx bxs-calculator'></i>
+                    <span class="links_name">รายรับรายจ่าย</span>
+                </a>
+                <span class="tooltip">รายรับรายจ่าย</span>
             </li>
             <li>
                 <a href="./setting.php">
@@ -599,17 +606,17 @@ $result_select = mysqli_query($con, $query);
                     }
                 }
 
-                if($_POST['old_img'] != "0"){
-                    if(count($files_arr) == 0){
+                if ($_POST['old_img'] != "0") {
+                    if (count($files_arr) == 0) {
                         $path_all = $_POST['old_img'];
-                    }else{
-                        $path_all = implode("|", $files_arr)."|".$_POST['old_img'];
+                    } else {
+                        $path_all = implode("|", $files_arr) . "|" . $_POST['old_img'];
                     }
-                }else{
+                } else {
                     $path_all = implode("|", $files_arr);
                 }
-                    
-                $query = "UPDATE complaint SET complaint_tltle = '" . $title . "',Description = '" . $description . "' , file = '".$path_all."' where complaint_id = '" . $_POST['id'] . "'";
+
+                $query = "UPDATE complaint SET complaint_tltle = '" . $title . "',Description = '" . $description . "' , file = '" . $path_all . "' where complaint_id = '" . $_POST['id'] . "'";
                 $result = mysqli_query($con, $query);
                 echo '<script>window.location.href = \'babfrom.php\'</script>';
             }
@@ -711,10 +718,10 @@ $result_select = mysqli_query($con, $query);
                                                         <?php
                                                         for ($j = 0; $j < 4; $j++) {
                                                             if (isset($image[$count])) {
-                                                                ?>
-                                                            <div class="col-md-3">
-                                                                <img src="<?= $image[$count++] ?>" alt="" style="width: 100%;height: 150px;">
-                                                            </div>
+                                                        ?>
+                                                                <div class="col-md-3">
+                                                                    <img src="<?= $image[$count++] ?>" alt="" style="width: 100%;height: 150px;">
+                                                                </div>
                                                         <?php
                                                             }
                                                         }
@@ -836,12 +843,12 @@ $result_select = mysqli_query($con, $query);
 
                         const old = []
                         for (let file of $inputImages) {
-                            if(file.currentSrc.search("uploads") != -1)
+                            if (file.currentSrc.search("uploads") != -1)
                                 old.push(file.currentSrc.substring(file.currentSrc.search("uploads")))
                         }
                         $("#old_img").val(old.join('|'))
                     }
-                    
+
 
                     $("#compliant_form").submit(); //ให้มันเพิ่มลงform
                 } else if (result.isDenied) {

@@ -1,4 +1,3 @@
-
 <?php require_once "includes/db.php";
 session_start();
 if (isset($_GET['next'])) {
@@ -18,7 +17,7 @@ if (isset($_GET['next'])) {
 } else if (isset($_GET['clear_page'])) {
     $_SESSION['page'] = 0;
     echo "<script> window.location.href = './backend.php' </script>";
-} else if(isset($_GET['year'])){
+} else if (isset($_GET['year'])) {
     $_SESSION['page'] = 0;
     $year = $_GET['year'];
     $_SESSION['enter_year'] = $year;
@@ -32,10 +31,10 @@ class user extends db
     {
         if (!empty($_SESSION['enter_year'])) {
             $enter_year = $_SESSION['enter_year'];
-        }else { 
+        } else {
             $enter_year = 0;
         }
-        
+
         echo "<script> console.log('enter_year :'+$enter_year) </script>";
         $lengthquery = "SELECT *,SUM(amount) as 'sum' FROM payment WHERE year=$enter_year GROUP BY house_id HAVING SUM(amount) < 3600";
         $stmtlength = $this->connect()->prepare($lengthquery);
@@ -46,7 +45,6 @@ class user extends db
         }
         return $length;
     }
-    
 }
 
 
@@ -77,41 +75,48 @@ if (!isset($_SESSION['username'])) {
             <i class='bx bx-menu' id="btn"></i>
         </div>
         <ul class="nav-list">
-        <li>
-            <a href="./backend.php">
-                <i class='bx bx-grid-alt'></i>
-                <span class="links_name">ยอดค้างชำระรวมทุกปี</span>
-            </a>
-            <span class="tooltip">ยอดค้างชำระรวมทุกปี</span>
-        </li>
-        <li>
-            <a href="../nav_debt/debt.php">
-                <i class='bx bx-calendar'></i>
-                <span class="links_name">ยอดค้างชำระ</span>
-            </a>
-            <span class="tooltip">ยอดค้างชำระ</span>
-        </li>
-        <li>
-            <a href="../nav_form/form.php">
-                <i class='bx bx-file'></i>
-                <span class="links_name">แบบฟอร์มเอกสาร</span>
-            </a>
-            <span class="tooltip">แบบฟอร์มเอกสาร</span>
-        </li>
-        <li>
-            <a href="../nav_petition/babfrom.php">
-                <i class='bx bx-chat'></i>
-                <span class="links_name">การร้องเรียนทั่วไป</span>
-            </a>
-            <span class="tooltip">การร้องเรียนทั่วไป</span>
-        </li>
-        <li>
-            <a href="../setting.php">
-                <i class='bx bx-cog'></i>
-                <span class="links_name">การตั้งค่า</span>
-            </a>
-            <span class="tooltip">การตั้งค่า</span>
-        </li>
+            <li>
+                <a href="./backend.php">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="links_name">ยอดค้างชำระรวมทุกปี</span>
+                </a>
+                <span class="tooltip">ยอดค้างชำระรวมทุกปี</span>
+            </li>
+            <li>
+                <a href="../nav_debt/debt.php">
+                    <i class='bx bx-calendar'></i>
+                    <span class="links_name">ยอดค้างชำระ</span>
+                </a>
+                <span class="tooltip">ยอดค้างชำระ</span>
+            </li>
+            <li>
+                <a href="../nav_form/form.php">
+                    <i class='bx bx-file'></i>
+                    <span class="links_name">แบบฟอร์มเอกสาร</span>
+                </a>
+                <span class="tooltip">แบบฟอร์มเอกสาร</span>
+            </li>
+            <li>
+                <a href="../nav_petition/babfrom.php">
+                    <i class='bx bx-chat'></i>
+                    <span class="links_name">การร้องเรียนทั่วไป</span>
+                </a>
+                <span class="tooltip">การร้องเรียนทั่วไป</span>
+            </li>
+            <li>
+                <a href="../nav_statement/statement.php">
+                    <i class='bx bxs-calculator'></i>
+                    <span class="links_name">รายรับรายจ่าย</span>
+                </a>
+                <span class="tooltip">รายรับรายจ่าย</span>
+            </li>
+            <li>
+                <a href="../setting.php">
+                    <i class='bx bx-cog'></i>
+                    <span class="links_name">การตั้งค่า</span>
+                </a>
+                <span class="tooltip">การตั้งค่า</span>
+            </li>
             <!-- Logged in user detail -->
             <?php if (isset($_SESSION['username'])) : ?>
 
@@ -254,21 +259,21 @@ if (!isset($_SESSION['username'])) {
                     </div>
                     <br>
                     <!-- <form action="backend.php/enter_year=2565" id='regForm' method="post">
-                            <?php 
-                                // $now = new DateTime();
-                                // $thisyear = $now->format("Y") +543;
-                                // $selectedYear = $_SESSION['enter_year'];
-                                // echo "<select name='enter_year' id='enter_year' onchange='changeYear()'>";
-                                // echo "<script> console.log('hello : '+$thisyear +' selectedYear :' +$selectedYear) </script>";
-                                
-                                // for ($thisyear ;$thisyear >= 2554; $thisyear--){
-                                //     if($selectedYear == $thisyear){
-                                //         echo "<option value='$thisyear' selected>$thisyear</option>";
-                                //     }else{
-                                //         echo "<option value='$thisyear'>$thisyear</option>";
-                                //     }
-                                // }
-                                // echo "</select>";
+                            <?php
+                            // $now = new DateTime();
+                            // $thisyear = $now->format("Y") +543;
+                            // $selectedYear = $_SESSION['enter_year'];
+                            // echo "<select name='enter_year' id='enter_year' onchange='changeYear()'>";
+                            // echo "<script> console.log('hello : '+$thisyear +' selectedYear :' +$selectedYear) </script>";
+
+                            // for ($thisyear ;$thisyear >= 2554; $thisyear--){
+                            //     if($selectedYear == $thisyear){
+                            //         echo "<option value='$thisyear' selected>$thisyear</option>";
+                            //     }else{
+                            //         echo "<option value='$thisyear'>$thisyear</option>";
+                            //     }
+                            // }
+                            // echo "</select>";
                             ?>                       
                     </form> -->
                     <div class="row align-items-center">
@@ -291,7 +296,7 @@ if (!isset($_SESSION['username'])) {
                     $user = new user;
                     $page = 0;
                     $length = $user->getLength();
-                    
+
                     for ($i = 1; $i <= $length; $i++) {
                         if ($i % 20 == 0) {
                             $page++;
@@ -336,7 +341,7 @@ if (!isset($_SESSION['username'])) {
 
 
     <?php
-    
+
 
 
     ?>
@@ -367,10 +372,11 @@ if (!isset($_SESSION['username'])) {
                 x.style.display = "none";
             }
         }
-        function changeYear(){
+
+        function changeYear() {
             var year = document.getElementById("enter_year").value
             console.log(year)
-            window.location.href = './backend.php?year='+year;
+            window.location.href = './backend.php?year=' + year;
         }
     </script>
 

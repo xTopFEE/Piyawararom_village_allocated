@@ -93,6 +93,13 @@ $number_of_complaint = mysqli_num_rows($result_of_complaint);
             <span class="tooltip">ยอดค้างชำระ</span>
         </li>
         <li>
+            <a href="../nav_statement/statement.php">
+                <i class='bx bxs-calculator'></i>
+                <span class="links_name">รายรับรายจ่าย</span>
+            </a>
+            <span class="tooltip">รายรับรายจ่าย</span>
+        </li>
+        <li>
             <a href="../setting.php">
                 <i class='bx bx-cog'></i>
                 <span class="links_name">การตั้งค่า</span>
