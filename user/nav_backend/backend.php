@@ -254,9 +254,9 @@ if (!isset($_SESSION['username'])) {
                     <br>
                     <h2 class='text-center'>ข้อมูลการชำระเงินค่าส่วนกลาง</h2><br>
 
-                    <div class="row align-items-center">
+                    <!-- <div class="row align-items-center">
                         <input type="text" id="q" name='q' placeholder="ค้นหา..." class='form-control col-sm-5 mx-auto' autocomplete='off'>
-                    </div>
+                    </div> -->
                     <br>
                     <!-- <form action="backend.php/enter_year=2565" id='regForm' method="post">
                             <?php
@@ -289,27 +289,27 @@ if (!isset($_SESSION['username'])) {
 
                     <br>
 
-                    <a href='?back=true'>
+                    <!-- <a href='?back=true'>
                         <input type='submit' id='backpage' value='ย้อนกลับ' class='btn btn-info'>
-                    </a>
+                    </a> -->
                     <?php
-                    $user = new user;
-                    $page = 0;
-                    $length = $user->getLength();
+                    // $user = new user;
+                    // $page = 0;
+                    // $length = $user->getLength();
 
-                    for ($i = 1; $i <= $length; $i++) {
-                        if ($i % 20 == 0) {
-                            $page++;
-                            echo "<a href='?page=$page'> <input type='submit' id='backpage' value='$page' class='btn btn-info'></a>";
-                        }
-                    }
-                    if ($length % 20 != 0) {
-                        $lastpage = $page + 1;
-                        echo "<a href='?page=$lastpage'> <input type='submit' id='backpage' value='$lastpage' class='btn btn-info'></a>";
-                    }
+                    // for ($i = 1; $i <= $length; $i++) {
+                    //     if ($i % 20 == 0) {
+                    //         $page++;
+                    //         echo "<a href='?page=$page'> <input type='submit' id='backpage' value='$page' class='btn btn-info'></a>";
+                    //     }
+                    // }
+                    // if ($length % 20 != 0) {
+                    //     $lastpage = $page + 1;
+                    //     echo "<a href='?page=$lastpage'> <input type='submit' id='backpage' value='$lastpage' class='btn btn-info'></a>";
+                    // }
 
-                    $testvar = $_SESSION['page'];
-                    echo "<script> console.log('page = '+$testvar + ' length = '+ $length);</script>";
+                    // $testvar = $_SESSION['page'];
+                    // echo "<script> console.log('page = '+$testvar + ' length = '+ $length);</script>";
 
                     ?>
                     <!-- <a href='?next=true'>

@@ -102,8 +102,8 @@ class user extends db
 		echo "<script> console.log('split: ' + '$split_user_id[0]/$split_user_id[1]') </script>";
 
 		// echo "<script> console.log('thismonth: ' + $thismonth) </script>";	
-		$query = "WITH added_row_number AS ( SELECT *,SUM(amount) as 'sum' , ROW_NUMBER() OVER(PARTITION BY `house_id`) AS 'row_number' FROM payment WHERE month IN('มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม') AND house_id = '$split_user_id[0]/$split_user_id[1]' GROUP BY house_id ORDER BY cast(SUBSTRING_INDEX(house_id, '/', -1)as int) ) SELECT * FROM added_row_number LIMIT 20 OFFSET $page";
-
+		$query = "WITH added_row_number AS ( SELECT *,SUM(amount) as 'sum' , ROW_NUMBER() OVER(PARTITION BY `house_id`) AS 'row_number' FROM payment WHERE month IN('มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม') AND house_id = '$split_user_id[0]/$split_user_id[1]' GROUP BY house_id ORDER BY cast(SUBSTRING_INDEX(house_id, '/', -1)as int) ) SELECT * FROM added_row_number";
+		echo "<script> console.log(\"$query\"); </script>";
 		// while ($min_year <= $this_year) {
 
 		// 	$query = "SELECT *,SUM(amount) as 'sum' FROM payment WHERE year='$min_year' GROUP BY house_id HAVING SUM(amount) < 3600 ORDER BY cast(SUBSTRING_INDEX(house_id, '/', -1)as int) LIMIT 20 OFFSET $page";
