@@ -97,7 +97,7 @@ if (!isset($_SESSION['username'])) {
                 <span class="tooltip">แบบฟอร์มเอกสาร</span>
             </li>
             <li>
-                <a href="../nav_petition/babfrom.php">
+                <a href="../babfrom.php">
                     <i class='bx bx-chat'></i>
                     <span class="links_name">การร้องเรียนทั่วไป</span>
                 </a>

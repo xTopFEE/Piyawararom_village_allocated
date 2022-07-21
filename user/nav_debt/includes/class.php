@@ -27,7 +27,7 @@ class user extends db
 			// $query = "SELECT *,SUM(amount) as 'sum' FROM payment WHERE year='$enter_year' GROUP BY house_id ORDER BY cast(SUBSTRING_INDEX(house_id, '/', -1)as int) LIMIT 20 OFFSET $page";
 			$query = "WITH added_row_number AS ( SELECT *,SUM(amount) as 'sum' , ROW_NUMBER() OVER(PARTITION BY `house_id`) AS 'row_number' FROM payment WHERE month IN('มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม') and year='$enter_year' and house_id = '$current_user_id' GROUP BY house_id ORDER BY cast(SUBSTRING_INDEX(house_id, '/', -1)as int) ) SELECT * FROM added_row_number";
 		} else {
-			$query = "SELECT *,SUM(amount) as 'sum' FROM payment WHERE GROUP BY house_id ORDER BY cast(SUBSTRING_INDEX(house_id, '/', -1)as int) DESC LIMIT 20 OFFSET $page";
+			$query = "SELECT *,SUM(amount) as 'sum' FROM payment WHERE GROUP BY house_id ORDER BY cast(SUBSTRING_INDEX(house_id, '/', -1)as int)";
 		}
 
 		$stmt = $this->connect()->prepare($query);

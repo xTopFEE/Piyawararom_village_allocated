@@ -52,9 +52,6 @@ class user extends db
 			$date = $row['date'];
 			$file = $row['file'];
 			$reply = $row['reply'];
-			if ($reply == NULL) {
-				$reply = "(ยังไม่มีการตอบกลับ)";
-			}
 			$other = $row['other'];
 			$status	 = $row['status'];
 			if ($status != NULL) {

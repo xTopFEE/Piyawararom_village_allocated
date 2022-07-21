@@ -52,6 +52,7 @@ if ($_FILES["import_excel"]["name"] != '') {
             }
         }
         $message = '<div class="alert alert-success">Data Imported Successfully</div>';
+        echo "<script> location.reload(); </script>";
     } else {
         $message = '<div class="alert alert-danger">Only .xls .csv or .xlsx file allowed</div>';
     }
