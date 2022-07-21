@@ -62,8 +62,16 @@ class user extends db {
 			$date = $row['date'];
 			$file = $row['file'];
 			$reply = $row['reply'];
+			if ($reply == NULL) {
+				$reply = "(ยังไม่มีการตอบกลับ)";
+			}
 			$other = $row['other'];
 			$status	 = $row['status'];
+			if ($status != NULL) {
+				if($status == 1) { $status = "รอการตรวจสอบ"; }
+				if($status == 2) { $status = "ได้รับการอนุมัติ"; }
+				if($status == 3) { $status = "ไม่ผ่านการอนุมัติ"; }
+			}
 			$out .= "<tr><td>$resultcount</td><td>$other</td><td>$date</td><td>$status</td>";
 			$out .= "<td><a href='edit.php?id=$id' class='edit btn btn-sm btn-success' title='edit'><i class='fa fa-fw fa-pencil'></i></a></td>";
 			$out .= "<td><span id='$id' class='del btn btn-sm btn-danger' onclick='myFunction()' title='delete'><i class='fa fa-fw fa-trash'></i></span></td>";
@@ -79,11 +87,23 @@ class user extends db {
 		return $out;
 	}
 	// update data
-	public function update($fileupload){
-		$query = "UPDATE fileupload SET fileupload = ?";
+	public function update($form_id, $other)
+	{
+		// echo "<script> console.log('$user');</script>";
+		// $type = $_SESSION['usertype'];
+		// // echo "<script> console.log('$type');</script>";
+		// $userid = $_SESSION['userid'];
+
+		// if ($type == 'user') {
+		// 	$table = "user";
+		// 	$setrow = "user_id";
+		// }
+
+		$query = "UPDATE form SET other = ? where form_id = ? ";
+
 		$stmt = $this->connect()->prepare($query);
-		if($stmt->execute([$fileupload])){
-			echo "ข้อมูลถูกแก้ไขแล้ว! <a href='news.php'>ดูข้อมูล</a>";
+		if ($stmt->execute([$other, $form_id])) {
+			echo "ข้อมูลถูกแก้ไขแล้ว! <a href='form.php'>ดูข้อมูล</a>";
 		}
 	}
 	//user search results
@@ -111,10 +131,10 @@ class user extends db {
 		return $out;
 	}
 	
-	public function delete($fileupload){
-		$query = "DELETE FROM fileupload WHERE fileupload = ?";
+	public function delete($form_id){
+		$query = "DELETE FROM form WHERE form_id = ?";
 		$stmt = $this->connect()->prepare($query);
-		if($stmt->execute([$fileupload])){
+		if($stmt->execute([$form_id])){
 			echo "ลบเรียบร้อยแล้ว";
 		}
 	}

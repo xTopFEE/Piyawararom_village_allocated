@@ -52,8 +52,16 @@ class user extends db
 			$date = $row['date'];
 			$file = $row['file'];
 			$reply = $row['reply'];
+			if ($reply == NULL) {
+				$reply = "(ยังไม่มีการตอบกลับ)";
+			}
 			$other = $row['other'];
 			$status	 = $row['status'];
+			if ($status != NULL) {
+				if($status == 1) { $status = "รอการตรวจสอบ"; }
+				if($status == 2) { $status = "ได้รับการอนุมัติ"; }
+				if($status == 3) { $status = "ไม่ผ่านการอนุมัติ"; }
+			}
 			$house_id = $this->find_houseid($row['user_id']);
 			$out .= "<tr><td>$resultcount</td><td>$house_id</td><td>$other</td><td>$date</td><td>$status</td>";
 			$out .= "<td><a href='edit.php?id=$id' class='edit btn btn-sm btn-success' title='edit'><i class='fa fa-fw fa-pencil'></i></a></td>";

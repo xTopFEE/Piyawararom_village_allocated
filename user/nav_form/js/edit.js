@@ -1,22 +1,24 @@
 $(document).ready(function() {
     function get_edit_id() {
         let url = new URLSearchParams(window.location.search);
-        let admin_id = url.get('admin_id');
-        admin_id = parseInt(admin_id);
+        let form_id = url.get('id');
+        form_id = parseInt(form_id);
         console.log('get edit id');
-        console.log(admin_id);
-        return admin_id;
+        console.log(form_id);
+        console.log(url);
+        // console.log("geteditid hello");
+        return form_id;
     }
 
     function get_rows() {
-        let admin_id = get_edit_id();
+        let form_id = get_edit_id();
+        console.log("get_rows hello");
         $.get(
-            "includes/get.php", { admin_id: admin_id },
+            "includes/get.php", { id: form_id },
             function(data) {
+                console.log(data);
                 data = JSON.parse(data);
-                $("#upd_username").val(data.username);
-                $("#upd_password").val(data.password);
-                $("#upd_fullname").val(data.fullname);
+                $("#upd_other").val(data.other);
                 console.log(data);
             });
     }
@@ -25,50 +27,42 @@ $(document).ready(function() {
     }
     $("#editForm").submit(function(e) {
         e.preventDefault();
-        let admin_id = get_edit_id();
-        console.log(admin_id);
+        let form_id = get_edit_id();
+        console.log(form_id);
 
-        var password_1 = $('#upd_password').val();
-        var password_2 = $('#upd_password_2').val();
 
-        console.log(password_1);
-        console.log(password_2);
+        Swal.fire({
+            title: 'ต้องการที่จะแก้ไขข้อมูล?',
+            showCancelButton: true,
+            confirmButtonText: 'แก้ไขข้อมูล',
+            denyButtonText: 'ยกเลิก',
+        }).then((result) => {
 
-        if (password_1 != password_2) {
-            Swal.fire(
-                'รหัสผ่านไม่ตรงกัน',
-                '',
-                'warning'
-            )
-        } else {
-            Swal.fire({
-                title: 'ต้องการที่จะแก้ไขข้อมูล?',
-                showCancelButton: true,
-                confirmButtonText: 'แก้ไขข้อมูล',
-                denyButtonText: 'ยกเลิก',
-            }).then((result) => {
+            if (result.isConfirmed) {
 
-                if (result.isConfirmed) {
-                    Swal.fire('แก้ไขข้อมูลแล้ว!', '', 'success')
-                        //
-                    $.ajax({
-                            type: "POST",
-                            url: "includes/update.php",
-                            data: { admin_id: admin_id, username: $('#upd_username').val(), password: $('#upd_password').val(), fullname: $('#upd_fullname').val() },
-                        })
-                        .done(function(data) {
-                            $("#upd_username").val('');
-                            $("#upd_password").val('');
-                            $("#upd_fullname").val('');
-                            $("#table").load("includes/load.php");
-                            $("#msgEdit").html("<p class='text-center alert alert-success'>" + data + "</p>");
-                            $("#msgEdit").slideDown(1000);
-                        });
+                Swal.fire({
+                        title: 'แก้ไขข้อมูลแล้ว!',
+                        showCancelButton: false,
+                        type: 'success'
+                    }).then((result) => { location.href = "./form.php"; })
                     //
-                } else if (result.isDenied) {
-                    Swal.fire('Changes are not saved', '', 'info')
-                }
-            })
-        }
+                $.ajax({
+                        type: "POST",
+                        url: "includes/update.php",
+                        data: { form_id: form_id, other: $('#upd_other').val() },
+                    })
+                    .done(function(data) {
+                        // $("#upd_reply").val('');
+                        // $("#upd_status").val('');
+                        $("#table").load("includes/load.php");
+                        $("#msgEdit").html("<p class='text-center alert alert-success'>" + data + "</p>");
+                        $("#msgEdit").slideDown(1000);
+                    });
+                //
+            } else if (result.isDenied) {
+                Swal.fire('Changes are not saved', '', 'info')
+            }
+        })
+
     });
 });
