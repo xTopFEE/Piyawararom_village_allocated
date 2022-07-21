@@ -96,9 +96,10 @@ class user extends db
 	{
 		$this->get_id();
 		$current_user_id = $_SESSION['username'];
+		echo "<script> console.log('current_user_id: ' + '$current_user_id') </script>";
 		
-		// echo "<script> console.log('thismonth :' + $thismonth) </script>";	
-		$query = "WITH added_row_number AS ( SELECT *,SUM(amount) as 'sum' , ROW_NUMBER() OVER(PARTITION BY `house_id`) AS 'row_number' FROM payment WHERE month IN('มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม') and house_id = '$current_user_id' GROUP BY house_id ORDER BY cast(SUBSTRING_INDEX(house_id, '/', -1)as int) ) SELECT * FROM added_row_number LIMIT 20 OFFSET $page";
+		// echo "<script> console.log('thismonth: ' + $thismonth) </script>";	
+		$query = "WITH added_row_number AS ( SELECT *,SUM(amount) as 'sum' , ROW_NUMBER() OVER(PARTITION BY `house_id`) AS 'row_number' FROM payment WHERE month IN('มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม') AND house_id = '124/1' GROUP BY house_id ORDER BY cast(SUBSTRING_INDEX(house_id, '/', -1)as int) ) SELECT * FROM added_row_number LIMIT 20 OFFSET $page";
 
 		// while ($min_year <= $this_year) {
 

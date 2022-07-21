@@ -18,55 +18,93 @@ class user extends db
 			return $row;
 		}
 	}
+	// แก้ ปี ค.ศ. เป็น พ.ศ.
+	public function change_year_format($old_year)
+	{
+		$old_year = $old_year + 543;
+		$old_year = $old_year / 100;
+
+		echo "<script> console.log('old_year: ' + $old_year) </script>";
+		$split_year = explode('.', $old_year);
+		echo "<script> console.log('split_year :' + $split_year[1]) </script>";
+		return $split_year[1];
+	}
 	public function change_date_format($date)
 	{
 		// 1(เดือน)/2(วัน)/2565(ปี)
 		$split_date = explode(" ", $date);
 		$newformat = "";
+
+		$old_year = $split_date[2] + 2000;
+
 		// return "สวัสดี";
 		if (count($split_date) > 1) {
 			//(int)$split_date[0] คือ เดือน
 			switch ($split_date[1]) {
 				case 'Jan':
+					$split_date[2] = $this->change_year_format($old_year);
+					echo "<script> console.log('$split_date[2]: ' + $split_date[2]) </script>";
 					$newformat = "$split_date[0] ม.ค. $split_date[2]";
 					break;
 				case 'Feb':
+					$split_date[2] = $this->change_year_format($old_year);
+					echo "<script> console.log('$split_date[2]: ' + $split_date[2]) </script>";
 					$newformat = "$split_date[0] ก.พ. $split_date[2]";
 					break;
 				case 'Mar':
+					$split_date[2] = $this->change_year_format($old_year);
+					echo "<script> console.log('$split_date[2]: ' + $split_date[2]) </script>";
 					$newformat = "$split_date[0] มี.ค. $split_date[2]";
 					break;
 				case 'Apr':
+					$split_date[2] = $this->change_year_format($old_year);
+					echo "<script> console.log('$split_date[2]: ' + $split_date[2]) </script>";
 					$newformat = "$split_date[0] เม.ย. $split_date[2]";
 					break;
 				case 'May':
+					$split_date[2] = $this->change_year_format($old_year);
+					echo "<script> console.log('$split_date[2]: ' + $split_date[2]) </script>";
 					$newformat = "$split_date[0] พ.ค. $split_date[2]";
 					break;
 				case 'Jun':
+					$split_date[2] = $this->change_year_format($old_year);
+					echo "<script> console.log('$split_date[2]: ' + $split_date[2]) </script>";
 					$newformat = "$split_date[0] มิ.ย. $split_date[2]";
 					break;
 				case 'Jul':
+					$split_date[2] = $this->change_year_format($old_year);
+					echo "<script> console.log('$split_date[2]: ' + $split_date[2]) </script>";
 					$newformat = "$split_date[0] ก.ค. $split_date[2]";
 					break;
 				case 'Aug':
+					$split_date[2] = $this->change_year_format($old_year);
+					echo "<script> console.log('$split_date[2]: ' + $split_date[2]) </script>";
 					$newformat = "$split_date[0] ส.ค. $split_date[2]";
 					break;
 				case 'Sep':
+					$split_date[2] = $this->change_year_format($old_year);
+					echo "<script> console.log('$split_date[2]: ' + $split_date[2]) </script>";
 					$newformat = "$split_date[0] ก.ย. $split_date[2]";
 					break;
 				case 'Oct':
+					$split_date[2] = $this->change_year_format($old_year);
+					echo "<script> console.log('$split_date[2]: ' + $split_date[2]) </script>";
 					$newformat = "$split_date[0] ต.ค. $split_date[2]";
 					break;
 				case 'Nov':
+					$split_date[2] = $this->change_year_format($old_year);
+					echo "<script> console.log('$split_date[2]: ' + $split_date[2]) </script>";
 					$newformat = "$split_date[0] พ.ย. $split_date[2]";
 					break;
 				case 'Dec':
+					$split_date[2] = $this->change_year_format($old_year);
+					echo "<script> console.log('$split_date[2]: ' + $split_date[2]) </script>";
 					$newformat = "$split_date[0] ธ.ค. $split_date[2]";
 					break;
 				default:
 					$newformat = $date;
 			}
-		}else{
+		} else {
 			$newformat = $date;
 		}
 		return $newformat;

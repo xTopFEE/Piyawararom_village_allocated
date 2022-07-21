@@ -69,7 +69,7 @@ $result_select = mysqli_query($con, $query);
                 <span class="tooltip">การร้องเรียนทั่วไป</span>
             </li>
             <li>
-                <a href="../nav_statement/statement.php">
+                <a href="./nav_statement/statement.php">
                     <i class='bx bxs-calculator'></i>
                     <span class="links_name">รายรับรายจ่าย</span>
                 </a>
