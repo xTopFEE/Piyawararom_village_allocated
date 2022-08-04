@@ -169,6 +169,12 @@ if (!isset($_SESSION['username'])) {
 							</label>
 							<input type="text" id="upd_fullname" name="upd_fullname" placeholder="ชื่อ-นามสกุล" class='form-control sm-5 mx-auto' required>
 						</div><br>
+						<div class="form-group">
+							<label>
+								<h4>รูปภาพ</h4>
+							</label>
+							<input type="file" id="upload" name="upload">
+						</div><br>
 						<center>
 							<input type="submit" value="แก้ไข" class='btn update btn-success'>
 							<a href="./director.php" class='btn btn-danger'>ยกเลิก</a>

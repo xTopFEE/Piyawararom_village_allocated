@@ -14,7 +14,8 @@
     <!-- Google Font and css file -->
     <link rel="stylesheet" href="custom.css">
     <link rel="stylesheet" href="custom-style.css">
-    <link rel="stylesheet" href="variables.scss">
+    <!-- <link rel="stylesheet" href="variables.scss"> -->
+
 
 
     <!-- Boxicons CDN -->
@@ -29,6 +30,7 @@
             background-size: cover;
             position: relative;
         }
+
         .hero-text2 {
             text-align: center;
             position: absolute;
@@ -37,6 +39,7 @@
             transform: translate(-50%, -50%);
             color: white;
         }
+
         /*กรอบข่าว*/
         .try-image2 {
             background-color: #3399FF;
@@ -45,6 +48,7 @@
             background-size: cover;
             position: relative;
         }
+
         .try-text2 {
             text-align: center;
             position: absolute;
@@ -53,6 +57,7 @@
             transform: translate(-50%, -50%);
             color: white;
         }
+
         .hero-image5 {
             background-image: url("./img/me.JPG");
             background-color: #cccccc;
@@ -64,6 +69,14 @@
             background-size: cover;
             position: relative;
         }
+      
+table, th, td {
+    
+    border-collapse: collapse;
+}
+th, td {
+    padding: 15px;
+}
     </style>
 </head>
 
@@ -114,20 +127,69 @@
             <h1 style="font-size:25px">เกี่ยวกับ</h1>
         </div>
     </div>
-    
-    <div class="hero-image5">
-        <!-- <div class="row align-items-center">
+
+    <!-- <div class="hero-image5">
+        <div class="row align-items-center">
             <div class="col">
                 <div class="col-md-4 text-light offset-1">
                     <h1 class="display-7 fw-bolder"><font color="#000000"> ติดต่อ </font></h1> 
                     <p class="lead">เว็บแอพพลิเคชั่นหมู่บ้านจัดสรรปิยวรารมย์</p>
                 </div>
             </div>
-        </div> -->
-    </div>
+        </div>
+    </div> -->
+ <?php
+            include('connection.php');  //ไฟล์เชื่อมต่อกับ database ที่เราได้สร้างไว้ก่อนหน้าน้ี
+            $query = "SELECT * FROM director" or die("Error:" . mysqli_error($con));
+            $result = mysqli_query($con, $query);
+            ?>
+            <div class="row">
+                <?php
+             while ($row = mysqli_fetch_array($result)) { 
+             $baby =  explode("|",$row['file']);
+            if($row['rank'] == 'president'){
+                $satatus = "ประธาน";
+            }
+            if($row['rank'] == 'director'){
+                $satatus = "กรรมการเลขานุการ";
+            }
+            if($row['rank'] == 'vice_president_financial'){
+                $satatus = "รองประธานกรรมการ ฝ่ายการเงิน";
+            }
+            if($row['rank'] == 'vice_president_civil'){
+                $satatus = "รองประธานกรรมการ ฝ่ายโยธา";
+            }
+            if($row['rank'] == 'financial_director'){
+                $satatus = "กรรมการและเหรัญญิก";
+            }
+            if($row['rank'] == 'director_public_relations'){
+                $satatus = "กรรมการฝ่ายประชาสัมพันธ์";
+            }
 
+                ?>
+
+<div class="row">
+    <div class="col">
 
    
+
+    <table style="width:80% height=150%">
+  <tr>
+    <th> <img class="card-img-top" width='80px' height='150px' src="admin/nav_director/includes/uploads/<?= $baby[0]  ?>" alt="Card image cap"></th>
+    <th><?= $row['fullname'] ?> </th>
+    <th><?= $satatus ?> </th>
+  </tr>
+  
+</table>
+
+
+    </div>
+</div>
+<?php
+
+             }
+mysqli_close($con);
+?>
 
     <!-- bottom nav -->
     <div class="row pt-5 px-3 border-top mt-1 " style="font-size: 5px;">
@@ -157,13 +219,13 @@
             </ul>
 
         </div>
-        
+
     </div>
     <nav class="nav mt-5 ml-3" style="font-size: 5px;">
 
     </nav>
     <hr />
-
+    <!-- 
     <div class="row" style="font-size: 10px;">
         <div class="col">
             <ul class="nav justify-content-end">
@@ -172,7 +234,7 @@
                 </li>
             </ul>
         </div>
-    </div>
+    </div> -->
 
 
 

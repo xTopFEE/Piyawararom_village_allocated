@@ -52,16 +52,31 @@ $(document).ready(function() {
                 if (result.isConfirmed) {
                     Swal.fire('แก้ไขข้อมูลแล้ว!', '', 'success')
                         //
+                        let fd = new FormData();
+                        fd.append('director_id',director_id);
+                        fd.append('username',$('#upd_username').val());
+                        fd.append('password',$('#upd_password').val());
+                        fd.append('rank',$('#upd_rank').val());
+                        fd.append('fullname',$('#upd_fullname').val());
+                        let files = $('#upload')[0].files;
+                        if(files.length > 0 ){
+                            fd.append('upload',files[0]);
+                        }else{
+                            fd.append('upload',null);
+                        }
                     $.ajax({
                             type: "POST",
                             url: "includes/update.php",
-                            data: { director_id: director_id, username: $('#upd_username').val(), password: $('#upd_password').val(), rank: $('#upd_rank').val(), fullname: $('#upd_fullname').val() },
+                            data: fd,
+                            contentType: false,
+                            processData: false,
                         })
                         .done(function(data) {
                             $("#upd_username").val('');
                             $("#upd_password").val('');
                             $("#upd_rank").val('');
                             $("#upd_fullname").val('');
+                            $("#upload").val(null);
                             $("#table").load("includes/load.php");
                             $("#msgEdit").html("<p class='text-center alert alert-success'>" + data + "</p>");
                             $("#msgEdit").slideDown(1000);

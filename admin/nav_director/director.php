@@ -199,9 +199,9 @@ if (!isset($_SESSION['username'])) {
             <div class="container">
                 <div class="container shadow-lg bg-light py-3" style="border-radius: 12px;" id='regBox'>
                     <br>
-                    <h2 class='text-center'>เพิ่มข้อมูลกรรมการ</h2><br>
+                    <h2 class='text-center'>เพิ่มข้อมูลกรรมการ2222</h2><br>
                     <div id='msgReg'></div>
-                    <form action="" id='regForm' method="post"><br>
+                    <form action="" id='regForm' method="post" enctype="multipart/form-data"><br>
                         <div class="row">
                             <div class="col">
                                 <label>
@@ -243,8 +243,8 @@ if (!isset($_SESSION['username'])) {
                                 <label>
                                     <h4>ตำแหน่ง</h4>
                                 </label><br>
-                                <select name="rank" id="fullname">
-                                    <option value="president">ประธานกรรมการ</option>
+                                <select name="rank" id="rank">
+                                    <option value="-" selected>ประธานกรรมการ</option>
                                     <option value="vice_president_financial">รองประธานกรรมการ ฝ่ายการเงิน</option>
                                     <option value="vice_president_civil">รองประธานกรรมการ ฝ่ายโยธา</option>
                                     <option value="financial_director">กรรมการและเหรัญญิก</option>
@@ -253,10 +253,20 @@ if (!isset($_SESSION['username'])) {
                                 </select>
                             </div>
                             <div class="col">
+                                <label>
+                                    <h4>รูปภาพกรรมการ</h4>
+                                </label><br>
+                                <div class="form-group">
+                                    <input type="file" name="upload" id="upload"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
                                 <br>
                                 <input type="submit" id="btnPost" value="เพิ่มข้อมูลกรรมการ" class='btn btn-info'>
                             </div>
-                        </div>
+                        </div>                    
                     </form>
                     <br>
 
@@ -401,10 +411,12 @@ if (!isset($_SESSION['username'])) {
                     cache: false,
                     processData: false,
                     beforeSend: function() {
+                        console.log('asdfasdfasdfasd');
                         $('#import').attr('disabled', 'disabled');
                         $('#import').val('Importing...');
                     },
                     success: function(data) {
+                        console.log('asdfasdfasdfasd222');
                         $('#message').html(data);
                         $('#import_excel_form')[0].reset();
                         $('#import').attr('disabled', false);
