@@ -19,11 +19,11 @@ if (!isset($_SESSION['username'])) {
     $_SESSION['msg'] = "กรุณาล็อกอินก่อน";
     header('location: ../../login.php');
 }
-if(isset($_GET['year'])){
+if (isset($_GET['year'])) {
     $year = $_GET['year'];
     $_SESSION['statement_year'] = $year;
 }
-if(isset($_GET['month'])){
+if (isset($_GET['month'])) {
     $month = $_GET['month'];
     $_SESSION['statement_month'] = $month;
 }
@@ -184,7 +184,7 @@ if(isset($_GET['month'])){
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
         </head>
 
-        <body>
+        <body onload="setdate()">
             <div class="container">
                 <div class="container shadow-lg bg-light py-3" style="border-radius: 12px;" id='regBox'>
                     <br>
@@ -211,7 +211,17 @@ if(isset($_GET['month'])){
                                 </div><br><br>
                             </div>
                             <div class="col">
+                                <script>
+                                    var nowDate = new Date()
+                                    document.getElementById('date').value = nowDate.getFullYear() + "-" + settwoFormat((parseInt(nowDate.getMonth()) + 1)) + "-" + settwoFormat(nowDate.getDate());
 
+                                    function settwoFormat(num){
+                                        if(num <= 9){
+                                            num = "0"+num
+                                        }
+                                        return num
+                                    }
+                                </script>
                             </div>
                         </div>
                         <div class="row">
@@ -277,56 +287,56 @@ if(isset($_GET['month'])){
                     </div> -->
                     <br>
                     <form action="statement.php/enter_year=2565" id='regForm' method="post">
-                            <?php 
-                                $now = new DateTime();
-                                $thisyear = $now->format("Y") +543;
-                                $selectedYear = isset($_SESSION['statement_year']) ? $_SESSION['statement_year'] : '0';
-                                echo "<select name='enter_year' id='enter_year' onchange='changeYearAndMonth()'>";
-                                echo " <script> console.log('hello : '+$thisyear +' selectedYear :' +$selectedYear) </script> ";
-                                echo "<option value='0' >ทุกปี</option>";
-                                for ($thisyear ;$thisyear >= 2554; $thisyear--){
-                                    if($selectedYear == $thisyear){
-                                        echo "<option value='$thisyear' selected>$thisyear</option>";
-                                    }else{
-                                        echo "<option value='$thisyear'>$thisyear</option>";
-                                    }
-                                }
-                                echo "</select>";
-                                echo "<script>document.getElementById('enter_year').value = '$selectedYear'</script>";
-                                $selectedMonth = isset($_SESSION['statement_month']) ? $_SESSION['statement_month'] : '0';
-                                echo "<select name='enter_month' id='enter_month' onchange='changeYearAndMonth()'>";
-                                for ($i=0 ;$i <= 12; $i++){
-                                    if($i == 0){
-                                        echo "<option value='0'>ทุกเดือน</option>";
-                                    }else if($i == 1){
-                                        echo "<option value='1'>มกราคม</option>";
-                                    }else if($i == 2){
-                                        echo "<option value='2'>กุมภาพันธ์</option>";
-                                    }else if($i == 3){
-                                        echo "<option value='3'>มีนาคม</option>";
-                                    }else if($i == 4){
-                                        echo "<option value='4'>เมษายน</option>";
-                                    }else if($i == 5){
-                                        echo "<option value='5'>พฤษภาคม</option>";
-                                    }else if($i == 6){
-                                        echo "<option value='6'>มิถุนายน</option>";
-                                    }else if($i == 7){
-                                        echo "<option value='7'>กรกฎาคม</option>";
-                                    }else if($i == 8){
-                                        echo "<option value='8'>สิงหาคม</option>";
-                                    }else if($i == 9){
-                                        echo "<option value='9'>กันยายน</option>";
-                                    }else if($i == 10){
-                                        echo "<option value='10'>ตุลาคม</option>";
-                                    }else if($i == 11){
-                                        echo "<option value='11'>พฤศจิกายน</option>";
-                                    }else if($i == 12){
-                                        echo "<option value='12'>ธันวาคม</option>";
-                                    }
-                                }
-                                echo "</select>";
-                                echo "<script>document.getElementById('enter_month').value = '$selectedMonth'</script>";
-                            ?>          
+                        <?php
+                        $now = new DateTime();
+                        $thisyear = $now->format("Y") + 543;
+                        $selectedYear = isset($_SESSION['statement_year']) ? $_SESSION['statement_year'] : '0';
+                        echo "<select name='enter_year' id='enter_year' onchange='changeYearAndMonth()'>";
+                        echo " <script> console.log('hello : '+$thisyear +' selectedYear :' +$selectedYear) </script> ";
+                        echo "<option value='0' >ทุกปี</option>";
+                        for ($thisyear; $thisyear >= 2554; $thisyear--) {
+                            if ($selectedYear == $thisyear) {
+                                echo "<option value='$thisyear' selected>$thisyear</option>";
+                            } else {
+                                echo "<option value='$thisyear'>$thisyear</option>";
+                            }
+                        }
+                        echo "</select>";
+                        echo "<script>document.getElementById('enter_year').value = '$selectedYear'</script>";
+                        $selectedMonth = isset($_SESSION['statement_month']) ? $_SESSION['statement_month'] : '0';
+                        echo "<select name='enter_month' id='enter_month' onchange='changeYearAndMonth()'>";
+                        for ($i = 0; $i <= 12; $i++) {
+                            if ($i == 0) {
+                                echo "<option value='0'>ทุกเดือน</option>";
+                            } else if ($i == 1) {
+                                echo "<option value='1'>มกราคม</option>";
+                            } else if ($i == 2) {
+                                echo "<option value='2'>กุมภาพันธ์</option>";
+                            } else if ($i == 3) {
+                                echo "<option value='3'>มีนาคม</option>";
+                            } else if ($i == 4) {
+                                echo "<option value='4'>เมษายน</option>";
+                            } else if ($i == 5) {
+                                echo "<option value='5'>พฤษภาคม</option>";
+                            } else if ($i == 6) {
+                                echo "<option value='6'>มิถุนายน</option>";
+                            } else if ($i == 7) {
+                                echo "<option value='7'>กรกฎาคม</option>";
+                            } else if ($i == 8) {
+                                echo "<option value='8'>สิงหาคม</option>";
+                            } else if ($i == 9) {
+                                echo "<option value='9'>กันยายน</option>";
+                            } else if ($i == 10) {
+                                echo "<option value='10'>ตุลาคม</option>";
+                            } else if ($i == 11) {
+                                echo "<option value='11'>พฤศจิกายน</option>";
+                            } else if ($i == 12) {
+                                echo "<option value='12'>ธันวาคม</option>";
+                            }
+                        }
+                        echo "</select>";
+                        echo "<script>document.getElementById('enter_month').value = '$selectedMonth'</script>";
+                        ?>
                     </form>
                     <div class="row align-items-center">
                         <div id="msg" class='mx-auto'></div>
@@ -380,12 +390,12 @@ if(isset($_GET['month'])){
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="js/main.js"></script>
         <script>
-            function changeYearAndMonth(){
-            var year = document.getElementById("enter_year").value
-            var month = document.getElementById("enter_month").value
-            console.log(year)
-            window.location.href = './statement.php?year='+year+'&month='+month;
-        }
+            function changeYearAndMonth() {
+                var year = document.getElementById("enter_year").value
+                var month = document.getElementById("enter_month").value
+                console.log(year)
+                window.location.href = './statement.php?year=' + year + '&month=' + month;
+            }
         </script>
 
     </section>
@@ -418,7 +428,7 @@ if(isset($_GET['month'])){
     }
 
     ?>
-    
+
 
 
     <script>

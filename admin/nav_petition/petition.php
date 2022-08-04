@@ -80,7 +80,7 @@ $number_of_complaint = mysqli_num_rows($result_of_complaint);
                 <span class="tooltip">กรรมการ</span>
             </li>
             <li>
-                <a href="admin.php">
+                <a href="../nav_admin/admin.php">
                     <i class='bx bx-code-block'></i>
                     <span class="links_name">แอดมิน</span>
                 </a>
