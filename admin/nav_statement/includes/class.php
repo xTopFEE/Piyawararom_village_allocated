@@ -112,6 +112,10 @@ class user extends db
 		}
 		return $newformat;
 	}
+	public function change_money_format($money)
+	{
+		return number_format($money, 0, '.', ',');
+	}
 	public function load($page,$SelectedYear,$SelectedMonth)
 	{
 		// $query = "SELECT * FROM accounting LIMIT 20 OFFSET $page";
@@ -162,9 +166,10 @@ class user extends db
 			$other = $row['other'];
 			array_push($balanceArray,$balance);
 			array_push($dateArray,$date);
-			if ($other == Null) {
-				$other = "-";
-			}
+			
+			$income = $this->change_money_format($income);
+			$expense = $this->change_money_format($expense);
+			$balance = $this->change_money_format($balance);
 
 			$out .= "<tr><td>$resultcount</td><td>$date</td><td style='text-align: right !important'>$income</td><td style='text-align: right !important'>$expense</td><td style='text-align: right !important'>$balance</td><td>$other</td>";
 			// $out .= "<td><a href='edit.php?accounting_id=$accounting_id' class='edit btn btn-sm btn-success' title='edit'><i class='fa fa-fw fa-pencil'></i></a></td>";

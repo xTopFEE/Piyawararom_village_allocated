@@ -18,6 +18,10 @@ class user extends db
 			return $row;
 		}
 	}
+	public function change_money_format($money)
+	{
+		return number_format($money, 0, '.', ',');
+	}
 	public function load($page, $enter_year)
 	{
 		if(!empty($enter_year))
@@ -49,7 +53,10 @@ class user extends db
 			$other = $row['other'];
 			$sum = $row['sum'];
 			$amountsum = 3600 - $sum;
-			$out .= "<tr><td colspan='2'>$seq</td><td>$year</td><td style='text-align: left !important'>$house_id</td><td style='text-align: right !important'>$sum / 3600</td><td style='text-align: right !important'>$amountsum</td>";
+			$sum = $this->change_money_format($sum);
+			$amountsum = $this->change_money_format($amountsum);
+			if($amountsum <= 0) { $amountsum = "ไม่มียอดค้างชำระ"; }
+			$out .= "<tr><td colspan='2'>$seq</td><td>$year</td><td style='text-align: left !important'>$house_id</td><td style='text-align: right !important'>$sum / 3,600</td><td style='text-align: right !important'>$amountsum</td>";
 			$strhref = "";
 			if(strpos($house_id, '/') !== false) {
 				$array_houseid = explode('/', $house_id);
@@ -112,6 +119,7 @@ class user extends db
 			$other = $row['other'];
 			$sum = $row['sum'];
 			$amountsum = 3600 - $sum;
+			if($amountsum <= 0) { $amountsum = "ไม่มียอดค้างชำระ"; }
 			$out .= "<tr><td colspan='2'>$seq</td><td>$year</td><td>$house_id</td><td>$sum / 3600</td><td>$amountsum</td>";
 			$strhref = "";
 			if(strpos($house_id, '/') !== false) {

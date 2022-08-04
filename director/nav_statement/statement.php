@@ -287,7 +287,7 @@ if (isset($_GET['month'])) {
                         echo "</select>";
                         echo "<script>document.getElementById('enter_year').value = '$selectedYear'</script>";
                         $selectedMonth = isset($_SESSION['statement_month']) ? $_SESSION['statement_month'] : '0';
-                        echo "<select name='enter_month' id='enter_month' onchange='changeYearAndMonth()'>";
+                        echo "<select name='enter_month' id='enter_month' onchange='changeYearAndMonth()' style='display: none;'>";
                         for ($i = 0; $i <= 12; $i++) {
                             if ($i == 0) {
                                 echo "<option value='0'>ทุกเดือน</option>";

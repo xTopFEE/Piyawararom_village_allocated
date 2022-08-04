@@ -146,6 +146,7 @@ class user extends db
 			$sum = $this->change_money_format($sum);
 			$amountsum = $this->change_money_format($amountsum);
 			$remainsum = $this->change_money_format($remainsum);
+			if($remainsum <= 0) { $remainsum = "ไม่มียอดค้างชำระ"; }
 			$out .= "<tr><td colspan='2' style='text-align: left !important'>$house_id</td><td>$year</td><td>$totalmonth</td><td style='text-align: right !important'>$sum</td><td style='text-align: right !important'>$amountsum</td><td style='text-align: right !important'>$remainsum</td>";
 			$strhref = "";
 			if (strpos($house_id, '/') !== false) {
