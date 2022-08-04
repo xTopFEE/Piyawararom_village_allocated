@@ -84,6 +84,9 @@ class user extends db
 			case "director": 
 				$rank = "กรรมการและเลขานุการ";
 				break;
+			case "other":
+				$rank = "กรรมการตำแหน่งอื่นๆ";
+				break;
 		}
 		return $rank;	
 	}

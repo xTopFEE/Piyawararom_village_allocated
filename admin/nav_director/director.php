@@ -199,7 +199,7 @@ if (!isset($_SESSION['username'])) {
             <div class="container">
                 <div class="container shadow-lg bg-light py-3" style="border-radius: 12px;" id='regBox'>
                     <br>
-                    <h2 class='text-center'>เพิ่มข้อมูลกรรมการ2222</h2><br>
+                    <h2 class='text-center'>เพิ่มข้อมูลกรรมการ</h2><br>
                     <div id='msgReg'></div>
                     <form action="" id='regForm' method="post" enctype="multipart/form-data"><br>
                         <div class="row">
@@ -250,6 +250,7 @@ if (!isset($_SESSION['username'])) {
                                     <option value="financial_director">กรรมการและเหรัญญิก</option>
                                     <option value="director_public_relations">กรรมการฝ่ายประชาสัมพันธ์</option>
                                     <option value="director">กรรมการและเลขานุการ</option>
+                                    <option value="other">กรรมการตำแหน่งอื่นๆ</option>
                                 </select>
                             </div>
                             <div class="col">
