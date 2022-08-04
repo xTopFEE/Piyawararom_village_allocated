@@ -146,7 +146,7 @@ class user extends db
 			$date_paid = $this->change_date_format($date_paid);
 			$amount = $row['amount'];
 			$other = $row['other'];
-			$out .= "<tr><td colspan='2'>$seq</td><td>$year</td><td>$month</td><td>$house_id</td><td>$date_paid</td><td>$amount</td><td>$other</td>";
+			$out .= "<tr><td colspan='2'>$seq</td><td>$year</td><td>$month</td><td style='text-align: left !important'>$house_id</td><td>$date_paid</td><td style='text-align: right !important'>$amount</td><td>$other</td>";
 			//$out .= "<td><a href='edit.php?payment_id=$payment_id' class='edit btn btn-sm btn-success' title='edit'><i class='fa fa-fw fa-pencil'></i></a></td>";
 			//$out .= "<td><span payment_id='$payment_id' class='del btn btn-sm btn-danger' onclick='myFunction()' title='delete'><i class='fa fa-fw fa-trash'></i></span></td>";
 			$count++;

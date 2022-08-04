@@ -49,7 +49,7 @@ class user extends db
 			$other = $row['other'];
 			$sum = $row['sum'];
 			$amountsum = 3600 - $sum;
-			$out .= "<tr><td colspan='2'>$seq</td><td>$year</td><td>$house_id</td><td>$sum / 3600</td><td>$amountsum</td>";
+			$out .= "<tr><td colspan='2'>$seq</td><td>$year</td><td style='text-align: left !important'>$house_id</td><td style='text-align: right !important'>$sum / 3600</td><td style='text-align: right !important'>$amountsum</td>";
 			$strhref = "";
 			if(strpos($house_id, '/') !== false) {
 				$array_houseid = explode('/', $house_id);

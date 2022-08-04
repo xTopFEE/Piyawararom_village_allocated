@@ -108,7 +108,7 @@ class user extends db
 			//แปลงตำแหน่ง
 			$rank = $this->translate_rank($rank);
 			$fullname = $row['fullname'];
-			$out .= "<tr><td>$resultcount</td><td><a href='./includes/uploads/$img' target='_blank'><img src=\"./includes/uploads/$img\" width='40'></a></td><td>$username</td><td><p style='display:none' id='hide_pass_$resultcount'>$password</p><i onclick='hidepass($resultcount)' class='bx bx-hide'></i></td><td>$rank</td><td>$fullname</td>";
+			$out .= "<tr><td>$resultcount</td><td><a href='./includes/uploads/$img' target='_blank'><img src=\"./includes/uploads/$img\" width='40'></a></td><td>$username</td><td><p style='display:none' id='hide_pass_$resultcount'>$password</p><i onclick='hidepass($resultcount)' class='bx bx-hide'></i></td><td>$rank</td><td style='text-align: left !important'>$fullname</td>";
 			$out .= "<td><a href='edit.php?director_id=$director_id' class='edit btn btn-sm btn-success' title='edit'><i class='fa fa-fw fa-pencil'></i></a></td>";
 			$out .= "<td><span director_id='$director_id' class='del btn btn-sm btn-danger' onclick='myFunction()' title='delete'><i class='fa fa-fw fa-trash'></i></span></td>";
 			$count++;

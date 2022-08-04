@@ -69,7 +69,7 @@ class user extends db
 			$username = $row['username'];
 			$fullname = $row['fullname'];
 			$password = $row['password'];
-			$out .= "<tr><td>$count</td><td>$username</td><td><p style='display:none' id='hide_pass_$count'>$password</p><i onclick='hidepass($count)' class='bx bx-hide'></i></td><td>$fullname</td>";
+			$out .= "<tr><td>$count</td><td style='text-align: left !important'>$username</td><td><p style='display:none' id='hide_pass_$count'>$password</p><i onclick='hidepass($count)' class='bx bx-hide'></i></td><td style='text-align: left !important'>$fullname</td>";
 			$out .= "<td><a href='edit.php?admin_id=$admin_id' class='edit btn btn-sm btn-success' title='edit'><i class='fa fa-fw fa-pencil'></i></a></td>";
 			$out .= "<td><span admin_id='$admin_id' class='del btn btn-sm btn-danger' onclick='myFunction()' title='delete'><i class='fa fa-fw fa-trash'></i></span></td>";
 			$count++;

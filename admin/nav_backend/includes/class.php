@@ -91,6 +91,9 @@ class user extends db
 		return $number;
 	}
 
+	public function money_format($money){
+		
+	}
 
 	public function load($page, $enter_year)
 	{
@@ -145,7 +148,7 @@ class user extends db
 			$sum = $row['sum'];
 			$amountsum = $totalmonth*300 ;
 			$remainsum = $amountsum-$sum;
-			$out .= "<tr><td colspan='2'>$house_id</td><td>$year</td><td>$totalmonth</td><td>$sum</td><td>$amountsum</td><td>$remainsum</td>";
+			$out .= "<tr><td colspan='2' style='text-align: left !important'>$house_id</td><td>$year</td><td>$totalmonth</td><td style='text-align: right !important'>$sum</td><td style='text-align: right !important'>$amountsum</td><td style='text-align: right !important'>$remainsum</td>";
 			$strhref = "";
 			if (strpos($house_id, '/') !== false) {
 				$array_houseid = explode('/', $house_id);

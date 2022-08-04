@@ -30,7 +30,7 @@ class user extends db {
 				$username = $row['username'];
 				$password = $row['password'];
 				$fullname = $row['fullname'];
-				$out .="<tr><td>$resultcount</td><td>$username</td><td><p style='display:none' id='hide_pass_$resultcount'>$password</p><i onclick='hidepass($resultcount)' class='bx bx-hide'></i></td><td>$fullname</td>";
+				$out .="<tr><td>$resultcount</td><td style='text-align: left !important'>$username</td><td><p style='display:none' id='hide_pass_$resultcount'>$password</p><i onclick='hidepass($resultcount)' class='bx bx-hide'></i></td><td style='text-align: left !important'>$fullname</td>";
 				$out .="<td><a href='edit.php?user_id=$user_id' class='edit btn btn-sm btn-success' title='edit'><i class='fa fa-fw fa-pencil'></i></a></td>";    
 				//$out .="<td><span user_id='$user_id' class='del btn btn-sm btn-danger' title='delete'><i class='fa fa-fw fa-trash'></i></span></td>";
 				$count ++;
