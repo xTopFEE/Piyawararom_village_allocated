@@ -42,7 +42,7 @@
 
         /*กรอบข่าว*/
         .try-image2 {
-            background-color: #3399FF;
+            background-color: #de9123;
             height: 50px;
             background-repeat: no-repeat;
             background-size: cover;
@@ -99,10 +99,10 @@
                         <a class="nav-link" aria-current="page" href="index.php">หน้าหลัก</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="loadform.php">แบบฟอร์ม</a>
+                        <a class="nav-link active" href="loadform.php">แบบฟอร์ม</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="info.php">เกี่ยวกับ</a>
+                        <a class="nav-link" href="info.php">เกี่ยวกับ</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="contact.php">ติดต่อ</a>
@@ -131,7 +131,7 @@
 
     <div class="try-image2">
         <div class="try-text2">
-            <h1 style="font-size:25px">เกี่ยวกับ</h1>
+            <h1 style="font-size:25px">แบบฟอร์มของหมู่บ้าน</h1>
         </div>
     </div>
 
@@ -147,47 +147,29 @@
     </div> -->
     <?php
     include('connection.php');  //ไฟล์เชื่อมต่อกับ database ที่เราได้สร้างไว้ก่อนหน้าน้ี
-    $query = "SELECT * FROM director" or die("Error:" . mysqli_error($con));
+    $query = "SELECT * FROM downloadform" or die("Error:" . mysqli_error($con));
     $result = mysqli_query($con, $query);
     ?>
     <div class="row">
         <?php
         while ($row = mysqli_fetch_array($result)) {
             $baby =  explode("|", $row['file']);
-            if ($row['rank'] == 'president') {
-                $satatus = "ประธานกรรมการ";
-            }
-            if ($row['rank'] == 'director') {
-                $satatus = "กรรมการเลขานุการ";
-            }
-            if ($row['rank'] == 'vice_president_financial') {
-                $satatus = "รองประธานกรรมการ ฝ่ายการเงิน";
-            }
-            if ($row['rank'] == 'vice_president_civil') {
-                $satatus = "รองประธานกรรมการ ฝ่ายโยธา";
-            }
-            if ($row['rank'] == 'financial_director') {
-                $satatus = "กรรมการและเหรัญญิก";
-            }
-            if ($row['rank'] == 'director_public_relations') {
-                $satatus = "กรรมการฝ่ายประชาสัมพันธ์";
-            }
-            if ($row['rank'] == 'other') {
-                $satatus = "กรรมการตำแหน่งอื่นๆ";
-            }
+            $name = $row['name'];
+            $file = $row['file'];
+            $date = $row['date'];
+            $other = $row['other'];
 
         ?>
 
             <div class="row">
                 <div class="col">
 
-
-
                     <table style="width:80% height=150%">
                         <tr>
-                            <th> <img class="card-img-top" width='80px' height='150px' src="admin/nav_director/includes/uploads/<?= $baby[0]  ?>" alt="Card image cap"></th>
-                            <th><?= $row['fullname'] ?> </th>
-                            <th><?= $satatus ?> </th>
+                            <th><?= $row['date']; ?> </th>
+                            <th><?= "<button class='btn btn-secondary' onclick='download(\"$file\")'>ดาวโหลด</button>" ?></th>
+                            <th><?= $row['name']; ?> </th>
+                            <th><?= $row['other']; ?> </th>
                         </tr>
 
                     </table>
@@ -224,7 +206,7 @@
                         <a class="nav-link text-info" href="index.php">หน้าหลัก</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-info" href="loadform.php">แบบฟอร์ม</a>
+                        <a class="nav-link text-info" href="info.php">เกี่ยวกับ</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-info" href="contact.php">ติดต่อ</a>

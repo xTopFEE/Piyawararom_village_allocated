@@ -52,7 +52,7 @@ class user extends db {
 		$stmt = $this->connect()->prepare($query);
 		$stmt->execute();
 		$out = "";
-		$out .= "<table style='font-size:14px;' class='table table-responsive table-hover'><tr class='bg-light'><th>ลำดับ</th><th>วันที่</th><th>ชื่อแบบฟอร์ม</th><th>ไฟล์แบบฟอร์ม</th><th>รายละเอียด</th><th colspan='2'>การดำเนินการ</th></tr>";
+		$out .= "<table style='font-size:14px;' class='table table-responsive table-hover'><tr class='bg-light'><th>ลำดับ</th><th>วันที่</th><th>ไฟล์แบบฟอร์ม</th><th>ชื่อแบบฟอร์ม</th><th>รายละเอียด</th><th colspan='2'>การดำเนินการ</th></tr>";
 		$count = 1;
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 			$resultcount = $page + $count;
@@ -63,7 +63,7 @@ class user extends db {
 			$file = $row['file'];
 			$date = $row['date'];
 			$other = $row['other'];
-			$out .= "<tr><td>$resultcount</td><td>$date</td><td style='text-align: left !important'>$name</td><td><button class='btn btn-secondary' onclick='download(\"$file\")'>ดาวโหลด</button></td><td style='text-align: left !important'>$other</td>";
+			$out .= "<tr><td>$resultcount</td><td>$date</td><td><button class='btn btn-secondary' onclick='download(\"$file\")'>ดาวโหลด</button></td><td style='text-align: left !important'>$name</td><td style='text-align: left !important'>$other</td>";
 			$out .= "<td><a href='edit.php?id=$id' class='edit btn btn-sm btn-success' title='edit'><i class='fa fa-fw fa-pencil'></i></a></td>";
 			$out .= "<td><span id='$id' class='del btn btn-sm btn-danger' onclick='myFunction()' title='delete'><i class='fa fa-fw fa-trash'></i></span></td>";
 			$count++;

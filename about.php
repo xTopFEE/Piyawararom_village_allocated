@@ -148,7 +148,7 @@ $image = explode("|", $row['file']);
         <h3 style="font-size:18px"> วันที่ : <?= $date->format('d/m/Y') ?></h3>
     </center>
     <br><br>
-    <p class="a"> <a href="index.php" style="float:right;" class="btn btn-danger">BACK</a> </p>
+    <p class="a"> <a href="index.php" style="float:right;" class="btn btn-danger">ย้อนกลับ</a> </p>
 
 </body>
 

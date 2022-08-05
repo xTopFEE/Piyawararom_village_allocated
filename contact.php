@@ -31,6 +31,7 @@
             background-size: cover;
             position: relative;
         }
+
         .hero-text1 {
             text-align: center;
             position: absolute;
@@ -48,6 +49,7 @@
             background-size: cover;
             position: relative;
         }
+
         .try-text1 {
             text-align: center;
             position: absolute;
@@ -63,16 +65,15 @@
             background-size: cover;
             position: relative;
         }
+
         .atext1 {
             text-align: center;
             position: absolute;
             top: 450%;
             left: 50%;
             transform: translate(-50%, -50%);
-          
-        }
 
-        
+        }
     </style>
 </head>
 
@@ -89,6 +90,9 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="index.php">หน้าหลัก</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="loadform.php">แบบฟอร์ม</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="info.php">เกี่ยวกับ</a>
@@ -127,9 +131,9 @@
     <!-- details of this page -->
     <div class="contenter"><br><br>
         <center>
-            <h1 style="font-size:25px" >หมู่บ้านปิยวรารมย์</h1><br>
-            <h4 style="font-size:16px" >ที่อยู่: ถนนไสวประชาราษฎร์ ตำบลบึงยี่โถ อำเภอธัญบุรี ปทุมธานี 12130</h4><br>
-            <i class='bx bx-time-five'style="font-size:16px"> เวลาทำการ 08:30-17:00 น.</i><br>
+            <h1 style="font-size:25px">หมู่บ้านปิยวรารมย์</h1><br>
+            <h4 style="font-size:16px">ที่อยู่: ถนนไสวประชาราษฎร์ ตำบลบึงยี่โถ อำเภอธัญบุรี ปทุมธานี 12130</h4><br>
+            <i class='bx bx-time-five' style="font-size:16px"> เวลาทำการ 08:30-17:00 น.</i><br>
             <i class='bx bxs-phone' style="font-size:16px"> โทร 02-152-2774 หรือ 092-929-1956</i><br><br>
             <iframe src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d990398.8825733615!2d100.47558500660959!3d14.151046437839087!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x311d7eeb023c2501%3A0x740f1d3ed1807b50!2z4Lir4Lih4Li54LmI4Lia4LmJ4Liy4LiZ4Lib4Li04Lii4Lin4Lij4Liy4Lij4Lih4Lii4LmMIOC4hOC4peC4reC4hyA0!3m2!1d13.984588299999999!2d100.6850264!5e0!3m2!1sth!2sth!4v1642947833859!5m2!1sth!2sth" width="90%" height="550" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </center>
@@ -153,12 +157,15 @@
                     <a class="nav-link text-info" href="index.php">หน้าหลัก</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link text-info" href="loadform.php">แบบฟอร์ม</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link text-info" href="info.php">เกี่ยวกับ</a>
                 </li>
             </ul>
 
         </div>
-        
+
     </div>
     <nav class="nav mt-5 ml-3" style="font-size: 5px;">
 

@@ -1,9 +1,10 @@
 <?php
-//session_start();
-//if (!isset($_SESSION['username'])) {
-//$_SESSION['msg'] = "กรุณาล็อกอินก่อน";
-//header('location: ../login.php');
-//}
+session_start();
+
+if (!isset($_SESSION['username'])) {
+	$_SESSION['msg'] = "กรุณาล็อกอินก่อน";
+	header('location: ../login.php');
+}
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +36,7 @@
 				<span class="tooltip">Dashboard</span>
 			</li>
 			<li>
-				<a href="../nav_user/user.php?clear_page=true">
+				<a href="../nav_user/user.php">
 					<i class='bx bx-user'></i>
 					<span class="links_name">สมาชิกในหมู่บ้าน</span>
 				</a>
@@ -63,32 +64,25 @@
 				<span class="tooltip">แบบฟอร์มเอกสาร</span>
 			</li>
 			<li>
-				<a href="../nav_news/news.php">
+				<a href="#">
 					<i class='bx bx-broadcast'></i>
 					<span class="links_name">ข่าวสารประชาสัมพันธ์</span>
 				</a>
 				<span class="tooltip">ข่าวสารประชาสัมพันธ์</span>
 			</li>
 			<li>
-				<a href="../nav_petition/petition.php">
+				<a href="#">
 					<i class='bx bx-chat'></i>
 					<span class="links_name">การร้องเรียนทั่วไป</span>
 				</a>
 				<span class="tooltip">การร้องเรียนทั่วไป</span>
 			</li>
 			<li>
-				<a href="../nav_payment/payment.php">
+				<a href="#">
 					<i class='bx bx-spreadsheet'></i>
 					<span class="links_name">การชำระเงิน</span>
 				</a>
 				<span class="tooltip">การชำระเงิน</span>
-			</li>
-			<li>
-				<a href="../nav_debt/debt.php">
-					<i class='bx bx-calendar'></i>
-					<span class="links_name">ยอดค้างชำระ</span>
-				</a>
-				<span class="tooltip">ยอดค้างชำระ</span>
 			</li>
 			<li>
 				<a href="../setting.php">
@@ -123,69 +117,16 @@
 		</ul>
 	</div>
 	<section class="home-section">
-		<div class="text">แบบฟอร์ม</div>
+		<div class="text">กรรมการ</div>
 
 		<head>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
 			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 		</head>
 
-		<?php require_once "includes/db.php";
-		if (!isset($_GET['id'])) {
-			header("Location: news.php?id=id");
-		}
-
-		class user extends db
-		{
-			public function getFileNameByID($formid)
-			{
-				$query = "SELECT * FROM form WHERE form_id='$formid'";
-				$stmt = $this->connect()->prepare($query);
-				$stmt->execute();
-
-				while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-
-					$id = $row['form_id'];
-					// $fileupload = $row['fileupload'];
-					$form_id = $row['form_id'];
-					$date = $row['date'];
-					$file = $row['file'];
-					$reply = $row['reply'];
-					$other = $row['other'];
-					$status	 = $row['status'];
-				}
-				return $file;
-			}
-
-			public function getStatusByID($formid) {
-				$query = "SELECT * FROM form WHERE form_id='$formid'";
-				$stmt = $this->connect()->prepare($query);
-				$stmt->execute();
-
-				while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-
-					$id = $row['form_id'];
-					// $fileupload = $row['fileupload'];
-					$form_id = $row['form_id'];
-					$date = $row['date'];
-					$file = $row['file'];
-					$reply = $row['reply'];
-					$other = $row['other'];
-					$status	 = $row['status'];
-				}
-				return $status;
-			}
-		}
-		if (isset($_GET['id'])) {
-			$user = new user;
-			$file = $user->getFileNameByID($_GET['id']);
-			$status = $user->getStatusByID($_GET['id']);
-
-			echo "<script> document.getElementById('fullname').value='$status'; </script>";
-			echo "<script>console.log('Hello');</script>";
-			// echo "<script>console.log('file=$file');</script>";
-		}
-		?>
+		<?php if (!isset($_GET['director_id'])) {
+			header("Location: director.php?msg=invalid");
+		} ?>
 		<!doctype html>
 		<html>
 
@@ -193,49 +134,120 @@
 			<meta charset="utf-8">
 			<meta http-equiv="X-UA-Compatible" content="IE=edge">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
-			<title>แก้ไขข้อมูลแบบฟอร์ม</title>
+			<title>สมาชิกในหมู่บ้าน</title>
 			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 		</head>
 
-		<body">
+		<body>
 			<br>
 			<div class="container">
 				<div class="container shadow-lg bg-light py-3" id='editBox' style="border-radius: 12px;">
-					<h2 class='text-center'>แก้ไขข้อมูลแบบฟอร์ม</h2><br>
-
-
-
+					<h2 class='text-center'>แก้ไขข้อมูลกรรมการ</h2><br>
 					<div id='msgEdit'></div>
 					<form action="" id='editForm' method="post">
-						<!-- <div class="form-group">
-							<label>
-								<h4>แก้ไขสถานะแบบฟอร์ม</h4>
-							</label><br>
-							<select name="upd_status" id="upd_status">
-								<option value="1">รอการตรวจสอบ</option>
-								<option value="2">ได้รับการอนุมัติ</option>
-								<option value="3">ไม่ผ่านการอนุมัติ</option>
-							</select>
-						</div><br> -->
 						<div class="form-group">
 							<label>
-								<h4>รายละเอียด</h4>
+								<h4>username</h4>
+							</label>
+							<input disabled="disabled" type="text" id="upd_username" name="upd_username" placeholder="username" class='form-control sm-3 mx-auto' required>
+						</div><br>
+						<div class="form-group">
+							<label>
+								<h4>รหัสผ่าน</h4>
+							</label>
+							<input type="text" id="upd_password" name="upd_password" placeholder="รหัสผ่าน" class='form-control sm-3 mx-auto' required>
+						</div><br>
+						<div class="form-group">
+							<label>
+								<h4>ยืนยันรหัสผ่าน</h4>
+							</label>
+							<input type="text" id="upd_password_2" name="upd_password_2" placeholder="ยืนยันรหัสผ่าน" class='form-control sm-3 mx-auto' required>
+						</div><br>
+						<div class="form-group">
+							<label>
+								<h4>ชื่อ-นามสกุล</h4>
+							</label>
+							<input type="text" id="upd_fullname" name="upd_fullname" placeholder="ชื่อ-นามสกุล" class='form-control sm-5 mx-auto' required>
+						</div><br>
+						<div class="form-group">
+							<label>
+								<h4>ตำแหน่ง</h4>
 							</label><br>
-							<textarea type="text" id="upd_other" name="upd_other" placeholder="รายละเอียด" class="form-control col-sm-9 mx-auto"></textarea><br><br>
-						</div><br><br>
+							<select name="upd_rank" id="upd_rank">
+								<option value="president">ประธานกรรมการ</option>
+								<option value="vice_president_financial">รองประธานกรรมการ ฝ่ายการเงิน</option>
+								<option value="vice_president_civil">รองประธานกรรมการ ฝ่ายโยธา</option>
+								<option value="financial_director">กรรมการและเหรัญญิก</option>
+								<option value="director_public_relations">กรรมการฝ่ายประชาสัมพันธ์</option>
+								<option value="director">กรรมการและเลขานุการ</option>
+								<option value="other">กรรมการตำแหน่งอื่นๆ</option>
+							</select>
+						</div><br>
+						<div class="form-group">
+							<label>
+								<h4>รูปภาพ</h4>
+							</label>
+							<input type="file" id="upload" name="upload">
+						</div><br>
 						<center>
-							<input type="submit" value="แก้ไข" class='btn update btn-success '>
-							<a href="./form.php" class='btn btn-danger'>ยกเลิก</a>
+							<input type="submit" value="แก้ไข" class='btn update btn-success'>
+							<a href="./director.php" class='btn btn-danger'>ยกเลิก</a>
 						</center>
-					</form><br><br>
-					<?php echo '<embed src="../../user/nav_form/fileupload/' . $file . '" width="1000px" height="1500px" />'; ?>
+					</form>
 					<br>
 				</div>
 			</div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="js/edit.js"></script>
+</section>
 
+
+<script>
+	$(document).ready(function() {
+		$('#import_excel_form').on('submit', function(event) {
+			event.preventDefault();
+			$.ajax({
+				url: "import.php",
+				method: "POST",
+				data: new FormData(this),
+				contentType: false,
+				cache: false,
+				processData: false,
+				beforeSend: function() {
+					$('#import').attr('disabled', 'disabled');
+					$('#import').val('Importing...');
+				},
+				success: function(data) {
+					$('#message').html(data);
+					$('#import_excel_form')[0].reset();
+					$('#import').attr('disabled', false);
+					$('#import').val('Import');
+				}
+			})
+		});
+	});
+</script>
+
+
+<script>
+	let sidebar = document.querySelector(".sidebar");
+	let closeBtn = document.querySelector("#btn");
+
+	closeBtn.addEventListener("click", () => {
+		sidebar.classList.toggle("open");
+		menuBtnChange(); //calling the function
+	});
+
+	// following are the code to change sidebar button
+	function menuBtnChange() {
+		if (sidebar.classList.contains("open")) {
+			closeBtn.classList.replace("bx-menu", "bx-menu-alt-right"); //replacing the iocns class
+		} else {
+			closeBtn.classList.replace("bx-menu-alt-right", "bx-menu"); //replacing the iocns class
+		}
+	}
+</script>
 </body>
 
 </html>

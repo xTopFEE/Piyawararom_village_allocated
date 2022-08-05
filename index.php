@@ -54,7 +54,7 @@
 
         /*กรอบข่าว*/
         .try-image {
-            background-color: #3399FF;
+            background-color: #6761a8;
             height: 50px;
             background-repeat: no-repeat;
             background-size: cover;
@@ -100,6 +100,9 @@
                         <a class="nav-link active" aria-current="page" href="index.php">หน้าหลัก</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="loadform.php">แบบฟอร์ม</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="info.php">เกี่ยวกับ</a>
                     </li>
                     <li class="nav-item">
@@ -142,7 +145,7 @@
             $num = mysqli_num_rows($result);
             $i = 0;
             $limit = 8;
-           
+
             ?>
 
 
@@ -153,8 +156,8 @@
                     $row = mysqli_fetch_array($result);
                     $baby =  explode("|", $row['file']);
 
-                    $date = new DateTime( $row['Date_time']); // ตรงนี้คือรูปแบบเดิมที่มีในฐานข้อมูล
-                
+                    $date = new DateTime($row['Date_time']); // ตรงนี้คือรูปแบบเดิมที่มีในฐานข้อมูล
+
                 ?>
 
 
@@ -177,7 +180,7 @@
                             <form action="about.php" method="post">
                                 <input name="" type="submit" value="คลิกรายละเอียด" />
                                 <input type="hidden" name="news_id" id="" value="<?= $row['news_id'] ?>">
-                    
+
                             </form>
                         </div>
                     </div>
@@ -202,7 +205,7 @@
 
 
 
-    <p class="a"> <a href="newsmore.php" style="float:right;" class="btn btn-danger">Read More..</a> </p><br><br>
+    <p class="a"> <a href="newsmore.php" style="float:right;" class="btn btn-danger">อ่านต่อ...</a> </p><br><br>
 
 
 
@@ -231,6 +234,9 @@
         <div class="col">
 
             <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link text-info" href="loadform.php">แบบฟอร์ม</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link text-info" href="info.php">เกี่ยวกับ</a>
                 </li>
