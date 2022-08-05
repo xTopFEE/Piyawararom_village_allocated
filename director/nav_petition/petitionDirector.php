@@ -140,7 +140,7 @@ $result = mysqli_query($con, $query);
 
         <body>
             <div class="container shadow-lg bg-light py-3" style="border-radius: 12px;">
-                <h2 align="center">ข้อมูลที่สมาชิกได้ทำการร้องเรียน</h2>
+                <h2 align="center">จัดการข้อมูลการร้องเรียน</h2>
                 <br>
                 <form action="#" id='compliant_form' method="post" enctype="multipart/form-data">
                     <div class="panel panel-default">

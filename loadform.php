@@ -167,7 +167,7 @@
                     <table style="width:80% height=150%">
                         <tr>
                             <th><?= $row['date']; ?> </th>
-                            <th><?= "<button class='btn btn-secondary' onclick='download(\"$file\")'>ดาวโหลด</button>" ?></th>
+                            <th><?= "<button class='btn btn-secondary' onclick='download(\admin\nav_downloadform\fileupload\"$file\")'>ดาวโหลด</button>" ?></th>
                             <th><?= $row['name']; ?> </th>
                             <th><?= $row['other']; ?> </th>
                         </tr>

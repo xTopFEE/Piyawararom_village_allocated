@@ -469,7 +469,7 @@ $number_of_complaint = mysqli_num_rows($result_of_complaint);
 
         <body>
             <div class="container shadow-lg bg-light py-3" style="border-radius: 12px;">
-                <h2 align="center">ข้อมูลที่สมาชิกได้ทำการร้องเรียน</h2>
+                <h2 align="center">จัดการข้อมูลการร้องเรียน</h2>
                 <br>
                 <div class="row">
                     <div class="col-md-4">
