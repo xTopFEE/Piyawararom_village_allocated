@@ -244,7 +244,7 @@ if (!isset($_SESSION['username'])) {
                                     <h4>ตำแหน่ง</h4>
                                 </label><br>
                                 <select name="rank" id="rank">
-                                    <option value="-" selected>ประธานกรรมการ</option>
+                                    <option value="president" selected>ประธานกรรมการ</option>
                                     <option value="vice_president_financial">รองประธานกรรมการ ฝ่ายการเงิน</option>
                                     <option value="vice_president_civil">รองประธานกรรมการ ฝ่ายโยธา</option>
                                     <option value="financial_director">กรรมการและเหรัญญิก</option>

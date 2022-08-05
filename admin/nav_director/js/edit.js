@@ -16,6 +16,7 @@ $(document).ready(function() {
                 data = JSON.parse(data);
                 $("#upd_username").val(data.username);
                 $("#upd_password").val(data.password);
+                $("#upd_password_2").val(data.password);
                 $("#upd_rank").val(data.rank);
                 $("#upd_fullname").val(data.fullname);
                 console.log(data);
@@ -50,20 +51,20 @@ $(document).ready(function() {
             }).then((result) => {
 
                 if (result.isConfirmed) {
-                    Swal.fire('แก้ไขข้อมูลแล้ว!', '', 'success')
+                    Swal.fire('แก้ไขข้อมูลแล้ว!', '', 'success').then((result) => { location.href = "./director.php"; })
                         //
-                        let fd = new FormData();
-                        fd.append('director_id',director_id);
-                        fd.append('username',$('#upd_username').val());
-                        fd.append('password',$('#upd_password').val());
-                        fd.append('rank',$('#upd_rank').val());
-                        fd.append('fullname',$('#upd_fullname').val());
-                        let files = $('#upload')[0].files;
-                        if(files.length > 0 ){
-                            fd.append('upload',files[0]);
-                        }else{
-                            fd.append('upload',null);
-                        }
+                    let fd = new FormData();
+                    fd.append('director_id', director_id);
+                    fd.append('username', $('#upd_username').val());
+                    fd.append('password', $('#upd_password').val());
+                    fd.append('rank', $('#upd_rank').val());
+                    fd.append('fullname', $('#upd_fullname').val());
+                    let files = $('#upload')[0].files;
+                    if (files.length > 0) {
+                        fd.append('upload', files[0]);
+                    } else {
+                        fd.append('upload', null);
+                    }
                     $.ajax({
                             type: "POST",
                             url: "includes/update.php",

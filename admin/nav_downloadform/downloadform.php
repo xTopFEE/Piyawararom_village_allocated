@@ -164,7 +164,7 @@ if (!isset($_SESSION['username'])) {
         <div class="container shadow-lg bg-light py-3" style="border-radius: 12px;">
             <br />
             <div class="container">
-                <h2 align="center">อัพโหลดแบบฟอร์ม</h2>
+                <h2 align="center">อัพโหลดแบบฟอร์มสำหรับดาวโหลด</h2>
                 <br />
             </div>
             <div class="panel panel-default">

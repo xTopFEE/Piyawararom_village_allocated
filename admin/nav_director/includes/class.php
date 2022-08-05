@@ -123,7 +123,7 @@ class user extends db
 		return $out;
 	}
 	// update data
-	public function update($username, $fullname, $password, $director_id,$img)
+	public function update($username, $fullname, $password, $rank, $director_id, $img)
 	{
 		$filename = null;
 		
@@ -169,13 +169,13 @@ class user extends db
 			}
 		}
 		$sql = '';
-		$arr = [$username, $fullname, $password, $director_id];
+		$arr = [$username, $fullname, $password, $rank, $director_id];
 		if($filename != null){
 			$sql = ',file=? ';
-			$arr = [$username, $fullname, $password,$filename , $director_id];
+			$arr = [$username, $fullname, $password, $rank, $filename, $director_id];
 		}
 		
-		$query = "UPDATE director SET username = ?,fullname = ?,password = ? $sql where director_id = ? ";
+		$query = "UPDATE director SET username = ?,fullname = ?,password = ?,rank = ?$sql where director_id = ? ";
 		$stmt = $this->connect()->prepare($query);
 
 		if ($stmt->execute($arr)) {

@@ -17,7 +17,7 @@ if (!isset($_SESSION['username'])) {
 	<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- Comfirm box -->
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -50,12 +50,12 @@ if (!isset($_SESSION['username'])) {
 				<span class="tooltip">กรรมการ</span>
 			</li>
 			<li>
-                <a href="../nav_admin/admin.php">
-                    <i class='bx bx-code-block'></i>
-                    <span class="links_name">แอดมิน</span>
-                </a>
-                <span class="tooltip">แอดมิน</span>
-            </li>
+				<a href="../nav_admin/admin.php">
+					<i class='bx bx-code-block'></i>
+					<span class="links_name">แอดมิน</span>
+				</a>
+				<span class="tooltip">แอดมิน</span>
+			</li>
 			<li>
 				<a href="#">
 					<i class='bx bx-file'></i>
@@ -138,7 +138,7 @@ if (!isset($_SESSION['username'])) {
 			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 		</head>
 
-		<body">
+		<body>
 			<br>
 			<div class="container">
 				<div class="container shadow-lg bg-light py-3" id='editBox' style="border-radius: 12px;">
@@ -168,6 +168,20 @@ if (!isset($_SESSION['username'])) {
 								<h4>ชื่อ-นามสกุล</h4>
 							</label>
 							<input type="text" id="upd_fullname" name="upd_fullname" placeholder="ชื่อ-นามสกุล" class='form-control sm-5 mx-auto' required>
+						</div><br>
+						<div class="form-group">
+							<label>
+								<h4>ตำแหน่ง</h4>
+							</label><br>
+							<select name="upd_rank" id="upd_rank">
+								<option value="president">ประธานกรรมการ</option>
+								<option value="vice_president_financial">รองประธานกรรมการ ฝ่ายการเงิน</option>
+								<option value="vice_president_civil">รองประธานกรรมการ ฝ่ายโยธา</option>
+								<option value="financial_director">กรรมการและเหรัญญิก</option>
+								<option value="director_public_relations">กรรมการฝ่ายประชาสัมพันธ์</option>
+								<option value="director">กรรมการและเลขานุการ</option>
+								<option value="other">กรรมการตำแหน่งอื่นๆ</option>
+							</select>
 						</div><br>
 						<div class="form-group">
 							<label>

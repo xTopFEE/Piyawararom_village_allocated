@@ -8,5 +8,5 @@ if(empty($_POST['director_id'])){
 		if(isset($_FILES['upload'])){
 			$img = $_FILES['upload'];
 		}
-	$user->update($_POST['username'],$_POST['fullname'],$_POST['password'],$_POST['director_id'],$img);
+	$user->update($_POST['username'],$_POST['fullname'],$_POST['password'],$_POST['rank'],$_POST['director_id'],$img);
 }
