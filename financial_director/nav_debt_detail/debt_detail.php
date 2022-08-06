@@ -154,7 +154,7 @@ if (!isset($_SESSION['username'])) {
                                 <div class="name_job">
                                     <div class="name"><?php echo $_SESSION['username'] ?></div>
                                     <!-- RODJANAPHADIT -->
-                                    <div class="job">Admin</div>
+                                    <div class="job">กรรมการการเงิน</div>
                                 </div>
                             </div>
                         </h1>
