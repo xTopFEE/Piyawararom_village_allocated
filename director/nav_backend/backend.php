@@ -296,9 +296,9 @@ if (!isset($_SESSION['username'])) {
 
                     <br>
 
-                    <a href='?back=true'>
+                    <!-- <a href='?back=true'>
                         <input type='submit' id='backpage' value='ย้อนกลับ' class='btn btn-info'>
-                    </a>
+                    </a> -->
                     <?php
                     $user = new user;
                     $page = 0;

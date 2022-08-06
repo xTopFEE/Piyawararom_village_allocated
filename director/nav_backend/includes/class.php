@@ -51,16 +51,16 @@ class user extends db
 	{
 		$number = 0;
 		switch ($month) {
-			case "มกราคม": 
+			case "มกราคม":
 				$number = 1;
 				break;
-			case "กุมภาพันธ์": 
+			case "กุมภาพันธ์":
 				$number = 2;
 				break;
-			case "มีนาคม": 
+			case "มีนาคม":
 				$number = 3;
 				break;
-			case "เมษายน": 
+			case "เมษายน":
 				$number = 4;
 				break;
 			case "พฤษภาคม":
@@ -91,20 +91,18 @@ class user extends db
 		return $number;
 	}
 
+	public function change_money_format($money)
+	{
+		return number_format($money, 0, '.', ',');
+	}
 
 	public function load($page, $enter_year)
 	{
 		$this->get_id();
 
-		
 		// echo "<script> console.log('thismonth :' + $thismonth) </script>";	
 		$query = "WITH added_row_number AS ( SELECT *,SUM(amount) as 'sum' , ROW_NUMBER() OVER(PARTITION BY `house_id`) AS 'row_number' FROM payment WHERE month IN('มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม') GROUP BY house_id ORDER BY cast(SUBSTRING_INDEX(house_id, '/', -1)as int) ) SELECT * FROM added_row_number LIMIT 20 OFFSET $page";
 
-
-		
-
-		
-		
 		// while ($min_year <= $this_year) {
 
 		// 	$query = "SELECT *,SUM(amount) as 'sum' FROM payment WHERE year='$min_year' GROUP BY house_id HAVING SUM(amount) < 3600 ORDER BY cast(SUBSTRING_INDEX(house_id, '/', -1)as int) LIMIT 20 OFFSET $page";
@@ -112,7 +110,6 @@ class user extends db
 		// 	echo "<script> console.log('Min year :' + $min_year) </script>";
 		// 	$min_year++;
 		// }
-
 
 
 		$stmt = $this->connect()->prepare($query);
@@ -143,9 +140,14 @@ class user extends db
 			$amount = $row['amount'];
 			$other = $row['other'];
 			$sum = $row['sum'];
-			$amountsum = $totalmonth*300 ;
-			$remainsum = $amountsum-$sum;
-			$out .= "<tr><td colspan='2'>$house_id</td><td>$year</td><td>$totalmonth</td><td>$sum</td><td>$amountsum</td><td>$remainsum</td>";
+			$amountsum = $totalmonth * 300;
+			$remainsum = $amountsum - $sum;
+			//ใส่ลูกน้ำ
+			$sum = $this->change_money_format($sum);
+			$amountsum = $this->change_money_format($amountsum);
+			$remainsum = $this->change_money_format($remainsum);
+			if($remainsum <= 0) { $remainsum = "ไม่มียอดค้างชำระ"; }
+			$out .= "<tr><td colspan='2' style='text-align: left !important'>$house_id</td><td>$year</td><td>$totalmonth</td><td style='text-align: right !important'>$sum</td><td style='text-align: right !important'>$amountsum</td><td style='text-align: right !important'>$remainsum</td>";
 			$strhref = "";
 			if (strpos($house_id, '/') !== false) {
 				$array_houseid = explode('/', $house_id);
@@ -214,19 +216,24 @@ class user extends db
 			$amount = $row['amount'];
 			$other = $row['other'];
 			$sum = $row['sum'];
-			$amountsum = $totalmonth*300 ;
-			$remainsum = $amountsum-$sum;
-			$out .= "<tr><td colspan='2'>$house_id</td><td>$year</td><td>$totalmonth</td><td>$sum</td><td>$amountsum</td><td>$remainsum</td>";
+			$amountsum = $totalmonth * 300;
+			$remainsum = $amountsum - $sum;
+			//ใส่ลูกน้ำ
+			$sum = $this->change_money_format($sum);
+			$amountsum = $this->change_money_format($amountsum);
+			$remainsum = $this->change_money_format($remainsum);
+			if($remainsum <= 0) { $remainsum = "ไม่มียอดค้างชำระ"; }
+			$out .= "<tr><td colspan='2' style='text-align: left !important'>$house_id</td><td>$year</td><td>$totalmonth</td><td style='text-align: right !important'>$sum</td><td style='text-align: right !important'>$amountsum</td><td style='text-align: right !important'>$remainsum</td>";
 			$strhref = "";
 			if (strpos($house_id, '/') !== false) {
-				// $array_houseid = explode('/', $house_id);
-				// $first_houseid = $array_houseid[0];
-				// $array_length = count($array_houseid);
-				// $last_houseid = $array_houseid[$array_length - 1];
+				$array_houseid = explode('/', $house_id);
+				$first_houseid = $array_houseid[0];
+				$array_length = count($array_houseid);
+				$last_houseid = $array_houseid[$array_length - 1];
 				// $strhref = "../nav_debt_detail/debt_detail.php?first_houseid=$first_houseid&last_houseid=$last_houseid&enter_year=$enter_year";
 			} else {
-				// $first_houseid = $house_id;
-				// $last_houseid = "false";
+				$first_houseid = $house_id;
+				$last_houseid = "false";
 				// $strhref = "../nav_debt_detail/debt_detail.php?first_houseid=$first_houseid&enter_year=$enter_year";
 			}
 			// $out .= "<td><a href='$strhref' class='edit btn btn-sm btn-info' title='ดูรายละเอียด'><i class='bx bx-detail'></i></a></td>";

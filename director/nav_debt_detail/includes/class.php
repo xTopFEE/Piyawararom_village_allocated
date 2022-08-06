@@ -109,16 +109,20 @@ class user extends db
 		}
 		return $newformat;
 	}
-	public function load($page, $enter_year, $first_houseid, $last_houseid)
+	public function change_money_format($money)
 	{
-		if (!empty($enter_year))
-			echo "<script> console.log('enter year in load :' + $enter_year) </script>";
+		return number_format($money, 0, '.', ',');
+	}
+	public function load($page, $enter_year,$first_houseid,$last_houseid)
+	{
+		if(!empty($enter_year))
+		echo "<script> console.log('enter year in load :' + $enter_year) </script>";
 		if (!empty($enter_year)) {
-			if (!empty($first_houseid) && !empty($last_houseid)) {
+			if(!empty($first_houseid)&&!empty($last_houseid)){
 				echo "<script> console.log('inif in class') </script>";
 				echo "<script> console.log('$first_houseid/$last_houseid') </script>";
 				$query = "SELECT * FROM payment WHERE year = '$enter_year' AND house_id = '$first_houseid/$last_houseid' ORDER BY seq";
-			} else {
+			}else{
 				$query = "SELECT * FROM payment WHERE year='$enter_year' AND house_id='$first_houseid' ORDER BY seq LIMIT 20 OFFSET $page";
 			}
 			echo "<script> console.log('query') </script>";
@@ -145,8 +149,9 @@ class user extends db
 			//แปลง format date
 			$date_paid = $this->change_date_format($date_paid);
 			$amount = $row['amount'];
+			$amount = $this->change_money_format($amount);
 			$other = $row['other'];
-			$out .= "<tr><td colspan='2'>$seq</td><td>$year</td><td>$month</td><td>$house_id</td><td>$date_paid</td><td>$amount</td><td>$other</td>";
+			$out .= "<tr><td colspan='2'>$seq</td><td>$year</td><td>$month</td><td style='text-align: left !important'>$house_id</td><td>$date_paid</td><td style='text-align: right !important'>$amount</td><td>$other</td>";
 			//$out .= "<td><a href='edit.php?payment_id=$payment_id' class='edit btn btn-sm btn-success' title='edit'><i class='fa fa-fw fa-pencil'></i></a></td>";
 			//$out .= "<td><span payment_id='$payment_id' class='del btn btn-sm btn-danger' onclick='myFunction()' title='delete'><i class='fa fa-fw fa-trash'></i></span></td>";
 			$count++;

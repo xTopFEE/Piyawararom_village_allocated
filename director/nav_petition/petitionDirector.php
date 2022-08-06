@@ -12,7 +12,8 @@ $query = "SELECT * FROM complaint" or die("Error:" . mysqli_error($con));
 $result = mysqli_query($con, $query);
 ?>
 <style>
-    button, select {
+    button,
+    select {
         text-transform: none;
         border-radius: 7px;
         background-color: #FFEBCD;
@@ -43,35 +44,14 @@ $result = mysqli_query($con, $query);
         </div>
         <ul class="nav-list">
             <li>
-                <a href="../Backend.php">
+                <a href="../nav_backend/backend.php">
                     <i class='bx bx-grid-alt'></i>
-                    <span class="links_name">Dashboard</span>
+                    <span class="links_name">ยอดค้างชำระรวมทุกปี</span>
                 </a>
-                <span class="tooltip">Dashboard</span>
+                <span class="tooltip">ยอดค้างชำระรวมทุกปี</span>
             </li>
             <li>
-                <a href="../nav_user/user.php?clear_page=true">
-                    <i class='bx bx-user'></i>
-                    <span class="links_name">สมาชิกในหมู่บ้าน</span>
-                </a>
-                <span class="tooltip">สมาชิกในหมู่บ้าน</span>
-            </li>
-            <li>
-                <a href="../nav_director/director.php?clear_page=true">
-                    <i class='bx bx-group'></i>
-                    <span class="links_name">กรรมการ</span>
-                </a>
-                <span class="tooltip">กรรมการ</span>
-            </li>
-            <li>
-                <a href="../nav_admin/admin.php">
-                    <i class='bx bx-code-block'></i>
-                    <span class="links_name">แอดมิน</span>
-                </a>
-                <span class="tooltip">แอดมิน</span>
-            </li>
-            <li>
-                <a href="#">
+                <a href="../nav_form/form.php">
                     <i class='bx bx-file'></i>
                     <span class="links_name">แบบฟอร์มเอกสาร</span>
                 </a>
@@ -92,11 +72,18 @@ $result = mysqli_query($con, $query);
                 <span class="tooltip">การร้องเรียนทั่วไป</span>
             </li>
             <li>
-                <a href="../nav_payment/payment.php">
-                    <i class='bx bx-spreadsheet'></i>
-                    <span class="links_name">การชำระเงิน</span>
+                <a href="../nav_debt/debt.php">
+                    <i class='bx bx-calendar'></i>
+                    <span class="links_name">ยอดค้างชำระ</span>
                 </a>
-                <span class="tooltip">การชำระเงิน</span>
+                <span class="tooltip">ยอดค้างชำระ</span>
+            </li>
+            <li>
+                <a href="../nav_statement/statement.php">
+                    <i class='bx bxs-calculator'></i>
+                    <span class="links_name">รายรับรายจ่าย</span>
+                </a>
+                <span class="tooltip">รายรับรายจ่าย</span>
             </li>
             <li>
                 <a href="../setting.php">
@@ -116,7 +103,7 @@ $result = mysqli_query($con, $query);
                                 <div class="name_job">
                                     <div class="name"><?php echo $_SESSION['username'] ?></div>
                                     <!-- RODJANAPHADIT -->
-                                    <div class="job">Admin</div>
+                                    <div class="job">กรรมการ</div>
                                 </div>
                             </div>
                         </h1>
@@ -239,7 +226,7 @@ $result = mysqli_query($con, $query);
                                         <div class="col-2">
                                             <input type="text" id="callback<?= $row[0] ?>" name="callback" placeholder="<?= $row['Admin_callback'] != null ? $row['Admin_callback'] : 'การตอบกลับ' ?>" class="form-control" onkeyup="myCallBack(<?= $row[0] ?>)"></input>
                                         </div>
-                                        
+
 
                                     </div>
                                 <?php } ?>

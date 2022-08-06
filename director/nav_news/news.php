@@ -35,7 +35,7 @@ $result_select = mysqli_query($con, $query);
             <i class='bx bx-menu' id="btn"></i>
         </div>
         <ul class="nav-list">
-            <li>
+        <li>
                 <a href="../nav_backend/backend.php">
                     <i class='bx bx-grid-alt'></i>
                     <span class="links_name">ยอดค้างชำระรวมทุกปี</span>
@@ -50,7 +50,7 @@ $result_select = mysqli_query($con, $query);
                 <span class="tooltip">แบบฟอร์มเอกสาร</span>
             </li>
             <li>
-                <a href="news.php">
+                <a href="./news.php">
                     <i class='bx bx-broadcast'></i>
                     <span class="links_name">ข่าวสารประชาสัมพันธ์</span>
                 </a>
@@ -84,8 +84,7 @@ $result_select = mysqli_query($con, $query);
                 </a>
                 <span class="tooltip">การตั้งค่า</span>
             </li>
-            <!-- Logged in user detail -->
-            <?php if (isset($_SESSION['username']))?>
+
             <li class="profile">
                 <div class="profile_content">
                     <h1 href="#">
@@ -94,7 +93,7 @@ $result_select = mysqli_query($con, $query);
                             <div class="name_job">
                                 <div class="name"><?php echo $_SESSION['username'] ?></div>
                                 <!-- RODJANAPHADIT -->
-                                <div class="job">Admin</div>
+                                <div class="job">กรรมการ</div>
                             </div>
                         </div>
                     </h1>

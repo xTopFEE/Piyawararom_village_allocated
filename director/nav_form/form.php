@@ -42,7 +42,7 @@ if (!isset($_SESSION['username'])) {
             <i class='bx bx-menu' id="btn"></i>
         </div>
         <ul class="nav-list">
-        <li>
+            <li>
                 <a href="../nav_backend/backend.php">
                     <i class='bx bx-grid-alt'></i>
                     <span class="links_name">ยอดค้างชำระรวมทุกปี</span>
@@ -102,7 +102,7 @@ if (!isset($_SESSION['username'])) {
                                 <div class="name_job">
                                     <div class="name"><?php echo $_SESSION['username'] ?></div>
                                     <!-- RODJANAPHADIT -->
-                                    <div class="job">Admin</div>
+                                    <div class="job">กรรมการ</div>
                                 </div>
                             </div>
                         </h1>

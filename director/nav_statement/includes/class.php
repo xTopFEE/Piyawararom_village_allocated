@@ -112,6 +112,10 @@ class user extends db
 		}
 		return $newformat;
 	}
+	public function change_money_format($money)
+	{
+		return number_format($money, 0, '.', ',');
+	}
 	public function load($page,$SelectedYear,$SelectedMonth)
 	{
 		// $query = "SELECT * FROM accounting LIMIT 20 OFFSET $page";
@@ -135,13 +139,13 @@ class user extends db
 		$stmt = $this->connect()->prepare($query);
 		$stmt->execute();
 		$out = "";
-		$out .= "<table style='font-size:14px;' class='table table-responsive table-hover'><tr class='bg-light'><th>ลำดับ</th><th>เลขที่</th><th>วันที่</th><th>รายรับ (บาท)</th><th>รายจ่าย (บาท)</th><th>ยอดคงเหลือ (บาท)</th><th colspan='2'>หมายเหตุ</th></tr>";
-		$count = 0;
+		$out .= "<table style='font-size:14px;' class='table table-responsive table-hover'><tr class='bg-light'><th>ลำดับ</th><th>วันที่</th><th>รายรับ (บาท)</th><th>รายจ่าย (บาท)</th><th>ยอดคงเหลือ (บาท)</th><th colspan='2'>หมายเหตุ</th></tr>";
+		$count = 1;
 		$balanceArray = array();
 		$dateArray = array();
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 			$resultcount = $page + $count;
-			$accounting_id = $row['accounting_id'];
+			// $accounting_id = $row['accounting_id'];
 			$date = $row['date'];
 			//แปลง format date
 			$date = $this->change_date_format($date);
@@ -149,24 +153,25 @@ class user extends db
 			$income = $row['income'];
 			
 			if ($income == 0) {
-				$income = "-";
+				$income = "0";
 			}
 
 			$expense = $row['expense'];
 
 			if ($expense == 0) {
-				$expense = "-";
+				$expense = "0";
 			}
 
 			$balance = $row['balance'];
 			$other = $row['other'];
 			array_push($balanceArray,$balance);
 			array_push($dateArray,$date);
-			if ($other == Null) {
-				$other = "-";
-			}
+			
+			$income = $this->change_money_format($income);
+			$expense = $this->change_money_format($expense);
+			$balance = $this->change_money_format($balance);
 
-			$out .= "<tr><td>$resultcount</td><td>$accounting_id</td><td>$date</td><td>$income</td><td>$expense</td><td>$balance</td><td>$other</td>";
+			$out .= "<tr><td>$resultcount</td><td>$date</td><td style='text-align: right !important'>$income</td><td style='text-align: right !important'>$expense</td><td style='text-align: right !important'>$balance</td><td>$other</td>";
 			// $out .= "<td><a href='edit.php?accounting_id=$accounting_id' class='edit btn btn-sm btn-success' title='edit'><i class='fa fa-fw fa-pencil'></i></a></td>";
 			// $out .= "<td><span accounting_id='$accounting_id' class='del btn btn-sm btn-danger' onclick='myFunction()' title='delete'><i class='fa fa-fw fa-trash'></i></span></td>";
 			$count++;
