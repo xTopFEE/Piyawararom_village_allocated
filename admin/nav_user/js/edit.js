@@ -16,6 +16,7 @@ $(document).ready(function() {
                 data = JSON.parse(data);
                 $("#upd_username").val(data.username);
                 $("#upd_password").val(data.password);
+                $("#upd_password_2").val(data.password);
                 $("#upd_fullname").val(data.fullname);
                 console.log(data);
             });
