@@ -72,6 +72,13 @@ if (!isset($_SESSION['username'])) {
                 <span class="tooltip">แอดมิน</span>
             </li>
             <li>
+                <a href="../nav_downloadform/downloadform.php">
+                    <i class='bx bxs-download'></i>
+                    <span class="links_name">แบบฟอร์มสำหรับดาวโหลด</span>
+                </a>
+                <span class="tooltip">แบบฟอร์มสำหรับดาวโหลด</span>
+            </li>
+            <li>
                 <a href="../nav_form/form.php">
                     <i class='bx bx-file'></i>
                     <span class="links_name">แบบฟอร์มเอกสาร</span>
