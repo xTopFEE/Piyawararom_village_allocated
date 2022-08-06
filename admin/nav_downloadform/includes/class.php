@@ -9,7 +9,7 @@ class user extends db {
 		}
 	}
 	public function get_row($fileupload){
-		$query = "SELECT * FROM fileupload WHERE fileupload = ? ";
+		$query = "SELECT * FROM downloadform WHERE df_id = ? ";
 		$stmt = $this->connect()->prepare($query);
 		$stmt->execute([$fileupload]);
 		while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
@@ -77,23 +77,62 @@ class user extends db {
 		return $out;
 	}
 	// update data
-	public function update($df_id, $other)
+	public function update($df_id, $name, $other, $img)
 	{
-		// echo "<script> console.log('$user');</script>";
-		// $type = $_SESSION['usertype'];
-		// // echo "<script> console.log('$type');</script>";
-		// $userid = $_SESSION['userid'];
+		$filename = null;
+		
 
-		// if ($type == 'user') {
-		// 	$table = "user";
-		// 	$setrow = "user_id";
-		// }
+		if($img != null){
+			$target_dir = "../fileupload/";
+			$target_file = $target_dir . basename($img["name"]);
+			$uploadOk = 1;
+			$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
-		$query = "UPDATE downloadform SET other = ? where df_id = ? ";
+			// Check if image file is a actual image or fake image
+			if(isset($_POST["submit"])) {
+			$check = getimagesize($img["tmp_name"]);
+			if($check !== false) {
+				echo "File is an image - " . $check["mime"] . ".";
+				$uploadOk = 1;
+			} else {
+				echo "File is not an image.";
+				$uploadOk = 0;
+			}
+			}
 
+
+
+			// Allow certain file formats
+			if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+			&& $imageFileType != "gif" ) {
+			echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+			$uploadOk = 0;
+			}
+
+			
+			// Check if $uploadOk is set to 0 by an error
+			if ($uploadOk == 0) {
+			echo "Sorry, your file was not uploaded.";
+			// if everything is ok, try to upload file
+			} else {
+			if (move_uploaded_file($img["tmp_name"], $target_file)) {
+				$filename =  htmlspecialchars( basename( $img["name"]));
+			} else {
+				echo "Sorry, there was an error uploading your file.";
+			}
+			}
+		}
+		$sql = '';
+		$arr = [$name, $other, $df_id];
+		if($filename != null){
+			$sql = ',file=? ';
+			$arr = [$name, $other, $filename, $df_id];
+		}
+		$query = "UPDATE downloadform SET name = ?,other = ?$sql where df_id = ? ";
 		$stmt = $this->connect()->prepare($query);
-		if ($stmt->execute([$other, $df_id])) {
-			echo "ข้อมูลถูกแก้ไขแล้ว! <a href='form.php'>ดูข้อมูล</a>";
+		
+		if ($stmt->execute($arr)) {
+			echo "ข้อมูลถูกแก้ไขแล้ว! <a href='director.php'>ดูข้อมูล</a>";
 		}
 	}
 	//user search results

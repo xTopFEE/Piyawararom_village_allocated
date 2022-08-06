@@ -3,24 +3,24 @@ $(document).ready(function() {
 
     $("#regForm").submit(function(e) {
         let fd = new FormData();
-        fd.append('username',$("#username").val());
-        fd.append('fullname',$("#fullname").val());
-        fd.append('rank',$("#rank").val());
-        fd.append('password',$("#password").val());
-        fd.append('password_2',$("#password_2").val());
+        fd.append('username', $("#username").val());
+        fd.append('fullname', $("#fullname").val());
+        fd.append('rank', $("#rank").val());
+        fd.append('password', $("#password").val());
+        fd.append('password_2', $("#password_2").val());
         let files = $('#upload')[0].files;
-        if(files.length > 0 ){
-            fd.append('upload',files[0]);
-        }else{
-            fd.append('upload',null);
+        if (files.length > 0) {
+            fd.append('upload', files[0]);
+        } else {
+            fd.append('upload', null);
         }
         e.preventDefault();
         $.ajax({
                 type: "POST",
                 url: "includes/post.php",
-                data:  fd,// $(this).serialize(),
+                data: fd, // $(this).serialize(),
                 contentType: false,
-              processData: false,
+                processData: false,
             })
             .done(function(data) {
                 $("#table").load("includes/load.php");

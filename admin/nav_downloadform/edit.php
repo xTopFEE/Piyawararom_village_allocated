@@ -29,7 +29,7 @@ if (!isset($_SESSION['username'])) {
 		</div>
 		<ul class="nav-list">
 			<li>
-				<a href="../Backend.php">
+				<a href="../nav_backend/backend.php">
 					<i class='bx bx-grid-alt'></i>
 					<span class="links_name">Dashboard</span>
 				</a>
@@ -124,7 +124,7 @@ if (!isset($_SESSION['username'])) {
 			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 		</head>
 
-		<?php if (!isset($_GET['director_id'])) {
+		<?php if (!isset($_GET['id'])) {
 			header("Location: director.php?msg=invalid");
 		} ?>
 		<!doctype html>
@@ -147,107 +147,85 @@ if (!isset($_SESSION['username'])) {
 					<form action="" id='editForm' method="post">
 						<div class="form-group">
 							<label>
-								<h4>username</h4>
-							</label>
-							<input disabled="disabled" type="text" id="upd_username" name="upd_username" placeholder="username" class='form-control sm-3 mx-auto' required>
-						</div><br>
-						<div class="form-group">
-							<label>
-								<h4>รหัสผ่าน</h4>
-							</label>
-							<input type="text" id="upd_password" name="upd_password" placeholder="รหัสผ่าน" class='form-control sm-3 mx-auto' required>
-						</div><br>
-						<div class="form-group">
-							<label>
-								<h4>ยืนยันรหัสผ่าน</h4>
-							</label>
-							<input type="text" id="upd_password_2" name="upd_password_2" placeholder="ยืนยันรหัสผ่าน" class='form-control sm-3 mx-auto' required>
-						</div><br>
-						<div class="form-group">
-							<label>
-								<h4>ชื่อ-นามสกุล</h4>
-							</label>
-							<input type="text" id="upd_fullname" name="upd_fullname" placeholder="ชื่อ-นามสกุล" class='form-control sm-5 mx-auto' required>
-						</div><br>
-						<div class="form-group">
-							<label>
-								<h4>ตำแหน่ง</h4>
-							</label><br>
-							<select name="upd_rank" id="upd_rank">
-								<option value="president">ประธานกรรมการ</option>
-								<option value="vice_president_financial">รองประธานกรรมการ ฝ่ายการเงิน</option>
-								<option value="vice_president_civil">รองประธานกรรมการ ฝ่ายโยธา</option>
-								<option value="financial_director">กรรมการและเหรัญญิก</option>
-								<option value="director_public_relations">กรรมการฝ่ายประชาสัมพันธ์</option>
-								<option value="director">กรรมการและเลขานุการ</option>
-								<option value="other">กรรมการตำแหน่งอื่นๆ</option>
-							</select>
-						</div><br>
-						<div class="form-group">
-							<label>
 								<h4>รูปภาพ</h4>
 							</label>
-							<input type="file" id="upload" name="upload">
+							<div class="form-group">
+								<input type="file" id="upload" name="upload">
+							</div>
 						</div><br>
+						<div class="form-group">
+							<label>
+								<h4>ชื่อแบบฟอร์ม</h4>
+							</label>
+							<input type="text" id="upd_name" name="upd_name" placeholder="ชื่อแบบฟอร์ม" class='form-control sm-3 mx-auto' required>
+						</div><br>
+						<div class="form-group">
+							<label>
+								<h4>รายละเอียด</h4>
+							</label>
+							<div class="form-group">
+								<textarea type="text" id="upd_other" name="upd_other" placeholder="รายละเอียด" class="form-control col-sm-9 mx-auto"></textarea>
+							</div>
+						</div><br><br><br><br>
 						<center>
 							<input type="submit" value="แก้ไข" class='btn update btn-success'>
-							<a href="./director.php" class='btn btn-danger'>ยกเลิก</a>
+							<a href="./downloadform.php" class='btn btn-danger'>ยกเลิก</a>
 						</center>
 					</form>
 					<br>
 				</div>
 			</div>
-</body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="js/edit.js"></script>
-</section>
+		</body>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="js/edit.js"></script>
+	</section>
 
 
-<script>
-	$(document).ready(function() {
-		$('#import_excel_form').on('submit', function(event) {
-			event.preventDefault();
-			$.ajax({
-				url: "import.php",
-				method: "POST",
-				data: new FormData(this),
-				contentType: false,
-				cache: false,
-				processData: false,
-				beforeSend: function() {
-					$('#import').attr('disabled', 'disabled');
-					$('#import').val('Importing...');
-				},
-				success: function(data) {
-					$('#message').html(data);
-					$('#import_excel_form')[0].reset();
-					$('#import').attr('disabled', false);
-					$('#import').val('Import');
-				}
-			})
+	<script>
+		$(document).ready(function() {
+			$('#import_excel_form').on('submit', function(event) {
+				event.preventDefault();
+				$.ajax({
+					url: "import.php",
+					method: "POST",
+					data: new FormData(this),
+					contentType: false,
+					cache: false,
+					processData: false,
+					beforeSend: function() {
+						$('#import').attr('disabled', 'disabled');
+						$('#import').val('Importing...');
+					},
+					success: function(data) {
+						$('#message').html(data);
+						$('#import_excel_form')[0].reset();
+						$('#import').attr('disabled', false);
+						$('#import').val('Import');
+					}
+				})
+			});
 		});
-	});
-</script>
+	</script>
 
 
-<script>
-	let sidebar = document.querySelector(".sidebar");
-	let closeBtn = document.querySelector("#btn");
+	<script>
+		let sidebar = document.querySelector(".sidebar");
+		let closeBtn = document.querySelector("#btn");
 
-	closeBtn.addEventListener("click", () => {
-		sidebar.classList.toggle("open");
-		menuBtnChange(); //calling the function
-	});
+		closeBtn.addEventListener("click", () => {
+			sidebar.classList.toggle("open");
+			menuBtnChange(); //calling the function
+		});
 
-	// following are the code to change sidebar button
-	function menuBtnChange() {
-		if (sidebar.classList.contains("open")) {
-			closeBtn.classList.replace("bx-menu", "bx-menu-alt-right"); //replacing the iocns class
-		} else {
-			closeBtn.classList.replace("bx-menu-alt-right", "bx-menu"); //replacing the iocns class
+		// following are the code to change sidebar button
+		function menuBtnChange() {
+			if (sidebar.classList.contains("open")) {
+				closeBtn.classList.replace("bx-menu", "bx-menu-alt-right"); //replacing the iocns class
+			} else {
+				closeBtn.classList.replace("bx-menu-alt-right", "bx-menu"); //replacing the iocns class
+			}
 		}
-	}
-</script>
+	</script>
 </body>
 
 </html>

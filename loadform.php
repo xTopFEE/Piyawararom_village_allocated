@@ -151,37 +151,46 @@
     $result = mysqli_query($con, $query);
     ?>
     <div class="row">
-        <?php
-        while ($row = mysqli_fetch_array($result)) {
-            $baby =  explode("|", $row['file']);
-            $name = $row['name'];
-            $file = $row['file'];
-            $date = $row['date'];
-            $other = $row['other'];
+        
+        <table style="width:50%; height:150%">
+            <tr>
+                <th>วันที่</th>
+                <th>ไฟล์แบบฟอร์ม</th>
+                <th>ชื่อแบบฟอร์ม</th>
+                <th>รายละเอียด</th>
+            </tr>
+            <?php
+            while ($row = mysqli_fetch_array($result)) {
+                $baby =  explode("|", $row['file']);
+                $name = $row['name'];
+                $file = $row['file'];
+                $date = $row['date'];
+                $other = $row['other'];
 
-        ?>
+            ?>
 
-            <div class="row">
-                <div class="col">
+                <div class="row">
+                    <div class="col">
 
-                    <table style="width:80% height=150%">
+
                         <tr>
                             <th><?= $row['date']; ?> </th>
-                            <th><?= "<button class='btn btn-secondary' onclick='download(\admin\nav_downloadform\fileupload\"$file\")'>ดาวโหลด</button>" ?></th>
+                            <th><?= "<button class='btn btn-secondary' onclick='download(\"$file\")'>ดาวโหลด</button>" ?></th>
                             <th><?= $row['name']; ?> </th>
                             <th><?= $row['other']; ?> </th>
                         </tr>
 
-                    </table>
 
 
+
+                    </div>
                 </div>
-            </div>
-        <?php
+            <?php
 
-        }
-        mysqli_close($con);
-        ?>
+            }
+            mysqli_close($con);
+            ?>
+        </table>
 
         <!-- bottom nav -->
         <div class="row pt-5 px-3 border-top mt-1 " style="font-size: 5px;">
@@ -233,7 +242,29 @@
 
 
 
-
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js">
+        </script>
+        <script>
+            function download(filename) {
+                var filetype = filename.split(".").pop();
+                var path = window.location.origin
+                axios({
+                        url: path + '/Piyawararom_village_allocated/admin/nav_downloadform/fileupload/' + filename,
+                        method: 'GET',
+                        responseType: 'blob'
+                    })
+                    .then((response) => {
+                        const url = window.URL
+                            .createObjectURL(new Blob([response.data]));
+                        const link = document.createElement('a');
+                        link.href = url;
+                        link.setAttribute('download', filename);
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                    })
+            }
+        </script>
 </body>
 
 </html>

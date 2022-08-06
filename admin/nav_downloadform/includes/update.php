@@ -4,5 +4,9 @@ if(empty($_POST['df_id'])){
 	die();
 } else {
 	$user = new user;
-	$user->update($_POST['df_id'],$_POST['other']);
+	$img = null;
+		if(isset($_FILES['upload'])){
+			$img = $_FILES['upload'];
+		}
+	$user->update($_POST['df_id'],$_POST['name'],$_POST['other'],$img);
 }
