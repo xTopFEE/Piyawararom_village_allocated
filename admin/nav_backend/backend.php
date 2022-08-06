@@ -111,7 +111,7 @@ if (!isset($_SESSION['username'])) {
                 <span class="tooltip">แบบฟอร์มสำหรับดาวโหลด</span>
             </li>
             <li>
-                <a href="../nav_form/form.php">
+                <a href="../nav_form/form.php?clear_page=true">
                     <i class='bx bx-file'></i>
                     <span class="links_name">แบบฟอร์มเอกสาร</span>
                 </a>
@@ -132,14 +132,14 @@ if (!isset($_SESSION['username'])) {
                 <span class="tooltip">การร้องเรียนทั่วไป</span>
             </li>
             <li>
-                <a href="../nav_payment/payment.php">
+                <a href="../nav_payment/payment.php?clear_page=true">
                     <i class='bx bx-spreadsheet'></i>
                     <span class="links_name">การชำระเงิน</span>
                 </a>
                 <span class="tooltip">การชำระเงิน</span>
             </li>
             <li>
-                <a href="../nav_debt/debt.php">
+                <a href="../nav_debt/debt.php?clear_page=true">
                     <i class='bx bx-calendar'></i>
                     <span class="links_name">ยอดค้างชำระ</span>
                 </a>
@@ -331,9 +331,9 @@ if (!isset($_SESSION['username'])) {
 
                     <br>
 
-                    <a href='?back=true'>
+                    <!-- <a href='?back=true'>
                         <input type='submit' id='backpage' value='ย้อนกลับ' class='btn btn-info'>
-                    </a>
+                    </a> -->
                     <?php
                     $user = new user;
                     $page = 0;

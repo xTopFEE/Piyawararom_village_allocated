@@ -29,21 +29,21 @@ if (!isset($_SESSION['username'])) {
 		</div>
 		<ul class="nav-list">
 			<li>
-				<a href="../Backend.php">
+				<a href="../Backend.php?clear_page=true">
 					<i class='bx bx-grid-alt'></i>
 					<span class="links_name">Dashboard</span>
 				</a>
 				<span class="tooltip">Dashboard</span>
 			</li>
 			<li>
-				<a href="../nav_user/user.php">
+				<a href="../nav_user/user.php?clear_page=true">
 					<i class='bx bx-user'></i>
 					<span class="links_name">สมาชิกในหมู่บ้าน</span>
 				</a>
 				<span class="tooltip">สมาชิกในหมู่บ้าน</span>
 			</li>
 			<li>
-				<a href="director.php">
+				<a href="director.php?clear_page=true">
 					<i class='bx bx-group'></i>
 					<span class="links_name">กรรมการ</span>
 				</a>
@@ -57,28 +57,35 @@ if (!isset($_SESSION['username'])) {
                 <span class="tooltip">แอดมิน</span>
             </li>
 			<li>
-				<a href="#">
+                <a href="../nav_downloadform/downloadform.php">
+                    <i class='bx bxs-download'></i>
+                    <span class="links_name">แบบฟอร์มสำหรับดาวโหลด</span>
+                </a>
+                <span class="tooltip">แบบฟอร์มสำหรับดาวโหลด</span>
+            </li>
+			<li>
+				<a href="../nav_form/form.php?clear_page=true">
 					<i class='bx bx-file'></i>
 					<span class="links_name">แบบฟอร์มเอกสาร</span>
 				</a>
 				<span class="tooltip">แบบฟอร์มเอกสาร</span>
 			</li>
 			<li>
-				<a href="#">
+				<a href="../nav_news/news.php">
 					<i class='bx bx-broadcast'></i>
 					<span class="links_name">ข่าวสารประชาสัมพันธ์</span>
 				</a>
 				<span class="tooltip">ข่าวสารประชาสัมพันธ์</span>
 			</li>
 			<li>
-				<a href="#">
+				<a href="../nav_petition/petition.php">
 					<i class='bx bx-chat'></i>
 					<span class="links_name">การร้องเรียนทั่วไป</span>
 				</a>
 				<span class="tooltip">การร้องเรียนทั่วไป</span>
 			</li>
 			<li>
-				<a href="#">
+				<a href="../nav_statement/statement.php">
 					<i class='bx bx-spreadsheet'></i>
 					<span class="links_name">การชำระเงิน</span>
 				</a>

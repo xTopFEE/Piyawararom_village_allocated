@@ -120,7 +120,6 @@ class user extends db
 			$out .= "<p class='alert alert-info text-center col-sm-5 mx-auto'>ไม่มีข้อมูล!</p>";
 		}
 		return $out;
-		return $out;
 	}
 	// update data
 	public function update($username, $fullname, $password, $rank, $director_id, $img)
@@ -190,23 +189,28 @@ class user extends db
 		$stmt = $this->connect()->prepare($query);
 		$stmt->execute([$text, $text, $text, $text]);
 		$out = "";
-		$out .= "<table style='font-size:14px;' class='table table-responsive table-hover'><tr class='bg-light'><th>ลำดับ</th><th>username</th><th>password</th><th>ตำแหน่ง</th><th>ชื่อ-นามสกุล</th><th colspan='2'>การดำเนินการ</th></tr>";
+		$out .= "<table style='font-size:14px;' class='table table-responsive table-hover'><tr class='bg-light'><th>ลำดับ</th><th>รูปภาพ</th><th>username</th><th>password</th><th>ตำแหน่ง</th><th>ชื่อ-นามสกุล</th><th colspan='2'>การดำเนินการ</th></tr>";
 		$count = 1;
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+			$resultcount = $count;
 			$director_id = $row['director_id'];
 			$username = $row['username'];
-			$fullname = $row['fullname'];
-			$rank = $row['rank'];
 			$password = $row['password'];
-			$out .= "<tr><td>$count</td><td>$username</td><td><p style='display:none' id='hide_pass_$count'>$password</p><i onclick='hidepass($count)' class='bx bx-hide'></i></td><td>$rank</td><td>$fullname</td>";
+			$rank = $row['rank'];
+			$img = $row['file'] == null? 'no-img.png':$row['file'];
+			//แปลงตำแหน่ง
+			$rank = $this->translate_rank($rank);
+			$fullname = $row['fullname'];
+			$out .= "<tr><td>$resultcount</td><td><a href='./includes/uploads/$img' target='_blank'><img src=\"./includes/uploads/$img\" width='40'></a></td><td>$username</td><td><p style='display:none' id='hide_pass_$resultcount'>$password</p><i onclick='hidepass($resultcount)' class='bx bx-hide'></i></td><td>$rank</td><td style='text-align: left !important'>$fullname</td>";
 			$out .= "<td><a href='edit.php?director_id=$director_id' class='edit btn btn-sm btn-success' title='edit'><i class='fa fa-fw fa-pencil'></i></a></td>";
 			$out .= "<td><span director_id='$director_id' class='del btn btn-sm btn-danger' onclick='myFunction()' title='delete'><i class='fa fa-fw fa-trash'></i></span></td>";
 			$count++;
 		}
 		$out .= "</table>";
+		//$out .= "<a href='./user.php?page=40'><input type='submit' id='' value='ถัดไป' class='btn btn-info'></a> <br> <br>";
 		if ($stmt->rowCount() == 0) {
 			$out = "";
-			$out .= "<p class='alert alert-danger text-center col-sm-3 mx-auto'>Not Found.</p>";
+			$out .= "<p class='alert alert-info text-center col-sm-5 mx-auto'>ไม่มีข้อมูล!</p>";
 		}
 		return $out;
 	}

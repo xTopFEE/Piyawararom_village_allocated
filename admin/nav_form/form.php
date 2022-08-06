@@ -43,7 +43,7 @@ if (!isset($_SESSION['username'])) {
         </div>
         <ul class="nav-list">
             <li>
-                <a href="../nav_backend/backend.php">
+                <a href="../nav_backend/backend.php?clear_page=true">
                     <i class='bx bx-grid-alt'></i>
                     <span class="links_name">ยอดค้างชำระรวมทุกปี</span>
                 </a>
@@ -57,7 +57,7 @@ if (!isset($_SESSION['username'])) {
                 <span class="tooltip">สมาชิกในหมู่บ้าน</span>
             </li>
             <li>
-                <a href="../nav_director/director.php">
+                <a href="../nav_director/director.php?clear_page=true">
                     <i class='bx bx-group'></i>
                     <span class="links_name">กรรมการ</span>
                 </a>
@@ -78,7 +78,7 @@ if (!isset($_SESSION['username'])) {
                 <span class="tooltip">แบบฟอร์มสำหรับดาวโหลด</span>
             </li>
             <li>
-                <a href="../nav_form/form.php">
+                <a href="../nav_form/form.php?clear_page=true">
                     <i class='bx bx-file'></i>
                     <span class="links_name">แบบฟอร์มเอกสาร</span>
                 </a>
@@ -99,14 +99,14 @@ if (!isset($_SESSION['username'])) {
                 <span class="tooltip">การร้องเรียนทั่วไป</span>
             </li>
             <li>
-                <a href="../nav_payment/payment.php">
+                <a href="../nav_payment/payment.php?clear_page=true">
                     <i class='bx bx-spreadsheet'></i>
                     <span class="links_name">การชำระเงิน</span>
                 </a>
                 <span class="tooltip">การชำระเงิน</span>
             </li>
             <li>
-                <a href="../nav_debt/debt.php">
+                <a href="../nav_debt/debt.php?clear_page=true">
                     <i class='bx bx-calendar'></i>
                     <span class="links_name">ยอดค้างชำระ</span>
                 </a>

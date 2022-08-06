@@ -218,17 +218,22 @@ class user extends db
 			$sum = $row['sum'];
 			$amountsum = $totalmonth * 300;
 			$remainsum = $amountsum - $sum;
-			$out .= "<tr><td colspan='2'>$house_id</td><td>$year</td><td>$totalmonth</td><td>$sum</td><td>$amountsum</td><td>$remainsum</td>";
+			//ใส่ลูกน้ำ
+			$sum = $this->change_money_format($sum);
+			$amountsum = $this->change_money_format($amountsum);
+			$remainsum = $this->change_money_format($remainsum);
+			if($remainsum <= 0) { $remainsum = "ไม่มียอดค้างชำระ"; }
+			$out .= "<tr><td colspan='2' style='text-align: left !important'>$house_id</td><td>$year</td><td>$totalmonth</td><td style='text-align: right !important'>$sum</td><td style='text-align: right !important'>$amountsum</td><td style='text-align: right !important'>$remainsum</td>";
 			$strhref = "";
 			if (strpos($house_id, '/') !== false) {
-				// $array_houseid = explode('/', $house_id);
-				// $first_houseid = $array_houseid[0];
-				// $array_length = count($array_houseid);
-				// $last_houseid = $array_houseid[$array_length - 1];
+				$array_houseid = explode('/', $house_id);
+				$first_houseid = $array_houseid[0];
+				$array_length = count($array_houseid);
+				$last_houseid = $array_houseid[$array_length - 1];
 				// $strhref = "../nav_debt_detail/debt_detail.php?first_houseid=$first_houseid&last_houseid=$last_houseid&enter_year=$enter_year";
 			} else {
-				// $first_houseid = $house_id;
-				// $last_houseid = "false";
+				$first_houseid = $house_id;
+				$last_houseid = "false";
 				// $strhref = "../nav_debt_detail/debt_detail.php?first_houseid=$first_houseid&enter_year=$enter_year";
 			}
 			// $out .= "<td><a href='$strhref' class='edit btn btn-sm btn-info' title='ดูรายละเอียด'><i class='bx bx-detail'></i></a></td>";

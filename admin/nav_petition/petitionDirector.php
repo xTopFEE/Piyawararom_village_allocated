@@ -71,7 +71,14 @@ $result = mysqli_query($con, $query);
                 <span class="tooltip">แอดมิน</span>
             </li>
             <li>
-                <a href="#">
+                <a href="../nav_downloadform/downloadform.php">
+                    <i class='bx bxs-download'></i>
+                    <span class="links_name">แบบฟอร์มสำหรับดาวโหลด</span>
+                </a>
+                <span class="tooltip">แบบฟอร์มสำหรับดาวโหลด</span>
+            </li>
+            <li>
+                <a href="../nav_form/form.php?clear_page=true">
                     <i class='bx bx-file'></i>
                     <span class="links_name">แบบฟอร์มเอกสาร</span>
                 </a>
@@ -92,7 +99,7 @@ $result = mysqli_query($con, $query);
                 <span class="tooltip">การร้องเรียนทั่วไป</span>
             </li>
             <li>
-                <a href="../nav_payment/payment.php">
+                <a href="../nav_payment/payment.php?clear_page=true">
                     <i class='bx bx-spreadsheet'></i>
                     <span class="links_name">การชำระเงิน</span>
                 </a>
