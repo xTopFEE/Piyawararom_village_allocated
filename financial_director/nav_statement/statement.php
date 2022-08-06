@@ -81,7 +81,7 @@ if (isset($_GET['month'])) {
                 <span class="tooltip">การร้องเรียนทั่วไป</span>
             </li>
             <li>
-                <a href="./payment.php">
+                <a href="../nav_payment/payment.php">
                     <i class='bx bx-spreadsheet'></i>
                     <span class="links_name">การชำระเงิน</span>
                 </a>

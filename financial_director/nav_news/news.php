@@ -24,11 +24,11 @@ $result_select = mysqli_query($con, $query);
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-   
+
 </head>
 
 <body>
-<div class="sidebar">
+    <div class="sidebar">
         <div class="logo-details">
             <i class='bx bx-home-alt icon'></i>
             <div class="logo_name">หมู่บ้านปิยวรารมย์</div>
@@ -50,7 +50,7 @@ $result_select = mysqli_query($con, $query);
                 <span class="tooltip">แบบฟอร์มเอกสาร</span>
             </li>
             <li>
-                <a href="news.php">
+                <a href="./news.php">
                     <i class='bx bx-broadcast'></i>
                     <span class="links_name">ข่าวสารประชาสัมพันธ์</span>
                 </a>
@@ -91,25 +91,24 @@ $result_select = mysqli_query($con, $query);
                 </a>
                 <span class="tooltip">การตั้งค่า</span>
             </li>
-         
 
-                <li class="profile">
-                    <div class="profile_content">
-                        <h1 href="#">
-                            <div class="profile-details">
-                                <img src="./user.png" alt="profileImg">
-                                <div class="name_job">
-                                    <div class="name"><?php echo $_SESSION['username'] ?></div>
-                                    <!-- RODJANAPHADIT -->
-                                    <div class="job">Admin</div>
-                                </div>
+            <li class="profile">
+                <div class="profile_content">
+                    <h1 href="#">
+                        <div class="profile-details">
+                            <img src="./user.png" alt="profileImg">
+                            <div class="name_job">
+                                <div class="name"><?php echo $_SESSION['username'] ?></div>
+                                <!-- RODJANAPHADIT -->
+                                <div class="job">Admin</div>
                             </div>
-                        </h1>
-                        <a href="../../logout.php">
-                            <i class='bx bx-log-out' id="log_out"></i>
-                        </a>
-                    </div>
-                </li>
+                        </div>
+                    </h1>
+                    <a href="../../logout.php">
+                        <i class='bx bx-log-out' id="log_out"></i>
+                    </a>
+                </div>
+            </li>
 
         </ul>
     </div>
@@ -124,7 +123,7 @@ $result_select = mysqli_query($con, $query);
             <link rel="stylesheet" href="dist/image-uploader.min.css">
 
             <style>
-                    /* .container {
+                /* .container {
                     width: 60%;
                     max-width: 1200px;
                     margin: 0 auto;
@@ -392,17 +391,17 @@ $result_select = mysqli_query($con, $query);
                     }
                 }
 
-                if($_POST['old_img'] != "0"){
-                    if(count($files_arr) == 0){
+                if ($_POST['old_img'] != "0") {
+                    if (count($files_arr) == 0) {
                         $path_all = $_POST['old_img'];
-                    }else{
-                        $path_all = implode("|", $files_arr)."|".$_POST['old_img'];
+                    } else {
+                        $path_all = implode("|", $files_arr) . "|" . $_POST['old_img'];
                     }
-                }else{
+                } else {
                     $path_all = implode("|", $files_arr);
                 }
-                    
-                $query = "UPDATE news SET news_title = '" . $title . "',Description = '" . $description . "' , file = '".$path_all."' where news_id = '" . $_POST['id'] . "'";
+
+                $query = "UPDATE news SET news_title = '" . $title . "',Description = '" . $description . "' , file = '" . $path_all . "' where news_id = '" . $_POST['id'] . "'";
                 $result = mysqli_query($con, $query);
                 echo '<script>window.location.href = \'news.php\'</script>';
             }
@@ -427,7 +426,7 @@ $result_select = mysqli_query($con, $query);
             <div class="container">
                 <br>
                 <div class="container shadow-lg bg-light py-3" style="border-radius: 12px;">
-                  
+
                     <h2 class='text-center'>ข้อมูลข่าวสาร</h2><br>
                     <br>
                     <div class="row align-items-center">
@@ -492,10 +491,10 @@ $result_select = mysqli_query($con, $query);
                                                         <?php
                                                         for ($j = 0; $j < 4; $j++) {
                                                             if (isset($image[$count])) {
-                                                                ?>
-                                                            <div class="col-md-3">
-                                                                <img src="<?= $image[$count++] ?>" alt="" style="width: 100%;height: 150px;">
-                                                            </div>
+                                                        ?>
+                                                                <div class="col-md-3">
+                                                                    <img src="<?= $image[$count++] ?>" alt="" style="width: 100%;height: 150px;">
+                                                                </div>
                                                         <?php
                                                             }
                                                         }
@@ -503,7 +502,7 @@ $result_select = mysqli_query($con, $query);
                                                     </div>
                                                 <?php
                                                 }  ?>
-                                                 
+
                                             </div>
                                         </div>
                                     </div>
@@ -515,14 +514,14 @@ $result_select = mysqli_query($con, $query);
                             <div class="col-2 text-center">
                                 <?= $row['Description'] ?>
                             </div>
-                       
-        
+
+
                             <div class="col-2 text-center">
                                 <button type="button" class="btn btn-success bi bi-trash" onclick="editPetition(<?= $row[0] ?>, '<?= $row['news_title'] ?>', '<?= $row['Description'] ?>','<?= $row['file'] ?>' )"><i class='fa fa-fw fa-edit'></i></button>
                                 <button type="button" class="btn btn-danger bi bi-trash" onclick="deletePetition(<?= $row[0] ?>, '<?= $row['news_title'] ?>')"><i class='fa fa-fw fa-trash'></i></button>
                             </div>
                         </div>
-                        <?php
+                    <?php
                     } ?>
                 </div>
             </div>
@@ -538,9 +537,6 @@ $result_select = mysqli_query($con, $query);
     </section>
 
     <script>
-      
-
-
         $('#submit2').click(function(e) {
             let edit = $('#submit2').text()
             let titter = "ต้องการที่จะเพิ่มข้อมูล"
@@ -569,12 +565,12 @@ $result_select = mysqli_query($con, $query);
 
                         const old = []
                         for (let file of $inputImages) {
-                            if(file.currentSrc.search("uploads") != -1)
+                            if (file.currentSrc.search("uploads") != -1)
                                 old.push(file.currentSrc.substring(file.currentSrc.search("uploads")))
                         }
                         $("#old_img").val(old.join('|'))
                     }
-                    
+
 
                     $("#news_form").submit(); //ให้มันเพิ่มลงform
                 } else if (result.isDenied) {
@@ -583,7 +579,7 @@ $result_select = mysqli_query($con, $query);
             })
         })
 
-       
+
 
         function deletePetition(id, name) {
 
@@ -630,7 +626,7 @@ $result_select = mysqli_query($con, $query);
         }
     </script>
 
-<script>
+    <script>
         let sidebar = document.querySelector(".sidebar");
         let closeBtn = document.querySelector("#btn");
 

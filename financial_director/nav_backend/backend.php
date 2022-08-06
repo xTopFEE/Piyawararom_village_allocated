@@ -75,8 +75,8 @@ if (!isset($_SESSION['username'])) {
             <i class='bx bx-menu' id="btn"></i>
         </div>
         <ul class="nav-list">
-            <li>
-                <a href="backend.php">
+        <li>
+                <a href="./backend.php">
                     <i class='bx bx-grid-alt'></i>
                     <span class="links_name">ยอดค้างชำระรวมทุกปี</span>
                 </a>
@@ -142,7 +142,7 @@ if (!isset($_SESSION['username'])) {
                                 <div class="name_job">
                                     <div class="name"><?php echo $_SESSION['username'] ?></div>
                                     <!-- RODJANAPHADIT -->
-                                    <div class="job">กรรมการการเงิน</div>
+                                    <div class="job">Admin</div>
                                 </div>
                             </div>
                         </h1>
@@ -303,9 +303,9 @@ if (!isset($_SESSION['username'])) {
 
                     <br>
 
-                    <a href='?back=true'>
+                    <!-- <a href='?back=true'>
                         <input type='submit' id='backpage' value='ย้อนกลับ' class='btn btn-info'>
-                    </a>
+                    </a> -->
                     <?php
                     $user = new user;
                     $page = 0;
@@ -321,7 +321,6 @@ if (!isset($_SESSION['username'])) {
                         $lastpage = $page + 1;
                         echo "<a href='?page=$lastpage'> <input type='submit' id='backpage' value='$lastpage' class='btn btn-info'></a>";
                     }
-
 
                     $testvar = $_SESSION['page'];
                     echo "<script> console.log('page = '+$testvar + ' length = '+ $length);</script>";

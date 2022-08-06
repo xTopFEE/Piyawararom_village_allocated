@@ -9,9 +9,9 @@ if (!isset($_SESSION['username'])) {
 
 // connect to the database
 $offset = 0;
-if(isset($_GET['page'])){
-    $offset = ($_GET['page']-1)*20;
-}else{
+if (isset($_GET['page'])) {
+    $offset = ($_GET['page'] - 1) * 20;
+} else {
     $offset = 0;
 }
 
@@ -51,7 +51,7 @@ $number_of_complaint = mysqli_num_rows($result_of_complaint);
 <body>
 
 
-<div class="sidebar">
+    <div class="sidebar">
         <div class="logo-details">
             <i class='bx bx-home-alt icon'></i>
             <div class="logo_name">หมู่บ้านปิยวรารมย์</div>
@@ -80,7 +80,7 @@ $number_of_complaint = mysqli_num_rows($result_of_complaint);
                 <span class="tooltip">ข่าวสารประชาสัมพันธ์</span>
             </li>
             <li>
-                <a href="petition.php">
+                <a href="../nav_petition/petition.php">
                     <i class='bx bx-chat'></i>
                     <span class="links_name">การร้องเรียนทั่วไป</span>
                 </a>
@@ -101,7 +101,7 @@ $number_of_complaint = mysqli_num_rows($result_of_complaint);
                 <span class="tooltip">ยอดค้างชำระ</span>
             </li>
             <li>
-                <a href="../nav_debt/debt.php">
+                <a href="../nav_statement/statement.php">
                     <i class='bx bxs-calculator'></i>
                     <span class="links_name">รายรับรายจ่าย</span>
                 </a>
@@ -488,21 +488,21 @@ $number_of_complaint = mysqli_num_rows($result_of_complaint);
                     </div>
                     <div class="col-md-8">
                         <div aria-label="Page navigation example" style="float: right;">
-                       
+
                             <?php
-                            $res = mysqli_fetch_all($result,MYSQLI_ASSOC);
-                            
-                            $page = isset($_GET['page'])?$_GET['page']:0;
+                            $res = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+                            $page = isset($_GET['page']) ? $_GET['page'] : 0;
                             ?>
                             <ul class="pagination" style="margin-top: 0px;">
                                 <?php
                                 if ((isset($_GET['page']) && $_GET['page'] == 1) || !isset($_GET['page'])) {
                                 ?>
-                                    <li class="page-item disabled"><a class="page-link" >Previous</a></li>
+                                    <li class="page-item disabled"><a class="page-link">Previous</a></li>
                                 <?php
                                 } else {
                                 ?>
-                                    <li class="page-item "><a class="page-link" href="petition.php?page=<?= $page-1 ?>">Previous</a></li>
+                                    <li class="page-item "><a class="page-link" href="petition.php?page=<?= $page - 1 ?>">Previous</a></li>
                                     <?php
                                 }
                                 for ($i = 1; $i <= ceil($number_of_complaint / 20); $i++) {
@@ -528,7 +528,7 @@ $number_of_complaint = mysqli_num_rows($result_of_complaint);
                                 <?php
                                 } else {
                                 ?>
-                                    <li class="page-item"><a class="page-link" href="petition.php?page=<?=$page+1?>">Next</a></li>
+                                    <li class="page-item"><a class="page-link" href="petition.php?page=<?= $page + 1 ?>">Next</a></li>
                                 <?php
                                 }
                                 ?>
@@ -568,7 +568,7 @@ $number_of_complaint = mysqli_num_rows($result_of_complaint);
                         </thead>
                         <tbody id='body_pettition'>
                             <?php
-                            for ($yy = 0; $yy < count($res);$yy++) {
+                            for ($yy = 0; $yy < count($res); $yy++) {
                                 $row = $res[$yy];
                             ?>
 
@@ -645,19 +645,19 @@ $number_of_complaint = mysqli_num_rows($result_of_complaint);
                                         <input style="width: 80%;" type="text" id="callback<?= $row['complaint_id'] ?>" name="callback" value="<?= $row['Admin_callback'] != null ? $row['Admin_callback'] : 'การตอบกลับ' ?>" class="form-control" readonly></input>
 
                                     </td>
-                                    <td><select value="<?= $row['complaint_id'] ?>" id="status<?= $row['complaint_id'] ?>"  style="width: 100%;" disabled>
+                                    <td><select value="<?= $row['complaint_id'] ?>" id="status<?= $row['complaint_id'] ?>" style="width: 100%;" disabled>
                                             <option <?= $row['complaint_status'] == 0 ? 'selected' : '' ?> value="0">รอดำเนินการ</option>
                                             <option <?= $row['complaint_status'] == 2 ? 'selected' : '' ?> value="2">ไม่อนุมัติ</option>
                                             <option <?= $row['complaint_status'] == 1 ? 'selected' : '' ?> value="1">ดำเนินการ</option>
                                             <option <?= $row['complaint_status'] == 3 ? 'selected' : '' ?> value="3">อนุมัติ</option>
                                         </select></td>
                                     <td class="between">
-                                                <button id="hide1<?= $row['complaint_id'] ?>" type="button" class="btn btn-warning bi bi-edit" onclick="editPetition(<?= $row['complaint_id'] ?>)"><i class='fa fa-fw fa-edit'></i></button>
-                                                <button id="hide2<?= $row['complaint_id'] ?>" type="button" class="btn btn-danger bi bi-trash" onclick="deletePetition(<?= $row['complaint_id'] ?>, '<?= $row['complaint_tltle'] ?>')"><i class='fa fa-fw fa-trash'></i></button>
-                                            
-                                                <button style="display: none;" id="show1<?= $row['complaint_id'] ?>" type="button" class="btn btn-info bi bi-save" onclick="save(<?= $row['complaint_id'] ?>)"><i class='fa fa-fw fa-save'></i></button>
-                                                <button style="display: none;" id="show2<?= $row['complaint_id'] ?>" type="button" class="btn btn-danger bi bi-times" onclick="cancel(<?= $row['complaint_id'] ?>)"><i class='fa fa-fw fa-times'></i></button>
-                                           
+                                        <button id="hide1<?= $row['complaint_id'] ?>" type="button" class="btn btn-warning bi bi-edit" onclick="editPetition(<?= $row['complaint_id'] ?>)"><i class='fa fa-fw fa-edit'></i></button>
+                                        <button id="hide2<?= $row['complaint_id'] ?>" type="button" class="btn btn-danger bi bi-trash" onclick="deletePetition(<?= $row['complaint_id'] ?>, '<?= $row['complaint_tltle'] ?>')"><i class='fa fa-fw fa-trash'></i></button>
+
+                                        <button style="display: none;" id="show1<?= $row['complaint_id'] ?>" type="button" class="btn btn-info bi bi-save" onclick="save(<?= $row['complaint_id'] ?>)"><i class='fa fa-fw fa-save'></i></button>
+                                        <button style="display: none;" id="show2<?= $row['complaint_id'] ?>" type="button" class="btn btn-danger bi bi-times" onclick="cancel(<?= $row['complaint_id'] ?>)"><i class='fa fa-fw fa-times'></i></button>
+
                                     </td>
                                 </tr>
 
@@ -901,14 +901,14 @@ $number_of_complaint = mysqli_num_rows($result_of_complaint);
 
         }
 
-        function editPetition(id){
-            $('#show1'+id).css('display','block')
-            $('#show2'+id).css('display','block')
-            $('#hide1'+id).css('display','none')
-            $('#hide2'+id).css('display','none')
+        function editPetition(id) {
+            $('#show1' + id).css('display', 'block')
+            $('#show2' + id).css('display', 'block')
+            $('#hide1' + id).css('display', 'none')
+            $('#hide2' + id).css('display', 'none')
 
-            $('#callback'+id).removeAttr("readonly");
-            $('#status'+id).removeAttr("disabled");
+            $('#callback' + id).removeAttr("readonly");
+            $('#status' + id).removeAttr("disabled");
         }
 
         function save(id) {
@@ -927,15 +927,15 @@ $number_of_complaint = mysqli_num_rows($result_of_complaint);
         }
 
 
-        function cancel(id){
+        function cancel(id) {
             console.log(id);
-            $('#callback'+id).attr("readonly","true");
-            $('#status'+id).attr("disabled","true");
+            $('#callback' + id).attr("readonly", "true");
+            $('#status' + id).attr("disabled", "true");
 
-            $('#hide1'+id).css('display','block')
-            $('#hide2'+id).css('display','block')
-            $('#show1'+id).css('display','none')
-            $('#show2'+id).css('display','none')
+            $('#hide1' + id).css('display', 'block')
+            $('#hide2' + id).css('display', 'block')
+            $('#show1' + id).css('display', 'none')
+            $('#show2' + id).css('display', 'none')
         }
     </script>
 

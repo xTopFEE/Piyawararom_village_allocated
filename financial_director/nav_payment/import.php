@@ -7,6 +7,10 @@ include './vendor/autoload.php';
 
 $connect = new PDO("mysql:host=localhost;dbname=project", "root", "");
 
+$query = "DELETE FROM payment";
+$statement = $connect->prepare($query);
+$statement->execute();
+
 if ($_FILES["import_excel"]["name"] != '') {
     $allowed_extension = array('xls', 'csv', 'xlsx');
     $file_array = explode(".", $_FILES["import_excel"]["name"]);
@@ -52,6 +56,7 @@ if ($_FILES["import_excel"]["name"] != '') {
             }
         }
         $message = '<div class="alert alert-success">Data Imported Successfully</div>';
+        echo "<script> location.reload(); </script>";
     } else {
         $message = '<div class="alert alert-danger">Only .xls .csv or .xlsx file allowed</div>';
     }

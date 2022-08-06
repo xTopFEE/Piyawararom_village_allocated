@@ -52,9 +52,6 @@ class user extends db
 			$date = $row['date'];
 			$file = $row['file'];
 			$reply = $row['reply'];
-			if ($reply == NULL) {
-				$reply = "(ยังไม่มีการตอบกลับ)";
-			}
 			$other = $row['other'];
 			$status	 = $row['status'];
 			if ($status != NULL) {
@@ -63,7 +60,7 @@ class user extends db
 				if($status == 3) { $status = "ไม่ผ่านการอนุมัติ"; }
 			}
 			$house_id = $this->find_houseid($row['user_id']);
-			$out .= "<tr><td>$resultcount</td><td>$house_id</td><td>$other</td><td>$date</td><td>$status</td>";
+			$out .= "<tr><td>$resultcount</td><td style='text-align: left !important'>$house_id</td><td>$other</td><td>$date</td><td>$status</td>";
 			$out .= "<td><a href='edit.php?id=$id' class='edit btn btn-sm btn-success' title='edit'><i class='fa fa-fw fa-pencil'></i></a></td>";
 			$out .= "<td><span form_id='$form_id' class='del btn btn-sm btn-danger' onclick='myFunction()' title='delete'><i class='fa fa-fw fa-trash'></i></span></td>";
 			$out .= "<td>$reply</td>";
