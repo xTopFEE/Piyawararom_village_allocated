@@ -151,8 +151,8 @@
     $result = mysqli_query($con, $query);
     ?>
     <div class="row">
-        
-        <table style="width:50%; height:150%">
+
+        <table class="container" style="width:50%; height:150%">
             <tr>
                 <th>วันที่</th>
                 <th>ไฟล์แบบฟอร์ม</th>
@@ -229,17 +229,6 @@
 
         </nav>
         <hr />
-        <!-- 
-    <div class="row" style="font-size: 10px;">
-        <div class="col">
-            <ul class="nav justify-content-end">
-                <li class="nav-item">
-                    <span class="nav-link active text-muted font-weight-bold">เกี่ยวกับ</span>
-                </li>
-            </ul>
-        </div>
-    </div> -->
-
 
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js">

@@ -100,6 +100,9 @@ height: 30px;
                         <a class="nav-link active" aria-current="page" href="index.php">หน้าหลัก</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="loadform.php">แบบฟอร์ม</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="info.php">เกี่ยวกับ</a>
                     </li>
                     <li class="nav-item">
