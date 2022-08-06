@@ -91,6 +91,10 @@ class user extends db
 		return $number;
 	}
 
+	public function change_money_format($money)
+	{
+		return number_format($money, 0, '.', ',');
+	}
 
 	public function load($page, $enter_year)
 	{
@@ -140,9 +144,14 @@ class user extends db
 			$amount = $row['amount'];
 			$other = $row['other'];
 			$sum = $row['sum'];
-			$amountsum = $totalmonth*300 ;
-			$remainsum = $amountsum-$sum;
-			$out .= "<tr><td colspan='2'>$house_id</td><td>$year</td><td>$totalmonth</td><td>$sum</td><td>$amountsum</td><td>$remainsum</td>";
+			$amountsum = $totalmonth * 300;
+			$remainsum = $amountsum - $sum;
+			//ใส่ลูกน้ำ
+			$sum = $this->change_money_format($sum);
+			$amountsum = $this->change_money_format($amountsum);
+			$remainsum = $this->change_money_format($remainsum);
+			if($remainsum <= 0) { $remainsum = "ไม่มียอดค้างชำระ"; }
+			$out .= "<tr><td colspan='2' style='text-align: left !important'>$house_id</td><td>$year</td><td>$totalmonth</td><td style='text-align: right !important'>$sum</td><td style='text-align: right !important'>$amountsum</td><td style='text-align: right !important'>$remainsum</td>";
 			$strhref = "";
 			if (strpos($house_id, '/') !== false) {
 				$array_houseid = explode('/', $house_id);

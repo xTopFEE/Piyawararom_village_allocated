@@ -18,11 +18,15 @@ class user extends db
 			return $row;
 		}
 	}
+	public function change_money_format($money)
+	{
+		return number_format($money, 0, '.', ',');
+	}
 	public function load($page, $enter_year)
 	{
 		$current_user_id = $_SESSION['username'];
-		if(!empty($enter_year))
-		echo "<script> console.log('enter year in load :' + $enter_year) </script>";
+		if (!empty($enter_year))
+			echo "<script> console.log('enter year in load :' + $enter_year) </script>";
 		if (!empty($enter_year)) {
 			// $query = "SELECT *,SUM(amount) as 'sum' FROM payment WHERE year='$enter_year' GROUP BY house_id ORDER BY cast(SUBSTRING_INDEX(house_id, '/', -1)as int) LIMIT 20 OFFSET $page";
 			$query = "WITH added_row_number AS ( SELECT *,SUM(amount) as 'sum' , ROW_NUMBER() OVER(PARTITION BY `house_id`) AS 'row_number' FROM payment WHERE month IN('มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม') and year='$enter_year' and house_id = '$current_user_id' GROUP BY house_id ORDER BY cast(SUBSTRING_INDEX(house_id, '/', -1)as int) ) SELECT * FROM added_row_number";
@@ -50,13 +54,18 @@ class user extends db
 			$other = $row['other'];
 			$sum = $row['sum'];
 			$amountsum = 3600 - $sum;
-			$out .= "<tr><td colspan='2'>$seq</td><td>$year</td><td>$house_id</td><td>$sum / 3600</td><td>$amountsum</td>";
+			$sum = $this->change_money_format($sum);
+			$amountsum = $this->change_money_format($amountsum);
+			if ($amountsum <= 0) {
+				$amountsum = "ไม่มียอดค้างชำระ";
+			}
+			$out .= "<tr><td colspan='2'>$seq</td><td>$year</td><td style='text-align: left !important'>$house_id</td><td style='text-align: right !important'>$sum / 3,600</td><td style='text-align: right !important'>$amountsum</td>";
 			$strhref = "";
-			if(strpos($house_id, '/') !== false) {
+			if (strpos($house_id, '/') !== false) {
 				$array_houseid = explode('/', $house_id);
 				$first_houseid = $array_houseid[0];
 				$array_length = count($array_houseid);
-				$last_houseid = $array_houseid[$array_length-1];
+				$last_houseid = $array_houseid[$array_length - 1];
 				$strhref = "../nav_debt_detail/debt_detail.php?first_houseid=$first_houseid&last_houseid=$last_houseid&enter_year=$enter_year";
 			} else {
 				$first_houseid = $house_id;
@@ -115,11 +124,11 @@ class user extends db
 			$amountsum = 3600 - $sum;
 			$out .= "<tr><td colspan='2'>$seq</td><td>$year</td><td>$house_id</td><td>$sum / 3600</td><td>$amountsum</td>";
 			$strhref = "";
-			if(strpos($house_id, '/') !== false) {
+			if (strpos($house_id, '/') !== false) {
 				$array_houseid = explode('/', $house_id);
 				$first_houseid = $array_houseid[0];
 				$array_length = count($array_houseid);
-				$last_houseid = $array_houseid[$array_length-1];
+				$last_houseid = $array_houseid[$array_length - 1];
 				$strhref = "../nav_debt_detail/debt_detail.php?first_houseid=$first_houseid&last_houseid=$last_houseid&enter_year=$enter_year";
 			} else {
 				$first_houseid = $house_id;
@@ -138,10 +147,9 @@ class user extends db
 			$out .= "<p class='alert alert-info text-center col-sm-5 mx-auto'>ไม่มีข้อมูล!</p>";
 		}
 		$_SESSION['Total_house'] = $count;
-		
-		
+
+
 		return $out;
-		
 	}
 
 	public function delete($payment_id)

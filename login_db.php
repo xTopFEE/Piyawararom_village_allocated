@@ -108,10 +108,22 @@ if (isset($_POST['login_user'])) {
                                         $_SESSION['username'] = $username;
                                         $_SESSION['success'] = "คุณได้เข้าสู่ระบบ";
                                         header("location: director/nav_backend/backend.php");
-                                    } else {
-                                        array_push($error, "username หรือ รหัสผ่าน ของคุณผิด!");
-                                        $_SESSION['error'] = "username หรือ รหัสผ่าน ของคุณผิด!";
-                                        header("location: Login.php");
+                                    } else if (mysqli_num_rows($result) == 0) {
+                                        echo $password;
+                                        $query = "SELECT * FROM director WHERE username = '$username' AND password ='$password' AND rank ='other'";
+                                        $result = mysqli_query($conn, $query);
+                                        //echo strval($result);
+    
+                                        if (mysqli_num_rows($result) == 1) {
+                                            $_SESSION['usertype'] = "director"; // add $_SESSION['usertype']
+                                            $_SESSION['username'] = $username;
+                                            $_SESSION['success'] = "คุณได้เข้าสู่ระบบ";
+                                            header("location: director/nav_backend/backend.php");
+                                        } else {
+                                            array_push($error, "username หรือ รหัสผ่าน ของคุณผิด!");
+                                            $_SESSION['error'] = "username หรือ รหัสผ่าน ของคุณผิด!";
+                                            header("location: Login.php");
+                                        }
                                     }
                                 }
                             }
