@@ -66,25 +66,25 @@ class user extends db
 	}
 	public function translate_rank($rank) {
 		switch ($rank) {
-			case 'president': 
+			case '1': 
 				$rank = "ประธานกรรมการ";
 				break;
-			case "vice_president_financial": 
+			case "2": 
 				$rank = "รองประธานกรรมการ ฝ่ายการเงิน";
 				break;
-			case "vice_president_civil": 
+			case "3": 
 				$rank = "รองประธานกรรมการ ฝ่ายโยธา";
 				break;
-			case "financial_director": 
+			case "4": 
 				$rank = "กรรมการและเหรัญญิก";
 				break;
-			case "director_public_relations": 
+			case "5": 
 				$rank = "กรรมการฝ่ายประชาสัมพันธ์";
 				break;
-			case "director": 
+			case "6": 
 				$rank = "กรรมการและเลขานุการ";
 				break;
-			case "other":
+			case "7":
 				$rank = "กรรมการตำแหน่งอื่นๆ";
 				break;
 		}
@@ -92,7 +92,7 @@ class user extends db
 	}
 	public function load($page)
 	{
-		$query = "SELECT * FROM director LIMIT 20 OFFSET $page";
+		$query = "SELECT * FROM director ORDER BY rank LIMIT 20 OFFSET $page";
 		$stmt = $this->connect()->prepare($query);
 		$stmt->execute();
 		$out = "";

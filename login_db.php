@@ -44,7 +44,7 @@ if (isset($_POST['login_user'])) {
                 
             } else if (mysqli_num_rows($result) == 0) {
                 echo $password;
-                $query = "SELECT * FROM director WHERE username = '$username' AND password ='$password' AND rank ='director'";
+                $query = "SELECT * FROM director WHERE username = '$username' AND password ='$password' AND rank ='6'";
                 $result = mysqli_query($conn, $query);
                 //echo strval($result);
 
@@ -55,7 +55,7 @@ if (isset($_POST['login_user'])) {
                     header("location: director/nav_backend/backend.php");
                 } else if (mysqli_num_rows($result) == 0) {
                     echo $password;
-                    $query = "SELECT * FROM director WHERE username = '$username' AND password ='$password' AND rank ='financial_director'";
+                    $query = "SELECT * FROM director WHERE username = '$username' AND password ='$password' AND rank ='4'";
                     $result = mysqli_query($conn, $query);
                     //echo strval($result);
 
@@ -66,7 +66,7 @@ if (isset($_POST['login_user'])) {
                         header("location: financial_director/nav_backend/backend.php");
                     } else if (mysqli_num_rows($result) == 0) {
                         echo $password;
-                        $query = "SELECT * FROM director WHERE username = '$username' AND password ='$password' AND rank ='vice_president_financial'";
+                        $query = "SELECT * FROM director WHERE username = '$username' AND password ='$password' AND rank ='2'";
                         $result = mysqli_query($conn, $query);
                         //echo strval($result);
 
@@ -77,7 +77,7 @@ if (isset($_POST['login_user'])) {
                             header("location: financial_director/nav_backend/backend.php");
                         } else if (mysqli_num_rows($result) == 0) {
                             echo $password;
-                            $query = "SELECT * FROM director WHERE username = '$username' AND password ='$password' AND rank ='president'";
+                            $query = "SELECT * FROM director WHERE username = '$username' AND password ='$password' AND rank ='1'";
                             $result = mysqli_query($conn, $query);
                             //echo strval($result);
 
@@ -88,7 +88,7 @@ if (isset($_POST['login_user'])) {
                                 header("location: director/nav_backend/backend.php");
                             } else if (mysqli_num_rows($result) == 0) {
                                 echo $password;
-                                $query = "SELECT * FROM director WHERE username = '$username' AND password ='$password' AND rank ='vice_president_civil'";
+                                $query = "SELECT * FROM director WHERE username = '$username' AND password ='$password' AND rank ='3'";
                                 $result = mysqli_query($conn, $query);
                                 //echo strval($result);
 
@@ -99,7 +99,7 @@ if (isset($_POST['login_user'])) {
                                     header("location: director/nav_backend/backend.php");
                                 } else if (mysqli_num_rows($result) == 0) {
                                     echo $password;
-                                    $query = "SELECT * FROM director WHERE username = '$username' AND password ='$password' AND rank ='director_public_relations'";
+                                    $query = "SELECT * FROM director WHERE username = '$username' AND password ='$password' AND rank ='5'";
                                     $result = mysqli_query($conn, $query);
                                     //echo strval($result);
 
@@ -110,7 +110,7 @@ if (isset($_POST['login_user'])) {
                                         header("location: director/nav_backend/backend.php");
                                     } else if (mysqli_num_rows($result) == 0) {
                                         echo $password;
-                                        $query = "SELECT * FROM director WHERE username = '$username' AND password ='$password' AND rank ='other'";
+                                        $query = "SELECT * FROM director WHERE username = '$username' AND password ='$password' AND rank ='7'";
                                         $result = mysqli_query($conn, $query);
                                         //echo strval($result);
     

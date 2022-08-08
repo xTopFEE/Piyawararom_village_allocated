@@ -174,13 +174,13 @@ if (!isset($_SESSION['username'])) {
 								<h4>ตำแหน่ง</h4>
 							</label><br>
 							<select name="upd_rank" id="upd_rank">
-								<option value="president">ประธานกรรมการ</option>
-								<option value="vice_president_financial">รองประธานกรรมการ ฝ่ายการเงิน</option>
-								<option value="vice_president_civil">รองประธานกรรมการ ฝ่ายโยธา</option>
-								<option value="financial_director">กรรมการและเหรัญญิก</option>
-								<option value="director_public_relations">กรรมการฝ่ายประชาสัมพันธ์</option>
-								<option value="director">กรรมการและเลขานุการ</option>
-								<option value="other">กรรมการตำแหน่งอื่นๆ</option>
+								<option value="1">ประธานกรรมการ</option>
+								<option value="2">รองประธานกรรมการ ฝ่ายการเงิน</option>
+								<option value="3">รองประธานกรรมการ ฝ่ายโยธา</option>
+								<option value="4">กรรมการและเหรัญญิก</option>
+								<option value="5">กรรมการฝ่ายประชาสัมพันธ์</option>
+								<option value="6">กรรมการและเลขานุการ</option>
+								<option value="7">กรรมการตำแหน่งอื่นๆ</option>
 							</select>
 						</div><br>
 						<div class="form-group">

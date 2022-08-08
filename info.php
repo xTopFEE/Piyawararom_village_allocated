@@ -147,32 +147,32 @@
     </div> -->
     <?php
     include('connection.php');  //ไฟล์เชื่อมต่อกับ database ที่เราได้สร้างไว้ก่อนหน้าน้ี
-    $query = "SELECT * FROM director" or die("Error:" . mysqli_error($con));
+    $query = "SELECT * FROM director ORDER BY rank" or die("Error:" . mysqli_error($con));
     $result = mysqli_query($con, $query);
     ?>
     <div class="row">
         <?php
         while ($row = mysqli_fetch_array($result)) {
             $baby =  explode("|", $row['file']);
-            if ($row['rank'] == 'president') {
+            if ($row['rank'] == '1') {
                 $satatus = "ประธานกรรมการ";
             }
-            if ($row['rank'] == 'director') {
+            if ($row['rank'] == '6') {
                 $satatus = "กรรมการเลขานุการ";
             }
-            if ($row['rank'] == 'vice_president_financial') {
+            if ($row['rank'] == '2') {
                 $satatus = "รองประธานกรรมการ ฝ่ายการเงิน";
             }
-            if ($row['rank'] == 'vice_president_civil') {
+            if ($row['rank'] == '3') {
                 $satatus = "รองประธานกรรมการ ฝ่ายโยธา";
             }
-            if ($row['rank'] == 'financial_director') {
+            if ($row['rank'] == '4') {
                 $satatus = "กรรมการและเหรัญญิก";
             }
-            if ($row['rank'] == 'director_public_relations') {
+            if ($row['rank'] == '5') {
                 $satatus = "กรรมการฝ่ายประชาสัมพันธ์";
             }
-            if ($row['rank'] == 'other') {
+            if ($row['rank'] == '7') {
                 $satatus = "กรรมการตำแหน่งอื่นๆ";
             }
 
