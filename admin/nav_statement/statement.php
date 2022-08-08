@@ -429,12 +429,12 @@ if (isset($_GET['month'])) {
     if (isset($_GET['next'])) {
         if ($_SESSION['page'] + 20 < $length) {
             $_SESSION['page'] += 20;
-            echo "<script> window.location.href = './director.php' </script>";
+            echo "<script> window.location.href = './statement.php' </script>";
         }
     } else if (isset($_GET['back'])) {
         if ($_SESSION['page'] > 0) {
             $_SESSION['page'] -= 20;
-            echo "<script> window.location.href = './director.php' </script>";
+            echo "<script> window.location.href = './statement.php' </script>";
         }
     } else if (isset($_GET['page'])) {
         $goPage = $_GET['page'];
@@ -442,7 +442,7 @@ if (isset($_GET['month'])) {
         echo "<script> console.log(' get page = '+ $goPage);</script>";
     } else if (isset($_GET['clear_page'])) {
         $_SESSION['page'] = 0;
-        echo "<script> window.location.href = './director.php' </script>";
+        echo "<script> window.location.href = './statement.php' </script>";
     }
 
     ?>

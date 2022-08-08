@@ -36,7 +36,7 @@ class user extends db
         }
 
         echo "<script> console.log('enter_year :'+$enter_year) </script>";
-        $lengthquery = "SELECT *,SUM(amount) as 'sum' FROM payment WHERE year=$enter_year GROUP BY house_id HAVING SUM(amount) < 3600";
+        $lengthquery = "WITH added_row_number AS ( SELECT *,SUM(amount) as 'sum' , ROW_NUMBER() OVER(PARTITION BY `house_id`) AS 'row_number' FROM payment WHERE month IN('มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม') GROUP BY house_id ORDER BY cast(SUBSTRING_INDEX(house_id, '/', -1)as int) ) SELECT * FROM added_row_number";
         $stmtlength = $this->connect()->prepare($lengthquery);
         $stmtlength->execute();
         $length = 0;

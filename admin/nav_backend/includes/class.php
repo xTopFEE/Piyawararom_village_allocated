@@ -166,7 +166,7 @@ class user extends db
 			$count++;
 		}
 		$out .= "</table>";
-		//$out .= "<a href='./user.php?page=40'><input type='submit' id='' value='ถัดไป' class='btn btn-info'></a> <br> <br>";
+		// $out .= "<a href='./user.php?page=40'><input type='submit' id='' value='ถัดไป' class='btn btn-info'></a> <br> <br>";
 		if ($stmt->rowCount() == 0) {
 			$out = "";
 			$out .= "<p class='alert alert-info text-center col-sm-5 mx-auto'>ไม่มีข้อมูล!</p>";
