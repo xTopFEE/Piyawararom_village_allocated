@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 06, 2022 at 09:33 PM
+-- Generation Time: Aug 08, 2022 at 05:46 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -119,13 +119,13 @@ CREATE TABLE `director` (
 --
 
 INSERT INTO `director` (`director_id`, `username`, `password`, `rank`, `fullname`, `file`) VALUES
-(1, 'test2', '1234', 'director', 'นางอัจฉรา จินดาทองกวี', 'e-learning-icon-flat_1284-39511.jpg'),
-(2, 'test000', '1234', 'vice_president_civil', 'ธีรัตม์ โรจนประดิษฐ์', 'LOGOT.jpeg'),
-(3, 'director01', '1234', 'other', 'test test', 'LOGOT.jpeg'),
-(4, 'test', '1234', 'vice_president_financial', 'ทอสอบ ทดสอบ', 'no-img.png'),
-(5, 'testtesttest', '1234', 'president', 'ทดสอบ ทดสอบ', '76b1786b417f76cc87cb35fdeea8d064_.png'),
-(6, 'test123', '1234', 'vice_president_financial', 'ทอสอบ', '320.png'),
-(7, 'asdasdas', '1234', 'other', 'ทดสอบ', 'a44279e90fc98af4c14b84f5cc0a89c0.jpg');
+(1, 'test2', '1234', '1', 'นางอัจฉรา จินดาทองกวี', 'e-learning-icon-flat_1284-39511.jpg'),
+(2, 'test000', '1234', '3', 'ธีรัตม์ โรจนประดิษฐ์', 'LOGOT.jpeg'),
+(3, 'director01', '1234', '3', 'test test', 'LOGOT.jpeg'),
+(4, 'test', '1234', '2', 'ทอสอบ ทดสอบ', 'no-img.png'),
+(5, 'testtesttest', '1234', '5', 'ทดสอบ ทดสอบ', '76b1786b417f76cc87cb35fdeea8d064_.png'),
+(6, 'test123', '1234', '4', 'ทอสอบ', '320.png'),
+(7, 'asdasdas', '1234', '7', 'ทดสอบ', 'a44279e90fc98af4c14b84f5cc0a89c0.jpg');
 
 -- --------------------------------------------------------
 
