@@ -1,6 +1,6 @@
 <?php
 require_once 'connection.php';
-$db = new mysqli('127.0.0.1', 'root', '', 'project');
+$db = new mysqli('localhost', 'root', '', 'project');
 
 
 include 'connection.php';
