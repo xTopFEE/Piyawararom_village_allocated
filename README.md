@@ -27,5 +27,6 @@ Instructions for testing:
       - [admin/nav_user/includes/db.php](https://github.com/xTopFEE/Piyawararom_village_allocated/blob/main/admin/nav_user/includes/db.php)
       - [admin/nav_news/includes/db.php](https://github.com/xTopFEE/Piyawararom_village_allocated/blob/main/admin/nav_news/includes/db.php)
       - [admin/nav_petition/includes/db.php](https://github.com/xTopFEE/Piyawararom_village_allocated/blob/main/admin/nav_petition/includes/db.php)
+      - ...
 3. Import Database from ([Piyawararom village allocated DB.sql](https://github.com/xTopFEE/Piyawararom_village_allocated/tree/main/sql))
 4. Run with XAMPP(Start: Apache and MySQL)
