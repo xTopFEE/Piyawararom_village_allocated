@@ -30,3 +30,7 @@ Instructions for testing:
       - ...
 3. Import Database from ([Piyawararom village allocated DB.sql](https://github.com/xTopFEE/Piyawararom_village_allocated/tree/main/sql))
 4. Run with XAMPP(Start: Apache and MySQL)
+
+## Permission
+This project is released under the King Mongkut's University of Technology North Bangkok license. See LICENSE for the full text.
+Thesis file[Thai version]: [ปิยวรารมณ์.pdf](https://github.com/xTopFEE/Piyawararom_village_allocated/files/10196727/default.pdf)
